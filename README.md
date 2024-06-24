@@ -1,3 +1,26 @@
+ServiceLink - Service Booking Application
+
+ServiceLink is a web application that connects users with service providers for tasks such as cleaning, gardening, moving, cooking, and more. Users can easily search for services, check provider availability, book services, and communicate directly with providers to finalize details and pricing.
+Key Features:
+
+    Service Search and Booking: Browse a wide range of services and book based on provider availability.
+    Availability Management: View real-time provider availability and schedule bookings accordingly.
+    Rating and Review System: Check provider ratings and leave reviews after service completion.
+    Integrated Messaging: Communicate directly with providers to discuss specifics and requirements.
+    Automatic Notifications: Receive booking confirmations and reminders via email and SMS.
+
+Technologies Used:
+
+    Frontend: HTML5, CSS3, JavaScript, Tailwind CSS
+    Backend: Node.js, Express.js, MongoDB
+    Additional: Passport.js for authentication, Twilio for SMS notifications, Nodemailer for email notifications.
+
+Project Goals:
+
+ServiceLink aims to provide an intuitive and reliable platform for facilitating seamless connections between users and service providers, enhancing efficiency and user satisfaction.
+
+![Screenshot 2024-06-24 at 02-13-29 Create Next App](https://github.com/august-dev-pro/esea-reserve/assets/143771382/71b75493-adb6-4b30-8724-f98990ddbf54)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
