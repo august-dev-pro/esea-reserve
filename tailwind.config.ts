@@ -8,6 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        "custom-header":
+          "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+      },
+      colors: {
+        "midnight-blue": "#145da0",
+        "dark-blue": "#0C2D48",
+        blue: "#2E8BC0",
+        "Baby-Blue": "#B1D4E0",
+        "marron-opacity": "#00000087",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
