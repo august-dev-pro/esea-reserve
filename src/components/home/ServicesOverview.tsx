@@ -1,22 +1,21 @@
 import React from "react";
-
+import { services } from "@/ui/testDatas";
+import Service from "../ui/Service";
 const ServicesOverview = () => {
   return (
-    <section id="services" className="py-12">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">Nos Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mt-4">Nettoyage</h3>
-            <p className="mt-2 text-gray-600">
-              Service de nettoyage professionnel pour votre maison ou bureau.
-            </p>
-            <a
-              href="/services/cleaning"
-              className="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded-lg"
-            >
-              En savoir plus
-            </a>
+    <section id="services" className="section services-overview">
+      <div className="container px-4 sm:px-0 mx-auto">
+        <h2 className=" section_title text-3xl font-bold text-center">
+          Nos Services
+        </h2>
+        <div className="content flex flex-col gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+            {services.map((service: any, index: number) => (
+              <Service key={index} service={service} />
+            ))}
+          </div>
+          <div className="see-more w-fit m-[0_auto] px-5 py-2 bg-midnight-blue cursor-pointer rounded-[.3rem] text-white capitalize hover:bg-dark-blue transition-all">
+            autres prestations ...
           </div>
         </div>
       </div>

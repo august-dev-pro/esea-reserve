@@ -18,6 +18,7 @@ const config: Config = {
         blue: "#2E8BC0",
         "Baby-Blue": "#B1D4E0",
         "marron-opacity": "#00000087",
+        "white-opacity": "#ffffff5d",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
