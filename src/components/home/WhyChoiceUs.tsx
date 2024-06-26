@@ -51,7 +51,7 @@ const WhyChoiceUs = () => {
               alt="all services images"
             />
             <div className="description text-center">
-              <div className="title">Facilité d'Utilisation</div>
+              <div className="title">Facilité d&apos;Utilisation</div>
               <p className="des-content">
                 Naviguez facilement à travers notre interface intuitive pour
                 trouver, réserver et gérer vos services en quelques clics.
