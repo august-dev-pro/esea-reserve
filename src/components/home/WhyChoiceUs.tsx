@@ -69,7 +69,7 @@ const WhyChoiceUs = () => {
                   <div className="etape">
                     <div className="number">étape2:</div>
                     <div className="">
-                      definir l'heure et la date de l'intervention
+                      definir l&apos; heure et la date de l'intervention
                     </div>
                   </div>
                   <div className="etape">
