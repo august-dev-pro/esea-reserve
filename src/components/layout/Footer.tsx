@@ -18,15 +18,6 @@ const Footer = () => {
   ];
   return (
     <>
-      {/* <div className="logo_eseaservice w-[150px] m-[0_auto] py-[20px]">
-        <Image
-          className=" object-cover max-h-[100px]"
-          src={eseaServiceLogo}
-          alt="esea-service_logo"
-          width={500}
-          height={500}
-        />
-      </div> */}
       <footer className="footer bg-black text-white">
         <div className="container px-5 sm:px-0 items-center">
           <div className="logo_eseaservice w-[150px] m-[0_auto] py-[20px]">
@@ -48,7 +39,7 @@ const Footer = () => {
                   navLinks.map((link: any, index: number) => (
                     <Link
                       key={index}
-                      className={`link font-[200] md:font-[300]  hover:text-midnight-blue transition-all w-fit`}
+                      className={`link text-[15px] md:text-[18px] font-[200] md:font-[300]  hover:text-midnight-blue transition-all w-fit`}
                       href={link.path}
                     >
                       {link.label}
@@ -63,7 +54,7 @@ const Footer = () => {
                   navLinks.map((link: any, index: number) => (
                     <Link
                       key={index}
-                      className={` font-[200] md:font-[300] hover:text-midnight-blue transition-all w-fit`}
+                      className={` text-[15px] md:text-[18px] font-[200] md:font-[300] hover:text-midnight-blue transition-all w-fit`}
                       href={link.path}
                     >
                       {link.label}
@@ -78,7 +69,7 @@ const Footer = () => {
                   navLinks.map((link: any, index: number) => (
                     <Link
                       key={index}
-                      className={` font-[200] md:font-[300] hover:text-midnight-blue transition-all w-fit`}
+                      className={` text-[15px] md:text-[18px] font-[200] md:font-[300] hover:text-midnight-blue transition-all w-fit`}
                       href={link.path}
                     >
                       {link.label}
