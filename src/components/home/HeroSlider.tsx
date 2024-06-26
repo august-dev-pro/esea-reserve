@@ -120,20 +120,6 @@ const HeroSlider = () => {
             En savoir plus
           </button>
         </div>
-        {/* <div className="search_bar z-[1000] flex bg-white border-solid border-[1px]">
-          <select name="" id="" className=" bg-inherit">
-            <option value="">selectionnez-rapidement</option>
-            {banniereDatas.map((service: any, index: number) => (
-              <option value="">{service.alt}</option>
-            ))}
-          </select>
-          <input type="search" name="serach" id="search" />
-          <div className="submit_search">
-            <button type="submit">
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          </div>
-        </div> */}
         <SearchBar />
       </div>
     </div>

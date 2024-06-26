@@ -5,9 +5,12 @@ const ServicesOverview = () => {
   return (
     <section id="services" className="section services-overview">
       <div className="container px-4 sm:px-0 mx-auto">
-        <h2 className=" section_title text-3xl font-bold text-center">
-          Nos Services
-        </h2>
+        <div className="section-title">
+          <div className="title">choisissez un services</div>
+          <div className="sub-title">
+            Trouvez le service parfait pour vos besoins
+          </div>
+        </div>
         <div className="content flex flex-col gap-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             {services.map((service: any, index: number) => (

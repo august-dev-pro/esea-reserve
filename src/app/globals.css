@@ -23,10 +23,6 @@
 /* body {
   background-color: #0000004f;
 } */
-.hero-slider {
-  position: relative;
-  overflow: hidden;
-}
 
 .slide-content {
   transition: opacity 0.5s ease-in-out;
@@ -69,11 +65,159 @@
 }
 
 .section {
-  padding: 60px 0;
+  padding: 80px 0;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .section-title {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .section-title .title {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    font-weight: 900;
+    font-size: 25px;
+    width: fit-content;
+    padding: 10px 0;
+    text-transform: capitalize;
+    text-align: center;
+  }
+  .section-title .sub-title {
+    font-weight: 300;
+    color: #606264;
+    font-size: 18px;
+    letter-spacing: 1px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* card-wcu */
+  .card-wcu {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    gap: 20px;
+  }
+  .card-wcu img {
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .card-wcu .description .etapes .etapes-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card-wcu .description .etapes .etapes-items .etape {
+    display: flex;
+    gap: 15px;
+    font-weight: 300;
+    text-transform: capitalize;
+    text-align: left;
+  }
+  .card-wcu .description .etapes .etapes-items .etape .number {
+    font-weight: 500;
+    width: max-content;
+  }
+  .card-wcu .description .etapes {
+    width: fit-content;
+  }
+  .card-wcu .description .etapes .etapes-title {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: left;
+    padding: 5px 0;
+    text-transform: uppercase;
+  }
+  .card-wcu .description {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-wcu .description .title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .card-wcu .description .des-content {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+  }
+
+  @screen sm {
+    .section-title {
+      margin-bottom: 40px;
+    }
+    .section-title .title {
+      font-size: 35px;
+    }
+    .section-title .sub-title {
+      font-size: 25px;
+    }
+
+    /* card-wcu */
+    .card-wcu {
+      display: flex;
+      flex-direction: row;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      gap: 25px;
+    }
+    .card-wcu img {
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .card-wcu .description {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .card-wcu .description .title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+
+    .card-wcu .description .des-content {
+      --tw-text-opacity: 1;
+      color: rgb(75 85 99 / var(--tw-text-opacity));
+    }
+  }
+
+  @screen lg {
+    .card-wcu img {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    .card-wcu {
+      align-items: center;
+    }
+    .card-wcu .description {
+      gap: 15px;
+    }
+
+    .card-wcu .description .title {
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+
+    .card-wcu .description .des-content {
+      font-size: 1.3rem;
+    }
   }
 }

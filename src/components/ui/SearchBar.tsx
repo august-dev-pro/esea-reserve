@@ -17,7 +17,7 @@ const SearchBar = () => {
       <select
         name=""
         id=""
-        className={`border border-gray-300 rounded-[.2rem] sm:rounded-lg p-1 sm:p-2 focus:outline-none w-[120px] text-[14px] capitalize font-[300] sm:w-auto ${
+        className={`border border-gray-300 rounded-[.2rem] sm:rounded-lg p-1 sm:p-2 focus:outline-none w-[120px] text-[14px] capitalize font-[400] sm:w-auto ${
           content !== "" ? "hidden" : "flex"
         }`}
       >
