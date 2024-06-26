@@ -32,14 +32,14 @@ const Footer = () => {
           <div className="footer_content py-[20px]">
             <div className="actions_link flex flex-wrap gap-3 items-center justify-between">
               <div className="linkks flex flex-col text-[15px]">
-                <div className="font-[500] text-[19px] md:text-[22px] capitalize">
+                <div className="font-[500] text-[17px] md:text-[22px] capitalize">
                   eseareserve
                 </div>
                 {navLinks &&
                   navLinks.map((link: any, index: number) => (
                     <Link
                       key={index}
-                      className={`link text-[15px] md:text-[18px] font-[200] md:font-[300]  hover:text-midnight-blue transition-all w-fit`}
+                      className={`link text-[15px] md:text-[16px] font-[200]   hover:text-midnight-blue transition-all w-fit`}
                       href={link.path}
                     >
                       {link.label}
@@ -47,14 +47,14 @@ const Footer = () => {
                   ))}
               </div>
               <div className="linkks flex flex-col text-[15px]">
-                <div className="font-[500] text-[19px] md:text-[22px] capitalize">
+                <div className="font-[500] text-[17px] md:text-[22px] capitalize">
                   contact us
                 </div>
                 {navLinks &&
                   navLinks.map((link: any, index: number) => (
                     <Link
                       key={index}
-                      className={` text-[15px] md:text-[18px] font-[200] md:font-[300] hover:text-midnight-blue transition-all w-fit`}
+                      className={` text-[15px] md:text-[16px] font-[200]  hover:text-midnight-blue transition-all w-fit`}
                       href={link.path}
                     >
                       {link.label}
@@ -62,14 +62,14 @@ const Footer = () => {
                   ))}
               </div>
               <div className="linkks flex flex-col text-[15px]">
-                <div className="font-[500] text-[19px] md:text-[22px] capitalize">
+                <div className="font-[500] text-[17px] md:text-[22px] capitalize">
                   over link
                 </div>
                 {navLinks &&
                   navLinks.map((link: any, index: number) => (
                     <Link
                       key={index}
-                      className={` text-[15px] md:text-[18px] font-[200] md:font-[300] hover:text-midnight-blue transition-all w-fit`}
+                      className={` text-[15px] md:text-[16px] font-[200]  hover:text-midnight-blue transition-all w-fit`}
                       href={link.path}
                     >
                       {link.label}

@@ -57,7 +57,7 @@ const WhyChoiceUs = () => {
                 trouver, réserver et gérer vos services en quelques clics.
               </p>
 
-              <div className="etapes">
+              <div className="etapes gap-5">
                 <div className="etapes-title">
                   résoudre ton probleme en seulement 4 etapes
                 </div>
