@@ -19,6 +19,7 @@ const config: Config = {
         "Baby-Blue": "#B1D4E0",
         "marron-opacity": "#00000087",
         "white-opacity": "#ffffff5d",
+        "hover-btn": "#007bff",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

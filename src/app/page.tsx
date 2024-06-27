@@ -1,4 +1,5 @@
 import HeroSlider from "@/components/home/HeroSlider";
+import HowIsWork from "@/components/home/HowIsWork";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import WhyChoiceUs from "@/components/home/WhyChoiceUs";
 import Image from "next/image";
@@ -9,6 +10,7 @@ export default function Home() {
       <HeroSlider />
       <ServicesOverview />
       <WhyChoiceUs />
+      <HowIsWork />
     </main>
   );
 }

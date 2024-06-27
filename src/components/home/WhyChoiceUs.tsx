@@ -3,6 +3,15 @@ import React from "react";
 import collageServices from "@/imgs/collageServices.png";
 import mainAmain from "@/imgs/mainAmain.png";
 import telEnMain from "@/imgs/telenmain2.jpg";
+import pousse from "@/imgs/pouce-en-haut.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLaptop,
+  faMobileScreenButton,
+  faSquarePhone,
+  faStar,
+  faStarHalf,
+} from "@fortawesome/free-solid-svg-icons";
 
 const WhyChoiceUs = () => {
   return (
@@ -26,6 +35,7 @@ const WhyChoiceUs = () => {
                 Découvrez une gamme étendue de services pour répondre à tous vos
                 besoins quotidiens et spécifiques.
               </p>
+              <button className="btn">en s&apos;avoir plus</button>
             </div>
           </div>
           <div className="card-wcu md:flex-row-reverse">
@@ -41,6 +51,12 @@ const WhyChoiceUs = () => {
                 Nos prestataires sont rigoureusement sélectionnés pour assurer
                 un service de haute qualité et fiable à chaque réservation.
               </p>
+              <div className="btns w-full flex justify-between md:justify-around">
+                <button className="btn">nos prestataires</button>
+                <button className=" bg-lime-600 hover:bg-lime-500">
+                  dévenir prestataire
+                </button>
+              </div>
             </div>
           </div>
           <div className="card-wcu">
@@ -59,7 +75,7 @@ const WhyChoiceUs = () => {
 
               <div className="etapes gap-5">
                 <div className="etapes-title">
-                  résoudre ton probleme en seulement 4 etapes
+                  résoudre ton problème en seulement 4 etapes
                 </div>
                 <div className="etapes-items">
                   <div className="etape">
@@ -69,7 +85,7 @@ const WhyChoiceUs = () => {
                   <div className="etape">
                     <div className="number">étape2:</div>
                     <div className="">
-                      definir l&apos;heure et la date de l&apos;intervention
+                      définir l&apos;heure et la date de l&apos;intervention
                     </div>
                   </div>
                   <div className="etape">
@@ -81,11 +97,64 @@ const WhyChoiceUs = () => {
                   <div className="etape">
                     <div className="number">étape4:</div>
                     <div className="">
-                      payer apres prestation et probleme resolu
+                      payer après prestation et probleme résolu
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="btns w-full flex justify-between gap-4 md:justify-around">
+                <button className="btn p-[5px]">
+                  Commencer maintenant <FontAwesomeIcon icon={faLaptop} />
+                  <FontAwesomeIcon className="" icon={faMobileScreenButton} />
+                </button>
+                <button className=" bg-lime-600 hover:bg-lime-500">
+                  comment ça marche ?
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="card-wcu md:flex-row-reverse">
+            <Image
+              src={mainAmain.src}
+              width={500}
+              height={500}
+              alt="all services images"
+            />
+            <div className="description text-center">
+              <div className="title">Disponibilité 24/7 (24H/24 | 7jrs/7)</div>
+              <p className="des-content text-center">
+                Réservez vos services quand vous le souhaitez, 24 heures sur 24,
+                7 jours sur 7, pour répondre à vos besoins les plus urgents.
+              </p>
+              <button className="btn">débuter en meme temps</button>
+            </div>
+          </div>
+          <div className="card-wcu">
+            <Image
+              src={pousse.src}
+              width={400}
+              height={500}
+              alt="all services images"
+              className=" max-w-[350px] rounded-xl lg:ml-14"
+            />
+
+            <div className="description text-center">
+              <div className="title">
+                Système de Notation et Avis{" "}
+                <FontAwesomeIcon className=" text-yellow-400" icon={faStar} />
+                <FontAwesomeIcon className=" text-yellow-400" icon={faStar} />
+                <FontAwesomeIcon className=" text-yellow-400" icon={faStar} />
+                <FontAwesomeIcon
+                  className=" text-yellow-400"
+                  icon={faStarHalf}
+                />
+              </div>
+              <p className="des-content text-center">
+                Explorez les avis authentiques laissés par d'autres
+                utilisateurs, vous aidant à prendre une décision éclairée basée
+                sur l'expérience.
+              </p>
+              <button className="btn">consulter les meilleurs</button>
             </div>
           </div>
         </div>

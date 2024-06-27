@@ -146,17 +146,62 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: center;
+  }
+
+  .card-wcu .description .btn:hover {
+    background-color: #007bff;
+  }
+  .card-wcu .description .btn {
+    background-color: #145da0;
+  }
+  .card-wcu .description button {
+    font-size: 15px;
+    padding: 5px 10px;
+    text-transform: capitalize;
+    border-radius: 0.2rem;
+    color: #fff;
+    transition: background-color 0.3s;
   }
 
   .card-wcu .description .title {
     font-weight: 600;
     font-size: 1.25rem;
     line-height: 1.75rem;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
   }
 
   .card-wcu .description .des-content {
     --tw-text-opacity: 1;
     color: rgb(75 85 99 / var(--tw-text-opacity));
+  }
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-secondary {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn-secondary:hover {
+    background-color: #218838;
   }
 
   @screen sm {
@@ -164,10 +209,10 @@
       margin-bottom: 40px;
     }
     .section-title .title {
-      font-size: 35px;
+      font-size: 25px;
     }
     .section-title .sub-title {
-      font-size: 25px;
+      font-size: 20px;
     }
 
     /* card-wcu */
@@ -176,6 +221,7 @@
       flex-direction: row;
       padding: 25px;
       gap: 25px;
+      align-items: center;
     }
     .card-wcu img {
       object-fit: cover;
@@ -183,8 +229,6 @@
     }
 
     .card-wcu .description {
-      display: flex;
-      flex-direction: column;
       text-align: center;
       align-items: center;
     }
@@ -218,12 +262,14 @@
     }
 
     .card-wcu .description .title {
-      font-size: 2rem;
-      line-height: 2rem;
+      font-size: 1.3rem;
+      line-height: 1rem;
+      font-weight: 600;
     }
 
     .card-wcu .description .des-content {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      font-weight: 400;
     }
   }
 }
