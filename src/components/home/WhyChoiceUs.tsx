@@ -150,9 +150,9 @@ const WhyChoiceUs = () => {
                 />
               </div>
               <p className="des-content text-center">
-                Explorez les avis authentiques laissés par d'autres
+                Explorez les avis authentiques laissés par d&apos; autres
                 utilisateurs, vous aidant à prendre une décision éclairée basée
-                sur l'expérience.
+                sur l&apos; expérience.
               </p>
               <button className="btn">consulter les meilleurs</button>
             </div>

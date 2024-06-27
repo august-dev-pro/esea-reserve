@@ -71,9 +71,9 @@ const HowIsWork = () => {
         <div className="section-title">
           <div className="title">comment ça marche</div>
           <div className="sub-title">
-            "Découvrez en quelques étapes simples comment notre plateforme vous
-            permet de réserver des services de manière rapide et sécurisée.
-            Suivez le guide pour commencer dès aujourd'hui !"
+            &quot;Découvrez en quelques étapes simples comment notre plateforme
+            vous permet de réserver des services de manière rapide et sécurisée.
+            Suivez le guide pour commencer dès aujourd&apos;hui !&quot;
           </div>
         </div>
         <div className="section-content relative md:h-[760px] md:flex items-center lg:px-[70px]">
