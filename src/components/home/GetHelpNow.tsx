@@ -7,7 +7,7 @@ const GetHelpNow = () => {
       <div className="container mx-auto px-4 sm:px-0">
         <div className="text-center mb-8">
           <div className="section-title">
-            <div className="title">Besoin d'aide maintenant ?</div>
+            <div className="title">Besoin d&apos; aide maintenant ?</div>
             <div className="sub-title">
               Réservez un service en quelques clics et recevez une assistance
               immédiate.
