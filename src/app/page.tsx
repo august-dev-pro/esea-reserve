@@ -1,3 +1,4 @@
+import GetHelpNow from "@/components/home/GetHelpNow";
 import HeroSlider from "@/components/home/HeroSlider";
 import HowIsWork from "@/components/home/HowIsWork";
 import ServicesOverview from "@/components/home/ServicesOverview";
@@ -11,6 +12,7 @@ export default function Home() {
       <ServicesOverview />
       <WhyChoiceUs />
       <HowIsWork />
+      <GetHelpNow />
     </main>
   );
 }

@@ -24,7 +24,7 @@ const WhyChoiceUs = () => {
         <div className="grid grid-cols-1 gap-[50px]">
           <div className="card-wcu">
             <Image
-              src={collageServices.src}
+              src={collageServices}
               width={500}
               height={500}
               alt="all services images"
@@ -40,7 +40,7 @@ const WhyChoiceUs = () => {
           </div>
           <div className="card-wcu md:flex-row-reverse">
             <Image
-              src={mainAmain.src}
+              src={mainAmain}
               width={500}
               height={500}
               alt="all services images"
@@ -61,7 +61,7 @@ const WhyChoiceUs = () => {
           </div>
           <div className="card-wcu">
             <Image
-              src={telEnMain.src}
+              src={telEnMain}
               width={500}
               height={500}
               alt="all services images"
@@ -115,7 +115,7 @@ const WhyChoiceUs = () => {
           </div>
           <div className="card-wcu md:flex-row-reverse">
             <Image
-              src={mainAmain.src}
+              src={mainAmain}
               width={500}
               height={500}
               alt="all services images"
@@ -131,7 +131,7 @@ const WhyChoiceUs = () => {
           </div>
           <div className="card-wcu">
             <Image
-              src={pousse.src}
+              src={pousse}
               width={400}
               height={500}
               alt="all services images"
@@ -141,7 +141,6 @@ const WhyChoiceUs = () => {
             <div className="description text-center">
               <div className="title">
                 Système de Notation et Avis{" "}
-                <FontAwesomeIcon className=" text-yellow-400" icon={faStar} />
                 <FontAwesomeIcon className=" text-yellow-400" icon={faStar} />
                 <FontAwesomeIcon className=" text-yellow-400" icon={faStar} />
                 <FontAwesomeIcon

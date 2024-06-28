@@ -113,7 +113,7 @@ const HeroSlider = () => {
             {banniereDatas[currentIndex].alt}{" "}
             <FontAwesomeIcon icon={banniereDatas[currentIndex].icon} />
           </h1>
-          <p className="font-[300] text-justify sm:text-[20px] sm:font-[500] lg:text-[25px] lg:font-[400] sm:text-center">
+          <p className="font-[300] font-Quicksand text-justify sm:text-[20px] sm:font-[500] lg:text-[25px] lg:font-[400] sm:text-center">
             {banniereDatas[currentIndex].description}
           </p>
           <button className="bg-midnight-blue w-fit text-[15px] hover:bg-hover-btn transition-all capitalize lg:font-[600] rounded-[.2rem] sm:rounded-[.3rem] lg:rounded-lg px-[10px] py-[5px] lg:text-[18px]  lg:px-[30px] lg:py-[10px]">
