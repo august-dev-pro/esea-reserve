@@ -179,17 +179,19 @@
     font-family: "Quicksand", sans-serif;
   }
   .btn-primary {
-    background-color: #007bff;
-    color: white;
+    background-color: #0056b3;
+    font-size: 15px;
     padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    text-transform: capitalize;
+    border-radius: 0.2rem;
+    color: #fff;
+    font-weight: 500;
     transition: background-color 0.3s;
+    letter-spacing: 1px;
   }
 
   .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #007bff;
   }
 
   .btn-secondary {
@@ -204,6 +206,73 @@
 
   .btn-secondary:hover {
     background-color: #218838;
+  }
+
+  /* form style */
+  .form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.3rem;
+    margin: 0 auto;
+    border: 1px solid rgba(31, 42, 49, 0.288);
+    overflow: hidden;
+  }
+
+  .form .form-title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    padding: 10px;
+    background-color: #0057b318;
+    border-bottom: 1px solid rgba(31, 42, 49, 0.288);
+    letter-spacing: 1px;
+  }
+  .form .form-content {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .form .form-content .form_inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .form .form-content .form_inputs .input {
+    display: flex;
+    flex-direction: column;
+  }
+  .form .form-content .form_inputs .input label {
+    color: rgba(31, 42, 49, 0.718);
+    text-transform: capitalize;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .form .form-content .form_inputs .input label span {
+    color: #df3b3b;
+  }
+  .form .form-content .form_inputs .input input {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    border: 2px solid rgba(31, 42, 49, 0.145);
+    border-radius: 0.2rem;
+    padding-left: 5px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    font-weight: 300;
+    color: #595a5c;
+  }
+  .form .form-content .form_inputs .input input:focus {
+    border-color: rgba(31, 42, 49, 0.8);
+  }
+
+  .form .form-content .actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 
   @screen sm {
@@ -251,6 +320,16 @@
     }
   }
 
+  @screen md {
+    .form .form-content .form_inputs {
+      display: grid;
+      padding: 20px;
+    }
+
+    .form .form-content .form_inputs .input input {
+      width: 300px;
+    }
+  }
   @screen lg {
     .card-wcu img {
       border-top-left-radius: 10px;

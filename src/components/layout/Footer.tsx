@@ -27,6 +27,7 @@ const Footer = () => {
               alt="esea-service_logo"
               width={500}
               height={500}
+              priority={true}
             />
           </div>
           <div className="footer_content py-[20px]">

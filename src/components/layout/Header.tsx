@@ -61,6 +61,7 @@ const Header = () => {
               alt="esea-service_logo"
               width={500}
               height={500}
+              priority={true}
             />
           </div>
 
@@ -79,7 +80,7 @@ const Header = () => {
           )}
 
           {menuOpen && (
-            <div className="absolute top-[50px] right-0 w-[70%] bg-white shadow-xl z-50 md:hidden">
+            <div className="absolute top-[50px] right-0 w-[70%] bg-white shadow-xl z-50 md:hidden ">
               <div className="flex flex-col px-8">
                 {navLinks.map((link: any, index: number) => {
                   const isOpen = screenDropdownOpen === index;
@@ -94,7 +95,7 @@ const Header = () => {
                         setScreenDropdownOpen(isOpen ? null : index);
                       }}
                     >
-                      <div className="flex gap-[5px] items-center">
+                      <div className="flex gap-[5px] items-center font-Quicksand">
                         {link.label}
                         {isOpen ? (
                           <FontAwesomeIcon
@@ -109,12 +110,12 @@ const Header = () => {
                         )}
                       </div>
                       {isOpen && (
-                        <div className="sub ml-2 text-[15px] font-[300]">
+                        <div className="sub ml-2 text-[14px] font-[300] font-Quicksand capitalize">
                           {link.dropdownLinks.map(
                             (link: any, index2: number) => (
                               <Link
                                 key={index2}
-                                className={`block py-[2px] text-gray-700 hover:text-midnight-blue w-fit`}
+                                className={`block py-[2px] text-gray-700 hover:text-midnight-blue w-fit font-Quicksand`}
                                 href={link.path}
                                 onClick={() => {
                                   setMenuOpen(false);
@@ -130,7 +131,7 @@ const Header = () => {
                   ) : (
                     <Link
                       key={index}
-                      className={`block py-2 text-gray-700 hover:text-midnight-blue w-fit ${
+                      className={`block py-2 text-gray-700 hover:text-midnight-blue w-fit font-Quicksand ${
                         activeLink === index ? "text-midnight-blue" : ""
                       }`}
                       href={link.path}
@@ -175,7 +176,7 @@ const Header = () => {
                     {dropdownLinks.map((link, index) => (
                       <Link
                         key={index}
-                        className="block px-4 py-2 hover:bg-gray-100 hover:text-midnight-blue"
+                        className="block px-4 py-2 text-[13px] hover:bg-gray-100 font-Quicksand hover:text-midnight-blue"
                         href={link.path}
                       >
                         {link.label}

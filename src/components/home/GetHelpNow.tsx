@@ -14,7 +14,31 @@ const GetHelpNow = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap md:justify-center gap-4 md:gap-6">
+          {services.map((service: any, index: number) => (
+            <div
+              key={index}
+              className="help text-[15px] font-[300] px-[20px] py-[5px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
+            >
+              {service.title}
+            </div>
+          ))}
+          {services.map((service: any, index: number) => (
+            <div
+              key={index}
+              className="help text-[15px] font-[300] px-[20px] py-[5px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
+            >
+              {service.title}
+            </div>
+          ))}
+          {services.map((service: any, index: number) => (
+            <div
+              key={index}
+              className="help text-[15px] font-[300] px-[20px] py-[5px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
+            >
+              {service.title}
+            </div>
+          ))}
           {services.map((service: any, index: number) => (
             <div
               key={index}
