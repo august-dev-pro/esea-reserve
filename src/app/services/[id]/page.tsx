@@ -87,7 +87,7 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
           backgroundSize: "cover",
         }}
       >
-        <div className=" h-full w-full gap-1 bg-marron-opacity-claire text-white flex items-center justify-center font-Quicksand text-[35px] font-[700]">
+        <div className=" h-full w-full gap-1 bg-marron-opacity-claire text-white flex items-center justify-center font-Quicksand text-[35px] font-[700] md:text-[45px] md:font-[800]">
           {service.title} <FontAwesomeIcon icon={service.icon} />
         </div>
       </div>
