@@ -51,7 +51,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="header mb-[200Px] bg-white fixed z-[10000] w-full py-[7px] border-solid border-b-[1px] border-b-midnight-blue lg:py-[10px] shadow-custom-header">
+    <header className="header mb-[200Px] bg-white fixed z-[10000] w-full py-[7px] border-solid border-b-[1px] border-b-midnight-blue lg:py-[10px]">
       <div className="container px-5 sm:px-0">
         <div className="header_content flex justify-between items-center">
           <div className="logo_eseaservice w-[100px] h-[41px] sm: lg:w-[110px] lg:h-[45px]">

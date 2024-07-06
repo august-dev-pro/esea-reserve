@@ -314,6 +314,7 @@ input:focus {
   .step-form .step_form_title {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
   }
   .step-form .step_form_title .title {
     font-family: "Quicksand", sans-serif;
@@ -358,12 +359,62 @@ input:focus {
     font-weight: 400;
     font-family: "Quicksand", sans-serif;
   }
-
+  .errorMode {
+    border-color: #ff4040 !important;
+  }
+  .error {
+    font-family: "Quicksand", sans-serif;
+    color: red;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: lowercase;
+    margin-top: -2px;
+  }
   .step-form .form_content .inputs .champ input:focus,
   .step-form .form_content .inputs .champ textarea:focus {
     border-color: #1f2a31cc;
   }
 
+  /* tasker */
+
+  /* details review */
+  .review-all {
+    font-size: 16px;
+  }
+  .reservation_details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .reservation_details .chield {
+    border: 1px solid #9e9e9e69;
+    padding: 5px;
+    border-radius: 0.3rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .reservation_details .chield .edit {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    color: #4d4d4d;
+  }
+
+  .reservation_details .chield .edit svg {
+    transition: all 0.2s ease;
+  }
+  .reservation_details .chield .edit svg:hover {
+    color: #0056b3;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .reservation_details .chield .item {
+    display: flex;
+    font-family: "Quicksand", sans-serif;
+    gap: 10px;
+  }
   @screen sm {
     .section-title {
       margin-bottom: 40px;
@@ -409,8 +460,27 @@ input:focus {
     }
 
     /* step form */
+
+    .step-form .step_form_title {
+      letter-spacing: 1px;
+    }
+
+    .step-form .step_form_title .title {
+      font-size: 16px;
+    }
+    .step-form .step_form_title .sub_title {
+    }
     .step-form .form_content .inputs .champ label {
       font-size: 16px;
+    }
+
+    /* details review */
+    .review-all {
+      font-size: 18px;
+    }
+
+    .reservation_details .chield {
+      padding: 10px;
     }
   }
 
@@ -424,12 +494,25 @@ input:focus {
       width: 300px;
     }
 
+    /* step form */
     .step-form .step_form_title .title {
-      font-size: 16px;
+      font-size: 18px;
+    }
+    .step-form .step_form_title .sub_title {
     }
     .step-form .form_content .inputs .champ input {
       height: 50px;
       font-size: 17px;
+    }
+
+    /* details review */
+    .review-all {
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    .reservation_details .chield {
+      padding: 10px;
     }
   }
   @screen lg {
@@ -453,6 +536,19 @@ input:focus {
     .card-wcu .description .des-content {
       font-size: 1.2rem;
       font-weight: 400;
+    }
+
+    /* step form */
+    .step-form .step_form_title .title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .step-form .step_form_title .sub_title {
+    }
+
+    /* details review */
+    .reservation_details .chield {
+      padding: 15px;
     }
   }
 }

@@ -1,40 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
+import { taskers } from "@/ui/testDatas"; // Assurez-vous du chemin correct pour vos données de test
+import Tasker from "../ui/Tasker";
 
 const SelectTaskerForm = ({
+  setStep2Validated,
   handleNextStep,
 }: {
-  handleNextStep: (data: { tasker: string }) => void;
+  handleNextStep: (data: { taskerId: number | null }) => void;
+  setStep2Validated: any;
 }) => {
-  const [tasker, setTasker] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleNextStep({ tasker });
+  const handleTaskerSelect = (selectedTaskerId: number) => {
+    setStep2Validated(true);
+    handleNextStep({ taskerId: selectedTaskerId });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="">
-      <div className="champ">
-        <label htmlFor="tasker">Sélection du tasker:</label>
-        <select
-          id="tasker"
-          value={tasker}
-          onChange={(e) => setTasker(e.target.value)}
-          required
-        >
-          <option value="">Sélectionner un tasker</option>
-          <option value="tasker1">Tasker 1</option>
-          <option value="tasker2">Tasker 2</option>
-          <option value="tasker3">Tasker 3</option>
-        </select>
+    <div className="tasker-form step-form">
+      <div className="step_form_title">
+        <div className="title">2- Choisissez votre tasker par prefference</div>
+        <div className="sub_title"></div>
       </div>
-      <button
-        type="submit"
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        Suivant
-      </button>
-    </form>
+      <div className="taskers-list grid grid-cols-1 gap-7 md:w-[60%]">
+        {taskers.map((tasker) => (
+          <Tasker
+            key={tasker.id}
+            tasker={tasker}
+            handleTaskerSelect={handleTaskerSelect}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
