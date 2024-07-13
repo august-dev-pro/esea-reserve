@@ -186,7 +186,6 @@ input:focus {
   }
   .btn-primary {
     background-color: #0056b3;
-    font-size: 15px;
     padding: 10px 20px;
     text-transform: capitalize;
     border-radius: 0.2rem;
@@ -194,7 +193,6 @@ input:focus {
     font-weight: 500;
     transition: background-color 0.3s;
     letter-spacing: 1px;
-    width: fit-content;
     cursor: pointer;
   }
 
@@ -207,9 +205,10 @@ input:focus {
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.2rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-transform: capitalize;
   }
 
   .btn-secondary:hover {

@@ -1,7 +1,6 @@
 "use client";
 import { services } from "@/ui/testDatas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useRef, useState } from "react";
 import { notFound } from "next/navigation";
 import SelectTaskerForm from "@/components/forms/SelectTaskerForm";
@@ -16,55 +15,42 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
   }
 
   const [currentStep, setCurrentStep] = useState(1);
-  const [step1Validated, setStep1Validated] = useState(false);
-  const [step2Validated, setStep2Validated] = useState(false);
-  const [step3Validated, setStep3Validated] = useState(false);
+  const reserveHeadRef = useRef<HTMLDivElement>(null);
+  const [isFixed, setIsFixed] = useState(false);
   const [formData, setFormData] = useState({
     service: service.title,
     date: "",
     address: "",
     problemDescription: "",
     taskerId: "",
-    agreement: "",
     jobType: "",
     wever: "",
   });
-  /* progress scroll logique */
-  const reserveHeadRef = useRef<HTMLDivElement>(null);
-  const [isFixed, setIsFixed] = useState(false);
-  const [headerHeight, setHeaderHeight] = useState(0);
-  const [headerHeightS, setHeaderHeightS] = useState(0);
 
   const handleNextStep = (stepData: any) => {
     setFormData((prevData) => ({ ...prevData, ...stepData }));
     setCurrentStep((prevStep) => prevStep + 1);
   };
+
+  const confirmeReservation = () => {};
   const handleEditStep = (step: number) => {
     setCurrentStep(step);
   };
+
   const steps = [
     {
       id: 1,
       title: "Recherche et identification du service",
       description: "Date d'intervention, adresse, description du problème",
       component: (
-        <ServiceForm
-          handleNextStep={handleNextStep}
-          setStep1Validated={setStep1Validated}
-          data={formData}
-        />
+        <ServiceForm handleNextStep={handleNextStep} data={formData} />
       ),
     },
     {
       id: 2,
       title: "Sélection du tasker",
       description: "Choisissez un tasker pour effectuer le service",
-      component: (
-        <SelectTaskerForm
-          setStep2Validated={setStep2Validated}
-          handleNextStep={handleNextStep}
-        />
-      ),
+      component: <SelectTaskerForm handleNextStep={handleNextStep} />,
     },
     {
       id: 3,
@@ -73,9 +59,9 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
       component: (
         <ValidateReservation
           formData={formData}
-          setStep3Validated={setStep3Validated}
           handleNextStep={handleNextStep}
           handleEditStep={handleEditStep}
+          confirmeReservation={confirmeReservation}
         />
       ),
     },
@@ -85,7 +71,6 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
     const handleScroll = () => {
       if (reserveHeadRef.current) {
         const scrollY = window.scrollY;
-        setHeaderHeightS(scrollY);
 
         if (scrollY >= 300) {
           setIsFixed(true);

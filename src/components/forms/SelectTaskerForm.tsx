@@ -1,16 +1,14 @@
+"use client";
 import React from "react";
 import { taskers } from "@/ui/testDatas"; // Assurez-vous du chemin correct pour vos données de test
 import Tasker from "../ui/Tasker";
 
 const SelectTaskerForm = ({
-  setStep2Validated,
   handleNextStep,
 }: {
   handleNextStep: (data: { taskerId: number | null }) => void;
-  setStep2Validated: any;
 }) => {
   const handleTaskerSelect = (selectedTaskerId: number) => {
-    setStep2Validated(true);
     handleNextStep({ taskerId: selectedTaskerId });
   };
 

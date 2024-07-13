@@ -1,17 +1,16 @@
+"use client";
 import React, { useState } from "react";
 
 const ServiceForm = ({
   handleNextStep,
-  setStep1Validated,
-  data,
 }: {
   handleNextStep: (data: {
     date: string;
     address: string;
     problemDescription: string;
     jobType: string;
+    wever: string;
   }) => void;
-  setStep1Validated: any;
   data: any;
 }) => {
   const [formData, setFormData] = useState({
@@ -19,16 +18,20 @@ const ServiceForm = ({
     address: "",
     problemDescription: "",
     jobType: "",
+    wever: "",
   });
   const [formDataErrors, setFormDataErrors] = useState({
     date: "",
     address: "",
     problemDescription: "",
     jobType: "",
+    wever: "",
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLInputElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -57,6 +60,10 @@ const ServiceForm = ({
       isValid = false;
       errors.jobType = "Le type de travail est requis.";
     }
+    if (!formData.wever) {
+      isValid = false;
+      errors.wever = "Veuillez choisir le moment !";
+    }
 
     setFormDataErrors(errors);
     return isValid;
@@ -65,7 +72,6 @@ const ServiceForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      setStep1Validated(true);
       handleNextStep(formData);
     }
   };
@@ -168,6 +174,35 @@ const ServiceForm = ({
             ></textarea>
             {formDataErrors.problemDescription && (
               <div className="error">{formDataErrors.problemDescription}</div>
+            )}
+          </div>
+          <div className="times relative flex gap-8">
+            <label htmlFor="morning" className=" flex gap-2 font-Quicksand">
+              Matin
+              <input
+                type="radio"
+                name="wever"
+                value="morning"
+                id="morning"
+                checked={formData.wever === "morning"}
+                onChange={handleChange}
+              />
+            </label>
+            <label htmlFor="evening" className="flex gap-2 font-Quicksand">
+              Soir
+              <input
+                type="radio"
+                name="wever"
+                value="evening"
+                id="evening"
+                checked={formData.wever === "evening"}
+                onChange={handleChange}
+              />
+            </label>
+            {formDataErrors.wever && (
+              <div className="error absolute bottom-[-15px]">
+                {formDataErrors.wever}
+              </div>
             )}
           </div>
         </div>

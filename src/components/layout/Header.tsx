@@ -46,7 +46,7 @@ const Header = () => {
   const dropdownLinks = [
     { label: "Inscription", path: "/signup" },
     { label: "connexion", path: "/login" },
-    { label: "Devenir Prestataire", path: "/become-provider" },
+    { label: "Devenir Prestataire", path: "/providers/becomeProvider" },
     { label: "Mon Compte", path: "/account" },
   ];
 
