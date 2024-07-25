@@ -1,16 +1,15 @@
 import GetHelpNow from "@/components/home/GetHelpNow";
 import HeroSlider from "@/components/home/HeroSlider";
+import HomeTabs from "@/components/home/HomeTabs";
 import HowIsWork from "@/components/home/HowIsWork";
 import ServicesOverview from "@/components/home/ServicesOverview";
-import WhyChoiceUs from "@/components/home/WhyChoiceUs";
-import Image from "next/image";
 
 export default function Home() {
   return (
     <main className="h-fit">
       <HeroSlider />
+      <HomeTabs />
       <ServicesOverview />
-      <WhyChoiceUs />
       <HowIsWork />
       <GetHelpNow />
     </main>

@@ -14,7 +14,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState<number>(0);
-  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
   const [screenDropdownOpen, setScreenDropdownOpen] = useState<number | null>(
     null
   );
@@ -24,30 +24,17 @@ const Header = () => {
     { label: "Accueil", path: "/" },
     { label: "Services", path: "/services" },
     {
-      label: "Prestataires",
-      path: "/providers",
+      label: "inscription",
+      path: "/",
       dropdownLinks: [
-        { label: "nos prestataires", path: "" },
-        { label: "devenir prestataire", path: "" },
+        { label: "s'inscrire", path: "/signup" },
+        { label: "se connecter", path: "/login" },
+        { label: "Devenir Prestataire", path: "/providers/becomeProvider" },
+        { label: "mon compte", path: "/account" },
       ],
     },
+
     { label: "À propos", path: "/about" },
-    { label: "Contact", path: "/contact" },
-    {
-      label: "Inscription",
-      path: "/signup",
-      dropdownLinks: [
-        { label: "Inscription", path: "/signup" },
-        { label: "connexion", path: "/login" },
-        { label: "Mon Compte", path: "/account" },
-      ],
-    },
-  ];
-  const dropdownLinks = [
-    { label: "Inscription", path: "/signup" },
-    { label: "connexion", path: "/login" },
-    { label: "Devenir Prestataire", path: "/providers/becomeProvider" },
-    { label: "Mon Compte", path: "/account" },
   ];
 
   return (
@@ -148,47 +135,58 @@ const Header = () => {
             </div>
           )}
 
-          <nav className="nav group hidden md:flex">
-            <div className="links font-[400] flex gap-[15px] md:text-[15px] lg:gap-[35px]">
-              {navLinks &&
-                navLinks.map((link: any, index: number) => (
-                  <Link
-                    key={index}
-                    className={`link flex flex-col hover:text-midnight-blue transition-all after:transition-all ${
-                      activeLink === index ? "active" : ""
-                    }`}
-                    href={link.path}
-                    onClick={() => setActiveLink(index)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              <div
-                className="relative cursor-pointer"
-                onMouseEnter={() => setDropdownOpen(true)}
-                onMouseLeave={() => setDropdownOpen(false)}
-              >
-                <div className="link flex items-center gap-2 hover:text-midnight-blue transition-all after:transition-all">
-                  Inscription <FontAwesomeIcon icon={faCaretDown} />
-                </div>
-                {dropdownOpen && (
-                  <div className="absolute cursor-pointer right-0 left-0 mt-[-3px] w-48 bg-white border border-gray-200 shadow-lg">
-                    {dropdownLinks.map((link, index) => (
+          <div className="items-center gap-[50px] hidden md:flex">
+            <nav className="nav ">
+              <div className="links font-[300] flex gap-[15px] md:text-[15px]">
+                {navLinks.map((link: any, index: number) => (
+                  <div key={index} className="relative">
+                    {link.dropdownLinks ? (
+                      <div
+                        className="relative cursor-pointer"
+                        onMouseEnter={() => setDropdownOpen(index)}
+                        onMouseLeave={() => setDropdownOpen(null)}
+                      >
+                        <div className="link flex items-center capitalize gap-[5px] hover:text-midnight-blue transition-all">
+                          {link.label} <FontAwesomeIcon icon={faCaretDown} />
+                        </div>
+                        {dropdownOpen === index && (
+                          <div className="absolute right-0 left-0 w-48 bg-white border border-gray-200 shadow-lg rounded-sm">
+                            {link.dropdownLinks.map(
+                              (subLink: any, subIndex: number) => (
+                                <Link
+                                  key={subIndex}
+                                  className="block capitalize px-[30px] py-2 text-[14px] hover:bg-gray-100 font-Quicksand hover:text-midnight-blue"
+                                  href={subLink.path}
+                                >
+                                  {subLink.label}
+                                </Link>
+                              )
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
                       <Link
-                        key={index}
-                        className="block px-4 py-2 text-[13px] hover:bg-gray-100 font-Quicksand hover:text-midnight-blue"
+                        className={`link flex flex-col hover:text-midnight-blue transition-all ${
+                          activeLink === index ? "active" : ""
+                        }`}
                         href={link.path}
+                        onClick={() => setActiveLink(index)}
                       >
                         {link.label}
                       </Link>
-                    ))}
+                    )}
                   </div>
-                )}
+                ))}
               </div>
-            </div>
-          </nav>
-          <div className="start hidden md:flex px-[8px] py-[5px] rounded-[.3rem] bg-midnight-blue cursor-pointer text-white">
-            reservez
+            </nav>
+
+            <Link
+              href={"/providers/becomeProvider"}
+              className="start font-Quicksand capitalize border-[2px] border-midnight-blue px-[8px] py-[5px] rounded-[.3rem] cursor-pointer text-midnight-blue hover:bg-blue-opcity transition-colors"
+            >
+              devenir prerstataire
+            </Link>
           </div>
         </div>
       </div>

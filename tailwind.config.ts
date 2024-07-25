@@ -11,6 +11,7 @@ const config: Config = {
       boxShadow: {
         "custom-header":
           "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        "custom-form": "0 3px 9px rgba(0,0,0,0.5);",
       },
       colors: {
         "midnight-blue": "#145da0",
@@ -22,6 +23,8 @@ const config: Config = {
         "blue-opcity": "#009dff11",
         "white-opacity": "#ffffff5d",
         "hover-btn": "#007bff",
+        "white-opacity-plus": "#ffffff5d",
+        "blue-linght": "#0057b365",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

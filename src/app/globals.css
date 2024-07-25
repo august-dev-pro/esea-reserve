@@ -54,6 +54,7 @@ input:focus {
   content: "";
   padding: 1px;
   background-color: transparent;
+  margin-top: -2px;
   width: 1%;
 }
 
@@ -202,7 +203,7 @@ input:focus {
 
   .btn-secondary {
     background-color: #28a745;
-    color: white;
+    color: #ffffff;
     padding: 10px 20px;
     border: none;
     border-radius: 0.2rem;
@@ -414,6 +415,28 @@ input:focus {
     font-family: "Quicksand", sans-serif;
     gap: 10px;
   }
+
+  /* home tabs style */
+  .tabs-section .tabs .tabs_label .tab_title svg {
+    font-size: 18px;
+  }
+  .tabs-section .tabs .tabs_label .tab_title.active_tab .title::after {
+    content: "";
+    padding: 1px;
+    background-color: #0056b3;
+    position: absolute;
+    width: 70%;
+    margin: 0 auto;
+    bottom: -10px;
+  }
+  .tabs-section .tabs .tabs_label .tab_title.active_tab .title {
+    color: #0056b3;
+  }
+
+  .tab_title.active_tab .icon-container {
+    background-color: #009dff3d;
+  }
+
   @screen sm {
     .section-title {
       margin-bottom: 40px;
@@ -515,6 +538,11 @@ input:focus {
     }
   }
   @screen lg {
+    /* home tabs style */
+    .tabs-section .tabs .tabs_label .tab_title svg {
+      font-size: 25px;
+    }
+
     .card-wcu img {
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px;

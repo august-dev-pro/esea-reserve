@@ -2,8 +2,15 @@ import banniere from "@/imgs/banniere/R.jpeg";
 import banniere2 from "@/imgs/banniere/jardinage.jpg";
 import banniere3 from "@/imgs/banniere/demenagement.jpg";
 import banniere4 from "@/imgs/banniere/plomberie.jpeg";
+import plomberie from "@/imgs/banniere/plomberie.jpeg";
 import {
+  faBolt,
   faBroom,
+  faHammer,
+  faLaptop,
+  faLeaf,
+  faPaintRoller,
+  faPlug,
   faSeedling,
   faTruck,
   faWrench,
@@ -11,34 +18,110 @@ import {
 export const services = [
   {
     id: 1,
-    img: banniere,
+    img: banniere, // Change image as necessary
     title: "Nettoyage",
     description:
       "Des services de nettoyage professionnels pour votre maison ou bureau.",
     icon: faBroom,
+    points: [
+      "Nettoyage pour maisons, appartements et bureaux.",
+      "Entretien et nettoyage des véhicules.",
+    ],
   },
   {
     id: 2,
-    img: banniere2,
+    img: banniere2, // Change image as necessary
     title: "Jardinage",
     description:
       "Améliorez votre jardin avec nos services de jardinage experts.",
-    icon: faSeedling,
+    icon: faLeaf, // Changed to the correct icon
+    points: [
+      "Entretien de pelouses et jardins.",
+      "Plantation et soin des fleurs.",
+    ],
   },
   {
     id: 3,
-    img: banniere3,
+    img: banniere3, // Change image as necessary
     title: "Déménagement",
     description:
       "Des services de déménagement fiables et rapides pour un transfert sans souci.",
     icon: faTruck,
+    points: [
+      "Service de déménagement sécurisé.",
+      "Emballage et déballage professionnel.",
+    ],
   },
   {
     id: 4,
-    img: banniere4,
+    img: banniere4, // Change image as necessary
     title: "Plomberie",
     description: "Des solutions de plomberie efficaces pour tous vos besoins.",
     icon: faWrench,
+    points: [
+      "Réparation de fuites d'eau.",
+      "Installation de systèmes de plomberie.",
+    ],
+  },
+  {
+    id: 5,
+    img: plomberie, // Change image as necessary
+    title: "Électricité",
+    description:
+      "Des services électriques professionnels pour installations et réparations.",
+    icon: faBolt,
+    points: [
+      "Installation de systèmes électriques.",
+      "Réparation et maintenance de circuits électriques.",
+    ],
+  },
+  {
+    id: 6,
+    img: plomberie, // Change image as necessary
+    title: "Peinture",
+    description:
+      "Services de peinture pour un intérieur et un extérieur parfaits.",
+    icon: faPaintRoller,
+    points: [
+      "Peinture intérieure et extérieure.",
+      "Revêtements et finitions de haute qualité.",
+    ],
+  },
+  {
+    id: 7,
+    img: plomberie, // Change image as necessary
+    title: "Construction",
+    description:
+      "Services de construction et de rénovation pour tous vos besoins.",
+    icon: faHammer,
+    points: [
+      "Construction de maisons et de bâtiments.",
+      "Rénovation et amélioration de l'habitat.",
+    ],
+  },
+  {
+    id: 8,
+    img: plomberie, // Change image as necessary
+    title: "Informatique",
+    description:
+      "Services informatiques pour l'installation, la maintenance et la réparation.",
+    icon: faLaptop,
+    points: [
+      "Réparation et maintenance de PC et laptops.",
+      "Assistance technique pour mobiles et tablettes.",
+    ],
+  },
+  {
+    id: 9,
+    img: plomberie, // Change image as necessary
+    title: "Électroménager",
+    description:
+      "Installation et réparation d'appareils électroménagers de toutes marques.",
+    icon: faPlug,
+    points: [
+      "Installation d'appareils électroménagers.",
+      "Réparation de machines à laver, réfrigérateurs, et plus.",
+    ],
   },
 ];
 

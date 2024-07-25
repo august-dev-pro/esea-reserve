@@ -17,9 +17,6 @@ const ServicesOverview = () => {
               <Service key={index} service={service} />
             ))}
           </div>
-          <div className="see-more w-fit m-[0_auto] px-5 py-2 bg-midnight-blue cursor-pointer rounded-[.3rem] text-white capitalize hover:bg-dark-blue transition-all">
-            autres prestations ...
-          </div>
         </div>
       </div>
     </section>
