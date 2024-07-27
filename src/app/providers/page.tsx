@@ -2,7 +2,7 @@
 import { getProducts } from "@/ui/api";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
 
@@ -35,4 +35,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
