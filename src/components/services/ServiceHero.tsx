@@ -3,7 +3,7 @@ import ServiceHeroimg from "@/imgs/banniere/jardinage.jpg";
 const ServiceHero = () => {
   return (
     <div
-      className="h-[350px] sm:h-[500px] relative flex items-center justify-center"
+      className="h-[350px] md:h-[400px] lg:h-[450px] relative flex items-center justify-center"
       style={{
         background: `url('${ServiceHeroimg.src}') center`,
         backgroundAttachment: "fixed",

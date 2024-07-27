@@ -25,6 +25,7 @@ const config: Config = {
         "hover-btn": "#007bff",
         "white-opacity-plus": "#ffffff5d",
         "blue-linght": "#0057b365",
+        "black-opacity": "#0000004d",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

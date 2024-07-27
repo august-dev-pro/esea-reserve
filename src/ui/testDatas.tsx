@@ -27,6 +27,21 @@ export const services = [
       "Nettoyage pour maisons, appartements et bureaux.",
       "Entretien et nettoyage des véhicules.",
     ],
+    options: [
+      "Nettoyage de la maison",
+      "Nettoyage en profondeur",
+      "Services de désinfection",
+      "Nettoyage à l'entrée",
+      "Nettoyage à la sortie",
+      "Nettoyage de locations de vacances",
+      "Service de nettoyage de tapis",
+      "Nettoyage de garage",
+      "Services de nettoyage ponctuels",
+      "Lavage de voiture",
+      "Aide au linge",
+      "Nettoyage haute pression",
+      "Nettoyage de printemps",
+    ],
   },
   {
     id: 2,
@@ -38,6 +53,17 @@ export const services = [
     points: [
       "Entretien de pelouses et jardins.",
       "Plantation et soin des fleurs.",
+    ],
+    options: [
+      "Tonte de pelouse",
+      "Élagage des arbres",
+      "Plantation de fleurs",
+      "Désherbage",
+      "Arrosage de jardin",
+      "Aménagement paysager",
+      "Entretien de haies",
+      "Taille d'arbustes",
+      "Aménagement de parterres de fleurs",
     ],
   },
   {
@@ -51,6 +77,16 @@ export const services = [
       "Service de déménagement sécurisé.",
       "Emballage et déballage professionnel.",
     ],
+    options: [
+      "Déménagement local",
+      "Déménagement longue distance",
+      "Service d'emballage",
+      "Service de déballage",
+      "Déménagement commercial",
+      "Transport d'objets lourds",
+      "Stockage temporaire",
+      "Relocalisation d'entreprise",
+    ],
   },
   {
     id: 4,
@@ -61,6 +97,15 @@ export const services = [
     points: [
       "Réparation de fuites d'eau.",
       "Installation de systèmes de plomberie.",
+    ],
+    options: [
+      "Réparation de fuites",
+      "Installation de tuyauterie",
+      "Débouchage de canalisations",
+      "Installation de chauffe-eau",
+      "Réparation de robinetterie",
+      "Remplacement de toilettes",
+      "Réparation de systèmes de chauffage",
     ],
   },
   {
@@ -74,6 +119,15 @@ export const services = [
       "Installation de systèmes électriques.",
       "Réparation et maintenance de circuits électriques.",
     ],
+    options: [
+      "Installation électrique",
+      "Réparation de circuits",
+      "Maintenance électrique",
+      "Installation d'éclairages",
+      "Mise à niveau de systèmes électriques",
+      "Remplacement de fusibles",
+      "Installation de prises électriques",
+    ],
   },
   {
     id: 6,
@@ -85,6 +139,14 @@ export const services = [
     points: [
       "Peinture intérieure et extérieure.",
       "Revêtements et finitions de haute qualité.",
+    ],
+    options: [
+      "Peinture intérieure",
+      "Peinture extérieure",
+      "Application de revêtements",
+      "Restauration de surfaces",
+      "Peinture de meubles",
+      "Retouches de peinture",
     ],
   },
   {
@@ -98,6 +160,14 @@ export const services = [
       "Construction de maisons et de bâtiments.",
       "Rénovation et amélioration de l'habitat.",
     ],
+    options: [
+      "Construction résidentielle",
+      "Construction commerciale",
+      "Rénovation intérieure",
+      "Rénovation extérieure",
+      "Amélioration de l'habitat",
+      "Extensions de bâtiments",
+    ],
   },
   {
     id: 8,
@@ -109,6 +179,14 @@ export const services = [
     points: [
       "Réparation et maintenance de PC et laptops.",
       "Assistance technique pour mobiles et tablettes.",
+    ],
+    options: [
+      "Réparation de PC",
+      "Maintenance de laptops",
+      "Assistance mobile",
+      "Installation de logiciels",
+      "Réparation de matériel informatique",
+      "Support technique à distance",
     ],
   },
   {
@@ -122,9 +200,16 @@ export const services = [
       "Installation d'appareils électroménagers.",
       "Réparation de machines à laver, réfrigérateurs, et plus.",
     ],
+    options: [
+      "Installation de machines à laver",
+      "Réparation de réfrigérateurs",
+      "Entretien de lave-vaisselle",
+      "Réparation de fours",
+      "Installation de climatiseurs",
+      "Réparation d'appareils divers",
+    ],
   },
 ];
-
 export const taskers = [
   {
     id: 1,

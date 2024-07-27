@@ -56,12 +56,12 @@ const HomeTabs = () => {
               </div>
             </div>
             <div className="sucgess flex flex-wrap gap-[10px] py-[25px]">
-              {services.map((service: any, index: number) => (
+              {services[activeTab].options.map((option: any, index: number) => (
                 <div
                   key={index}
                   className="help text-[14px] font-[300] px-[18px] py-[3px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
                 >
-                  {service.title}
+                  {option}
                 </div>
               ))}
             </div>
