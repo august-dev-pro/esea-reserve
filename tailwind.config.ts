@@ -13,6 +13,9 @@ const config: Config = {
           "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
         "custom-form": "0 3px 9px rgba(0,0,0,0.5);",
       },
+      textShadow: {
+        custom: "0 1px 7px rgba(0, 0, 0, 0.4)",
+      },
       colors: {
         "midnight-blue": "#145da0",
         "dark-blue": "#0C2D48",

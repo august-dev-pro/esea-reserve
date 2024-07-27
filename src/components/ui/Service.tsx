@@ -7,7 +7,7 @@ import React from "react";
 const Service = ({ service }: any) => {
   return (
     <article className="service group relative border-solid border-[1px] rounded-[.5rem] overflow-hidden h-[350px] shadow-md border-gray-300">
-      <Link href={`/services/${service.id}`}>
+      <Link href={`/services/by-slug/${service.title}`}>
         <Image
           src={service.img}
           alt="tof"
@@ -17,21 +17,21 @@ const Service = ({ service }: any) => {
         />
       </Link>
       <div className="flex w-full flex-col transition-all bg-white absolute bottom-0 shadow-md p-4 md:bg-marron-opacity md:group-hover:bg-white md:text-white md:group-hover:text-gray-600">
-        <Link href={`/services/${service.id}`}>
+        <Link href={`/services/by-slug/${service.title}`}>
           <h3 className="text-[16px]  font-[500] md:text-[30px] md:text-center group-hover:text-left">
             {service.title} <FontAwesomeIcon icon={service.icon} />
           </h3>
         </Link>
 
         <div className="desc transition-all group-hover:block md:h-[0px] md:group-hover:h-[70px]">
-          <Link href={`/services/${service.id}`}>
+          <Link href={`/services/by-slug/${service.title}`}>
             <p className=" md:text-transparent md:group-hover:text-gray-400 text-gray-400 text-[15px] font-[300] sm:text-[16px]">
               {service.description}
             </p>
           </Link>
 
           <Link
-            href={`/services/${service.id}`}
+            href={`/services/by-slug/${service.title}`}
             className="flex gap-3 transition-all items-center text-red-900 underline hover:text-midnight-blue rounded-lg w-fit"
           >
             En savoir plus
