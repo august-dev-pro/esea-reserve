@@ -12,8 +12,8 @@ import paiement from "@/imgs/svgs/paiement.svg";
 import emploiTime from "@/imgs/svgs/emploi_du_temps.svg";
 import jobs from "@/imgs/svgs/getting_jobs-037938907c55e3d9ae963b4a182b3150.svg";
 import aboutFouter from "@/imgs/providers/about_footer_image.jpg";
-import RegisterTaskerForm from "@/components/forms/providers/RegisterTaskerForm";
-
+/* import RegisterTaskerForm from "@/components/forms/providers/RegisterTaskerForm";
+ */
 const page = () => {
   const bondoukouQuarters = [
     { value: "Bondoukou, Dioulabougou" },
@@ -86,7 +86,7 @@ const page = () => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <RegisterTaskerForm handleStartRegister={handleStartRegister} />
+          {/* <RegisterTaskerForm handleStartRegister={handleStartRegister} /> */}
         </div>
       ) : (
         <>
