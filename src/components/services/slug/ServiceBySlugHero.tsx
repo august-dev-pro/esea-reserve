@@ -1,24 +1,6 @@
+import { Service, ServiceOption } from "@/ui/types";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import React from "react";
-// Define the type for the service options
-type ServiceOption = {
-  title: string;
-  description: string;
-  img: string;
-};
-
-// Define the type for the main service object
-export type Service = {
-  id: number;
-  img: any; // Assuming img is a string path to the image
-  title: string;
-  description: string;
-  icon: IconDefinition; // FontAwesome icon type
-  points: string[];
-  options: ServiceOption[];
-};
-
-export type Services = Service[];
 
 const ServiceBySlugHero = ({ service }: { service: Service }) => {
   if (!service) {

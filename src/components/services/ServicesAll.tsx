@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { services } from "@/ui/testDatas";
+import { Service, ServiceOption } from "@/ui/types";
 
 const ServicesAll = () => {
   return (
@@ -10,7 +11,7 @@ const ServicesAll = () => {
       <div className="container mx-auto px-4 sm:px-8">
         <div className=""></div>
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service: any, index: number) => (
+          {services.map((service: Service, index: number) => (
             <div
               key={index}
               className="service-card border border-gray-300 rounded-lg  overflow-hidden  bg-white transition-transform transform"
@@ -39,17 +40,19 @@ const ServicesAll = () => {
                 </div>
                 <div className="options mb-5 mt-8">
                   <div className="grid grid-cols-1 gap-3">
-                    {service.options.map((option: any, index: number) => (
-                      <Link
-                        key={index}
-                        href={`/${service.title.toLowerCase()}/${option
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`}
-                        className="block w-fit font-Quicksand text-blue-600 text-[15px] hover:underline hover:text-black text-midnight-blue transition-all duration-200"
-                      >
-                        {option}
-                      </Link>
-                    ))}
+                    {service.options.map(
+                      (option: ServiceOption, index: number) => (
+                        <Link
+                          key={index}
+                          href={`/${service.title.toLowerCase()}/${option.title
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                          className="block w-fit font-Quicksand text-blue-600 text-[15px] hover:underline hover:text-black text-midnight-blue transition-all duration-200"
+                        >
+                          {option.title}
+                        </Link>
+                      )
+                    )}
                   </div>
                 </div>
                 <div className="points">
@@ -57,7 +60,7 @@ const ServicesAll = () => {
                     Points clés:
                   </h4>
                   <ul className="list-none space-y-2">
-                    {service.points.map((point: any, index: number) => (
+                    {service.points.map((point: string, index: number) => (
                       <li
                         key={index}
                         className="flex items-start text-gray-600"

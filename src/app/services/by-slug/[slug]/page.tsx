@@ -1,7 +1,6 @@
-import ServiceBySlugHero, {
-  Service,
-} from "@/components/services/slug/ServiceBySlugHero";
+import ServiceBySlugHero from "@/components/services/slug/ServiceBySlugHero";
 import { services } from "@/ui/testDatas";
+import { Service } from "@/ui/types";
 import React from "react";
 
 const Page = ({ params }: { params: { slug: string } }) => {
