@@ -1,6 +1,26 @@
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import React from "react";
+// Define the type for the service options
+type ServiceOption = {
+  title: string;
+  description: string;
+  img: string;
+};
 
-const ServiceBySlugHero = ({ service }: { service: any }) => {
+// Define the type for the main service object
+export type Service = {
+  id: number;
+  img: any; // Assuming img is a string path to the image
+  title: string;
+  description: string;
+  icon: IconDefinition; // FontAwesome icon type
+  points: string[];
+  options: ServiceOption[];
+};
+
+export type Services = Service[];
+
+const ServiceBySlugHero = ({ service }: { service: Service }) => {
   if (!service) {
     return;
   }
@@ -32,7 +52,7 @@ const ServiceBySlugHero = ({ service }: { service: any }) => {
         <div className="container px-4 sm:px-0">
           <div className="flex flex-col-reverse lg:grid lg:grid-cols-[1fr_300px] gap-4">
             <div className="flex flex-col gap-[30px]">
-              {service.options.map((option: any, index: number) => (
+              {service.options.map((option: ServiceOption, index: number) => (
                 <div
                   className="option shadow-custom-header flex flex-col gap-4 md:flex-row w-full items-center md:max-w-[750px] rounded-[.3rem] lg:justify-between p-[10px] sm:p-[15px] md:p-[20px] lg:p-[25px] border border-gray-400 bg-white"
                   key={index}
