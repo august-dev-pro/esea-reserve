@@ -19,3 +19,12 @@ export type Service = {
 };
 
 export type Services = Service[];
+
+export interface Comment {
+  id: number;
+  name: string;
+  service: string;
+  text: string;
+  date: string;
+  rate: number;
+}

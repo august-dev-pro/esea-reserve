@@ -15,7 +15,7 @@ const AboutUs = () => {
       >
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-marron-opacity-claire"></div>
         <div className="container px-4 sm:px-0 z-[100]">
-          <div className="w-fit flex flex-col m-[0_auto] text-white capitalize font-[500] text-[25px] md:text-[35px] after:p-1 after:w-1/2 after:rounded-md after:bg-white">
+          <div className="w-fit flex flex-col text-shadow-custom m-[0_auto] text-white capitalize font-[500] text-[25px] md:text-[35px] after:p-1 after:w-1/2 after:rounded-md after:bg-white">
             à propos de easy reserve
           </div>
         </div>

@@ -43,7 +43,11 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
       title: "Recherche et identification du service",
       description: "Date d'intervention, adresse, description du problème",
       component: (
-        <ServiceForm handleNextStep={handleNextStep} data={formData} />
+        <ServiceForm
+          handleNextStep={handleNextStep}
+          data={formData}
+          service={service}
+        />
       ),
     },
     {

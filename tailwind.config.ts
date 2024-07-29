@@ -14,6 +14,10 @@ const config: Config = {
         "custom-form": "0 3px 9px rgba(0,0,0,0.5);",
       },
       textShadow: {
+        sm: "1px 1px 2px rgba(0, 0, 0, 0.1)",
+        md: "2px 2px 4px rgba(0, 0, 0, 0.15)",
+        lg: "3px 3px 6px rgba(0, 0, 0, 0.2)",
+        xl: "4px 4px 8px rgba(0, 0, 0, 0.25)", // ombre très grande
         custom: "0 1px 7px rgba(0, 0, 0, 0.4)",
       },
       colors: {

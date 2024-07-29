@@ -38,7 +38,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="header mb-[200Px] bg-white fixed z-[10000] w-full py-[7px] border-solid border-b-[1px] border-b-midnight-blue lg:py-[10px]">
+    <header className="header mb-[200Px] bg-white fixed z-[10000] w-full py-[7px] border-solid border-b-[1px] border-b-gray-300 shadow-custom-header lg:py-[10px]">
       <div className="container px-5 sm:px-0">
         <div className="header_content flex justify-between items-center">
           <div className="logo_eseaservice w-[100px] h-[41px] sm: lg:w-[110px] lg:h-[45px]">
@@ -53,17 +53,19 @@ const Header = () => {
           </div>
 
           {menuOpen ? (
-            <FontAwesomeIcon
-              className="text-[25px] cursor-pointer md:hidden"
-              icon={faClose}
+            <div
+              className="icon-close"
               onClick={() => setMenuOpen(!menuOpen)}
-            />
+            ></div>
           ) : (
-            <FontAwesomeIcon
-              className="text-[25px] cursor-pointer md:hidden"
-              icon={faBars}
+            <div
+              className="bars-icon md:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
-            />
+            >
+              <div className="bar"></div>
+              <div className="bar"></div>
+              <div className="bar"></div>
+            </div>
           )}
 
           {menuOpen && (
@@ -146,7 +148,7 @@ const Header = () => {
                         onMouseEnter={() => setDropdownOpen(index)}
                         onMouseLeave={() => setDropdownOpen(null)}
                       >
-                        <div className="link flex items-center capitalize gap-[5px] hover:text-midnight-blue transition-all">
+                        <div className="link flex items-center font-[400] capitalize gap-[5px] hover:text-midnight-blue transition-all">
                           {link.label} <FontAwesomeIcon icon={faCaretDown} />
                         </div>
                         {dropdownOpen === index && (
@@ -167,7 +169,7 @@ const Header = () => {
                       </div>
                     ) : (
                       <Link
-                        className={`link flex flex-col hover:text-midnight-blue transition-all ${
+                        className={`link flex font-[400] flex-col hover:text-midnight-blue transition-all ${
                           activeLink === index ? "active" : ""
                         }`}
                         href={link.path}

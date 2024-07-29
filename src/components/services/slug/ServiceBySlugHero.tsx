@@ -1,6 +1,14 @@
-import { Service, ServiceOption } from "@/ui/types";
+import { Comment, Service, ServiceOption } from "@/ui/types";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import React from "react";
+import ServiceComent from "../ServiceComent";
+import { comments } from "@/ui/testDatas";
+import HowIsWork from "../HowIsWork";
+import Image from "next/image";
+import Serviceoption from "./ServiceOption";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const ServiceBySlugHero = ({ service }: { service: Service }) => {
   if (!service) {
@@ -22,7 +30,7 @@ const ServiceBySlugHero = ({ service }: { service: Service }) => {
             <div className="text-white text-[35px] font-[500]">
               {service.title}
             </div>
-            <div className="text-white font-[500] text-lg md:text-[27px] text-shadow-custom">
+            <div className="text-white font-[400] text-lg md:text-[27px] text-shadow-custom text-shadow-custom">
               Les prestataires peuvent vous aider avec les tâches de{" "}
               {service.title} autour de votre maison, à bon prix et un travail
               bien fait.
@@ -32,27 +40,56 @@ const ServiceBySlugHero = ({ service }: { service: Service }) => {
       </div>
       <div className="section bg-gray-100">
         <div className="container px-4 sm:px-0">
-          <div className="flex flex-col-reverse lg:grid lg:grid-cols-[1fr_300px] gap-4">
+          <div className="flex items-center gap-[5px] font-[400] text-midnight-blue mb-1">
+            <Link
+              className=" transition-all duration-200 hover:text-black "
+              href={"/"}
+            >
+              home{" "}
+              <FontAwesomeIcon className="text-[10px]" icon={faChevronRight} />
+            </Link>
+
+            <Link
+              className=" transition-all duration-200 hover:text-black "
+              href={"/services"}
+            >
+              services{" "}
+              <FontAwesomeIcon className="text-[10px]" icon={faChevronRight} />
+            </Link>
+
+            <Link
+              className=" transition-all duration-200 hover:text-black "
+              href={`/services/by-slug/${service.title}`}
+            >
+              {service.title}
+            </Link>
+          </div>
+          <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1fr_310px] lg:gap-4">
             <div className="flex flex-col gap-[30px]">
               {service.options.map((option: ServiceOption, index: number) => (
-                <div
-                  className="option shadow-custom-header flex flex-col gap-4 md:flex-row w-full items-center md:max-w-[750px] rounded-[.3rem] lg:justify-between p-[10px] sm:p-[15px] md:p-[20px] lg:p-[25px] border border-gray-400 bg-white"
-                  key={index}
-                >
-                  <div className="image rounded-[50%] lg:rounded-none m-[0_auto] h-[130px] w-[130px] md:h-[160px] md:w-[160px] lg:w-[250px] lg:h-[full] lg:min-h-[150px] bg-black"></div>
-                  <div className="des w-full md:max-w-[400px] justify-center items-center md:items-start text-center md:text-left flex flex-col gap-[10px]">
-                    <div className="title text-[20px] capitalize ">
-                      {option.title}
-                    </div>
-                    <div className="description font-Quicksand ">
-                      {option.description}
-                    </div>
-                    <div className="btn-primary w-fit">reserver</div>
-                  </div>
-                </div>
+                <Serviceoption option={option} />
               ))}
             </div>
-            <div className="bg-orange-500"></div>
+            <div className="flex flex-col gap-[50px]">
+              <div className="flex flex-col gap-[20px]">
+                <div className="title w-max capitalize font-Quicksand text-[20px] font-[700]">
+                  Réglez cette tâche sans effort
+                </div>{" "}
+                <HowIsWork />
+              </div>
+              <div className="flex flex-col gap-[20px]">
+                <div className="title capitalize font-Quicksand text-[20px] font-[700]">
+                  de certains utilisateurs
+                </div>
+                <div className=" flex flex-col gap-[20px] ">
+                  {comments.map((comment: Comment, index: number) => {
+                    if (comment.service == service.title) {
+                      return <ServiceComent key={index} comment={comment} />;
+                    }
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -679,3 +679,239 @@ export const taskers = [
     domaine: "Plomberie",
   },
 ];
+
+export const comments = [
+  // Nettoyage
+  {
+    id: 1,
+    service: "Nettoyage",
+    name: "Jean Dupont",
+    text: "Excellent service ! Les prestataires étaient très professionnels et ponctuels.",
+    date: "2024-07-25",
+    rate: 5,
+  },
+  {
+    id: 2,
+    service: "Nettoyage",
+    name: "Marie Curie",
+    text: "Très satisfait du travail effectué. Je recommande vivement.",
+    date: "2024-07-22",
+    rate: 4,
+  },
+  {
+    id: 3,
+    service: "Nettoyage",
+    name: "Pierre Martin",
+    text: "Service rapide et efficace. Bon rapport qualité-prix.",
+    date: "2024-07-20",
+    rate: 4,
+  },
+
+  // Jardinage
+  {
+    id: 4,
+    service: "Jardinage",
+    name: "Alice Moreau",
+    text: "Le jardin est magnifique maintenant. Très bon travail.",
+    date: "2024-07-21",
+    rate: 5,
+  },
+  {
+    id: 5,
+    service: "Jardinage",
+    name: "Robert Leblanc",
+    text: "Des professionnels très compétents. Je suis ravi du résultat.",
+    date: "2024-07-19",
+    rate: 4,
+  },
+  {
+    id: 6,
+    service: "Jardinage",
+    name: "Sophie Bernard",
+    text: "Service de jardinage de haute qualité. Je recommande sans hésiter.",
+    date: "2024-07-18",
+    rate: 5,
+  },
+
+  // Déménagement
+  {
+    id: 7,
+    service: "Déménagement",
+    name: "Lucie Lefevre",
+    text: "Très bon service de déménagement, tout s’est bien passé.",
+    date: "2024-07-23",
+    rate: 4,
+  },
+  {
+    id: 8,
+    service: "Déménagement",
+    name: "Marc Dubois",
+    text: "Service efficace et rapide. Les équipes étaient très professionnelles.",
+    date: "2024-07-24",
+    rate: 5,
+  },
+  {
+    id: 9,
+    service: "Déménagement",
+    name: "Élise Laurent",
+    text: "Un déménagement sans stress. Je suis très satisfait du service.",
+    date: "2024-07-20",
+    rate: 4,
+  },
+
+  // Plomberie
+  {
+    id: 10,
+    service: "Plomberie",
+    name: "Jacques Bernard",
+    text: "Réparation rapide et efficace de ma fuite d’eau. Très satisfait.",
+    date: "2024-07-22",
+    rate: 5,
+  },
+  {
+    id: 11,
+    service: "Plomberie",
+    name: "Claire Dupuis",
+    text: "Service professionnel et à l’écoute. Je recommande.",
+    date: "2024-07-18",
+    rate: 4,
+  },
+  {
+    id: 12,
+    service: "Plomberie",
+    name: "Marc Lefèvre",
+    text: "Bonne intervention, mais un peu cher. Globalement satisfait.",
+    date: "2024-07-21",
+    rate: 3,
+  },
+
+  // Électricité
+  {
+    id: 13,
+    service: "Électricité",
+    name: "Isabelle Martin",
+    text: "Installation électrique impeccable. Travail soigné et rapide.",
+    date: "2024-07-20",
+    rate: 5,
+  },
+  {
+    id: 14,
+    service: "Électricité",
+    name: "Julien Petit",
+    text: "Très bon service, mais il a fallu attendre un peu pour la réparation.",
+    date: "2024-07-23",
+    rate: 4,
+  },
+  {
+    id: 15,
+    service: "Électricité",
+    name: "Élodie Roy",
+    text: "Service correct, mais quelques petits problèmes ont persisté après l’intervention.",
+    date: "2024-07-22",
+    rate: 3,
+  },
+
+  // Peinture
+  {
+    id: 16,
+    service: "Peinture",
+    name: "Henri Vidal",
+    text: "Peinture intérieure réalisée avec soin. Très satisfait du résultat.",
+    date: "2024-07-19",
+    rate: 5,
+  },
+  {
+    id: 17,
+    service: "Peinture",
+    name: "Julie Lambert",
+    text: "Travail soigné, mais quelques retouches étaient nécessaires.",
+    date: "2024-07-21",
+    rate: 4,
+  },
+  {
+    id: 18,
+    service: "Peinture",
+    name: "Paul Durand",
+    text: "Service de peinture acceptable, mais le délai a été plus long que prévu.",
+    date: "2024-07-23",
+    rate: 3,
+  },
+
+  // Construction
+  {
+    id: 19,
+    service: "Construction",
+    name: "Marie-Claude Petit",
+    text: "Construction de ma maison terminée dans les délais. Excellent travail.",
+    date: "2024-07-25",
+    rate: 5,
+  },
+  {
+    id: 20,
+    service: "Construction",
+    name: "Louis Laurent",
+    text: "Bonne qualité de construction, mais quelques retards ont été rencontrés.",
+    date: "2024-07-22",
+    rate: 4,
+  },
+  {
+    id: 21,
+    service: "Construction",
+    name: "Nathalie Dupuis",
+    text: "Le projet a pris plus de temps que prévu, mais la qualité est au rendez-vous.",
+    date: "2024-07-20",
+    rate: 3,
+  },
+
+  // Informatique
+  {
+    id: 22,
+    service: "Informatique",
+    name: "Gérard Rousseau",
+    text: "Réparation de mon PC effectuée rapidement et efficacement.",
+    date: "2024-07-18",
+    rate: 5,
+  },
+  {
+    id: 23,
+    service: "Informatique",
+    name: "Sophie Durant",
+    text: "Bonne assistance technique, mais un peu de retard sur la réponse.",
+    date: "2024-07-20",
+    rate: 4,
+  },
+  {
+    id: 24,
+    service: "Informatique",
+    name: "Philippe Martin",
+    text: "Le support technique est moyen, quelques améliorations à apporter.",
+    date: "2024-07-23",
+    rate: 3,
+  },
+
+  // Électroménager
+  {
+    id: 25,
+    service: "Électroménager",
+    name: "Véronique Simon",
+    text: "Installation de mon climatiseur effectuée rapidement et avec soin.",
+    date: "2024-07-21",
+    rate: 5,
+  },
+  {
+    id: 26,
+    service: "Électroménager",
+    name: "Michel Roux",
+    text: "Réparation de mon réfrigérateur correcte, mais le service était un peu lent.",
+    date: "2024-07-24",
+    rate: 4,
+  },
+  {
+    id: 27,
+    service: "Électroménager",
+    name: "Céline Berger",
+    text: "Le service est acceptable, mais il y a eu quelques problèmes de communication.",
+    date: "2024-07-22",
+    rate: 3,
+  },
+];

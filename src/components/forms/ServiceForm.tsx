@@ -1,22 +1,31 @@
 "use client";
+import { updateReservation } from "@/redux/reservationSlice";
+import { RootState } from "@/redux/store";
+import { services } from "@/ui/testDatas";
+import { Service, ServiceOption } from "@/ui/types";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ServiceForm = ({
   handleNextStep,
+  service,
 }: {
   handleNextStep: (data: {
     date: string;
     address: string;
+    option: string[];
     problemDescription: string;
     jobType: string;
     wever: string;
   }) => void;
+  service: Service;
   data: any;
 }) => {
   const [formData, setFormData] = useState({
     date: "",
     address: "",
     problemDescription: "",
+    option: [],
     jobType: "",
     wever: "",
   });
@@ -25,6 +34,7 @@ const ServiceForm = ({
     address: "",
     problemDescription: "",
     jobType: "",
+    option: "",
     wever: "",
   });
 
@@ -73,6 +83,28 @@ const ServiceForm = ({
     e.preventDefault();
     if (validateForm()) {
       handleNextStep(formData);
+    }
+  };
+
+  const reservation = useSelector((state: RootState) => state.reservation);
+
+  const dispatch = useDispatch();
+
+  const handleCheckboxChange = (optionTitle: string, checked: boolean) => {
+    if (checked) {
+      // Ajouter l'option au tableau
+      dispatch(
+        updateReservation({
+          option: [...reservation.option, optionTitle],
+        })
+      );
+    } else {
+      // Retirer l'option du tableau
+      dispatch(
+        updateReservation({
+          option: reservation.option.filter((title) => title !== optionTitle),
+        })
+      );
     }
   };
 
@@ -145,6 +177,52 @@ const ServiceForm = ({
               <div className="error">{formDataErrors.jobType}</div>
             )}
           </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-[15px] sm:text-[16px] font-Quicksand capitalize font-[500] text-neutral-600">
+              Sélectionnez vos options ( optionnel )
+            </label>
+            <div className="flex flex-col items-start rounded-[.3rem] gap-4 border-solid border-gray-300 border-[1px] px-3 py-4">
+              {reservation.option.length > 0
+                ? // Affichage des options sélectionnées dans la réservation
+                  reservation.option.map(
+                    (optionTitle: string, index: number) => (
+                      <label
+                        key={index}
+                        className="flex flex-row-reverse gap-3 text-[14px] sm:text-[16px] capitalize font-Quicksand w-fit cursor-pointer"
+                      >
+                        {optionTitle}
+                        <input
+                          type="checkbox"
+                          checked={reservation.option.includes(optionTitle)}
+                          onChange={(e) =>
+                            handleCheckboxChange(optionTitle, e.target.checked)
+                          }
+                          className="w-[20px]"
+                        />
+                      </label>
+                    )
+                  )
+                : // Affichage de toutes les options disponibles si aucune option n'est sélectionnée
+                  service?.options.map(
+                    (option: ServiceOption, index: number) => (
+                      <label
+                        key={index}
+                        className="flex flex-row-reverse gap-3 text-[14px] sm:text-[16px] capitalize font-Quicksand w-fit cursor-pointer"
+                      >
+                        {option.title}
+                        <input
+                          type="checkbox"
+                          checked={reservation.option.includes(option.title)}
+                          onChange={(e) =>
+                            handleCheckboxChange(option.title, e.target.checked)
+                          }
+                          className="w-[20px]"
+                        />
+                      </label>
+                    )
+                  )}
+            </div>
+          </div>
           <div className="champ">
             <label htmlFor="date">Choisir la date d'intervention</label>
             <input
@@ -206,7 +284,7 @@ const ServiceForm = ({
             )}
           </div>
         </div>
-        <button className="btn-primary font-Quicksand mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+        <button className="btn-primary font-Quicksand mt-4 px-4 py-2n w-fit bg-blue-500 text-white rounded">
           Suivant
         </button>
       </div>
