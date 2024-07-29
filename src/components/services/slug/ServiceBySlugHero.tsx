@@ -67,7 +67,7 @@ const ServiceBySlugHero = ({ service }: { service: Service }) => {
           <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1fr_310px] lg:gap-4">
             <div className="flex flex-col gap-[30px]">
               {service.options.map((option: ServiceOption, index: number) => (
-                <Serviceoption option={option} />
+                <Serviceoption key={index} option={option} />
               ))}
             </div>
             <div className="flex flex-col gap-[50px]">
