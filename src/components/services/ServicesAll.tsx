@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { services } from "@/ui/testDatas";
-import { Service, ServiceOption } from "@/ui/types";
+import { ServiceOption } from "@/ui/types";
 
 const ServicesAll = () => {
   return (
@@ -11,7 +11,7 @@ const ServicesAll = () => {
       <div className="container mx-auto px-4 sm:px-8">
         <div className=""></div>
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service: Service, index: number) => (
+          {services.map((service: any, index: number) => (
             <div
               key={index}
               className="service-card border border-gray-300 rounded-lg  overflow-hidden  bg-white transition-transform transform"

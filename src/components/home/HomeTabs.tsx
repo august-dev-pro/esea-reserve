@@ -17,6 +17,7 @@ import {
 
 import Image from "next/image";
 import { services } from "@/ui/testDatas";
+import { ServiceOption } from "@/ui/types";
 
 const HomeTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -56,14 +57,16 @@ const HomeTabs = () => {
               </div>
             </div>
             <div className="sucgess flex flex-wrap gap-[10px] py-[25px]">
-              {services[activeTab].options.map((option: any, index: number) => (
-                <div
-                  key={index}
-                  className="help text-[14px] font-[300] px-[18px] py-[3px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
-                >
-                  {option}
-                </div>
-              ))}
+              {services[activeTab].options.map(
+                (option: ServiceOption, index: number) => (
+                  <div
+                    key={index}
+                    className="help text-[14px] font-[300] px-[18px] py-[3px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
+                  >
+                    {option.title}
+                  </div>
+                )
+              )}
             </div>
           </div>
           <div className="tabs_content bg-blue-linght w-full pr-4 pb-4 sm:p-[30px] h-fit md:h-fit sm:rounded-[.5rem]">
