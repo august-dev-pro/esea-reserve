@@ -4,9 +4,7 @@ import React from "react";
 
 const Page = ({ params }: { params: { slug: string } }) => {
   const slug = params.slug;
-  const service = services.find(
-    (service: any) => service.title.toLowerCase() === slug
-  );
+  const service = services.find((service: any) => service.title == slug);
 
   return (
     <div className="">
