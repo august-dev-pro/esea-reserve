@@ -53,12 +53,12 @@ const ServiceBySlugHero = ({ service }: { service: Service }) => {
               className=" transition-all duration-200 hover:text-black "
               href={"/services"}
             >
-              services{" "}
+              services
               <FontAwesomeIcon className="text-[10px]" icon={faChevronRight} />
             </Link>
 
             <Link
-              className=" transition-all duration-200 hover:text-black "
+              className=" transition-all duration-200 text-black "
               href={`/services/by-slug/${service.title}`}
             >
               {service.title}
@@ -67,7 +67,7 @@ const ServiceBySlugHero = ({ service }: { service: Service }) => {
           <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1fr_310px] lg:gap-4">
             <div className="flex flex-col gap-[30px]">
               {service.options.map((option: ServiceOption, index: number) => (
-                <Serviceoption key={index} option={option} />
+                <Serviceoption key={index} option={option} service={service} />
               ))}
             </div>
             <div className="flex flex-col gap-[50px]">

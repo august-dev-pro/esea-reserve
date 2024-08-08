@@ -1,8 +1,9 @@
 import banniere from "@/imgs/banniere/R.jpeg";
-import banniere2 from "@/imgs/banniere/jardinage.jpg";
+import jardinage from "@/imgs/visuel-jardinier.jpg";
 import banniere3 from "@/imgs/banniere/demenagement.jpg";
 import banniere4 from "@/imgs/banniere/plomberie.jpeg";
 import plomberie from "@/imgs/banniere/plomberie.jpeg";
+import electricité from "@/imgs/depannage-electrique.jpg";
 import {
   faBolt,
   faBroom,
@@ -11,7 +12,6 @@ import {
   faLeaf,
   faPaintRoller,
   faPlug,
-  faSeedling,
   faTruck,
   faWrench,
 } from "@fortawesome/free-solid-svg-icons";
@@ -98,7 +98,7 @@ export const services = [
   },
   {
     id: 2,
-    img: banniere2,
+    img: jardinage,
     title: "Jardinage",
     description:
       "Améliorez votre jardin avec nos services de jardinage experts.",
@@ -166,7 +166,7 @@ export const services = [
   {
     id: 3,
     img: banniere3,
-    title: "Déménagement",
+    title: "Demenagement",
     description:
       "Des services de déménagement fiables et rapides pour un transfert sans souci.",
     icon: faTruck,
@@ -281,8 +281,8 @@ export const services = [
   },
   {
     id: 5,
-    img: plomberie,
-    title: "Électricité",
+    img: electricité,
+    title: "Electricite",
     description:
       "Des services électriques professionnels pour installations et réparations.",
     icon: faBolt,
@@ -488,7 +488,7 @@ export const services = [
   {
     id: 9,
     img: plomberie,
-    title: "Électroménager",
+    title: "Electromenager",
     description:
       "Installation et réparation d'appareils électroménagers de toutes marques.",
     icon: faPlug,
@@ -681,7 +681,6 @@ export const taskers = [
 ];
 
 export const comments = [
-  // Nettoyage
   {
     id: 1,
     service: "Nettoyage",

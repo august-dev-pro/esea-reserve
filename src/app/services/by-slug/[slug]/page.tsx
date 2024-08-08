@@ -5,7 +5,9 @@ import React from "react";
 
 const Page = ({ params }: { params: { slug: string } }) => {
   const slug = params.slug;
-  const service = services.find((service: Service) => service.title == slug);
+  const service = services.find(
+    (service: Service) => service.title.toUpperCase() == slug.toUpperCase()
+  );
 
   if (!service) {
     return;

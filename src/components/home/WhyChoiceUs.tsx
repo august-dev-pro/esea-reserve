@@ -21,7 +21,7 @@ const WhyChoiceUs = () => {
           <div className="title">Pourquoi nous choisir</div>
           <div className="sub-title">Découvrez ce qui nous distingue</div>
         </div>
-        <div className="grid grid-cols-1 gap-[50px]">
+        <div className="grid grid-cols-1 gap-[50px] md:gap-[100px]">
           <div className="card-wcu">
             <Image
               src={collageServices}

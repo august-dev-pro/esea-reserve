@@ -1,34 +1,28 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faWrench,
-  faBroom,
-  faBolt,
-  faPaintRoller,
-  faLeaf,
-  faCar,
-  faHammer,
-  faLock,
-  faLaptop,
-  faPlug,
-  faMobile,
-} from "@fortawesome/free-solid-svg-icons";
-
 import Image from "next/image";
 import { services } from "@/ui/testDatas";
 import { ServiceOption } from "@/ui/types";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { addOption } from "@/redux/reservationSlice";
 
 const HomeTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
 
-  /* useEffect(() => {
+  const dispatch = useDispatch();
+
+  const handleOptionClick = (optionTitle: string, serviceId: number) => {
+    dispatch(addOption(optionTitle));
+  };
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setActiveTab((prevIndex) => (prevIndex + 1) % services.length);
-    }, 20000);
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, []); */
+  }, []);
 
   return (
     <div className="tabs-section pt-[50px] md:section">
@@ -43,36 +37,43 @@ const HomeTabs = () => {
                     key={index}
                     className={`tab_title ${
                       activeTab === index ? "active_tab" : ""
-                    } flex flex-col items-center cursor-pointer h-full justify-between group`}
+                    } flex flex-col items-center cursor-pointer h-full justify-between group transition duration-300 ease-in-out`}
                   >
-                    <div className="icon-container group-hover:text-midnight-blue transition-all duration-[.3s] flex gap-1 items-center">
+                    <div className="icon-container text-gray-500 group-hover:text-midnight-blue transition duration-300 ease-in-out flex gap-1 items-center">
                       <FontAwesomeIcon icon={tab.icon} />
                     </div>
 
-                    <div className="title items-center relative flex flex-col group-hover:text-midnight-blue transition-all duration-[.3s] font-Quicksand text-[14px] capitalize sm:text-[16px] mb-[10px]">
+                    <div className="title items-center relative flex flex-col group-hover:text-midnight-blue transition duration-300 ease-in-out font-Quicksand text-[14px] capitalize sm:text-[16px] mb-[10px]">
                       {tab.title}
+                      {activeTab === index && (
+                        <div className="absolute bottom-[-2px] left-0 h-[2px] w-full bg-midnight-blue transform scale-x-100 transition-transform duration-500 ease-in-out"></div>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="sucgess flex flex-wrap gap-[10px] py-[25px]">
+            <div className="success flex flex-wrap gap-[10px] py-[25px] transition-opacity duration-300 ease-in-out">
               {services[activeTab].options.map(
                 (option: ServiceOption, index: number) => (
-                  <div
+                  <Link
+                    href={`/services/by-id/${services[activeTab].id}`}
+                    onClick={() =>
+                      handleOptionClick(option.title, services[activeTab].id)
+                    }
                     key={index}
                     className="help text-[14px] font-[300] px-[18px] py-[3px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
                   >
                     {option.title}
-                  </div>
+                  </Link>
                 )
               )}
             </div>
           </div>
-          <div className="tabs_content bg-blue-linght w-full pr-4 pb-4 sm:p-[30px] h-fit md:h-fit sm:rounded-[.5rem]">
-            <div className="w-full md:rounded-[.5rem] flex flex-col overflow-hidden h-full md:grid md:grid-cols-[130px_1fr]">
-              <div className="relative">
-                <div className="bg-white w-full md:w-[393px] md:absolute top-[50px] p-3 sm:p-[50px] font-Quicksand border-solid md:border-[2px] lg:border-[4px] border-blue-linght">
+          <div className="tabs_content bg-blue-linght w-full pr-4 pb-4 sm:p-[30px] h-fit md:h-fit sm:rounded-[.5rem] transition-opacity duration-500 ease-in-out">
+            <div className="w-full md:rounded-[.5rem] flex flex-col overflow-hidden h-full md:grid md:grid-cols-[130px_1fr] transition-transform duration-500 ease-in-out transform-gpu translate-x-0 opacity-100">
+              <div className="relative transition-transform duration-500 ease-in-out transform-gpu z-[100]">
+                <div className="bg-white w-full md:w-[393px] md:absolute top-[50px] p-3 sm:p-[50px] font-Quicksand border-solid md:border-[2px] lg:border-[4px] border-blue-linght transition-transform duration-500 ease-in-out transform scale-100 ">
                   <div className="font-Quicksand text-[25px] font-[700]">
                     {services[activeTab].title}
                   </div>
@@ -91,13 +92,13 @@ const HomeTabs = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center items-center">
+              <div className="flex max-w-[1000px] justify-center items-center transition-opacity duration-500 ease-in-out opacity-100 transform-gpu">
                 <Image
                   src={services[activeTab].img}
                   width={500}
                   height={500}
                   alt={services[activeTab].title}
-                  className="h-full w-full object-cover md:rounded-[1rem]"
+                  className="h-full w-full object-cover md:rounded-[1rem] transition-transform duration-500 ease-in-out transform-gpu"
                 />
               </div>
             </div>

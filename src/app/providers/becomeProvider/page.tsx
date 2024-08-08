@@ -13,6 +13,8 @@ import emploiTime from "@/imgs/svgs/emploi_du_temps.svg";
 import jobs from "@/imgs/svgs/getting_jobs-037938907c55e3d9ae963b4a182b3150.svg";
 import aboutFouter from "@/imgs/providers/about_footer_image.jpg";
 import RegisterTaskerForm from "@/components/forms/RegisterTaskerForm";
+import { services } from "@/ui/testDatas";
+import { Prestataire, Service } from "@/ui/types";
 
 const Page = () => {
   const bondoukouQuarters = [
@@ -68,12 +70,12 @@ const Page = () => {
       description: "Développez votre entreprise selon vos propres conditions.",
     },
   ];
-
-  const [registerTakerForm, setRegisterTakerForm] = useState(true);
+  const [registerTakerForm, setRegisterTakerForm] = useState(false);
 
   const handleStartRegister = () => {
     setRegisterTakerForm(!registerTakerForm);
   };
+
   return (
     <div className="relative">
       {registerTakerForm ? (
@@ -116,7 +118,7 @@ const Page = () => {
                         htmlFor="country"
                         className=" font-Quicksand text-[18px] capitalize"
                       >
-                        choisissez votre domaine
+                        choisissez votre zone
                       </label>
                       <select
                         defaultValue={"Bondoukou (all)"}
@@ -144,8 +146,8 @@ const Page = () => {
                         className="font-Quicksand font-[600] text-[17px] cursor-pointer overflow-hidden p-3 bg-white border-solid border-[1px] border-gray-400 w-full rounded-lg"
                       >
                         <option disabled>Netoyage, burreau...</option>
-                        {bondoukouQuarters.map((item: any, index: number) => (
-                          <option key={index}>{item.value}</option>
+                        {services.map((item: Service, index: number) => (
+                          <option key={index}>{item.title}</option>
                         ))}
                       </select>
                     </div>
@@ -225,8 +227,16 @@ const Page = () => {
                 love, when and where you want — all while saving the day for
                 someone in your city.
                 <div className="actions flex w-full text-[16px] justify-around">
-                  <div className="btn-primary w-fit">devenir tasker</div>
-                  <div className="btn-secondary w-fit">reserver service</div>
+                  <button
+                    type="submit"
+                    onClick={handleStartRegister}
+                    className="btn-primary w-fit"
+                  >
+                    devenir tasker
+                  </button>
+                  <Link href={`/services`} className="btn-secondary w-fit">
+                    reserver service
+                  </Link>
                 </div>
               </div>
             </div>

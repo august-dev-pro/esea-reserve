@@ -18,9 +18,10 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
   const reserveHeadRef = useRef<HTMLDivElement>(null);
   const [isFixed, setIsFixed] = useState(false);
   const [formData, setFormData] = useState({
-    service: service.title,
+    service: service.id,
     date: "",
     address: "",
+    option: [""],
     problemDescription: "",
     taskerId: "",
     jobType: "",
@@ -32,7 +33,9 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
-  const confirmeReservation = () => {};
+  const confirmeReservation = (data: any) => {
+    console.log("reservation: ", data);
+  };
   const handleEditStep = (step: number) => {
     setCurrentStep(step);
   };

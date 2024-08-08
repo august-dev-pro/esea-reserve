@@ -7,16 +7,15 @@ import {
   faArrowLeft,
   faArrowRight,
   faBroom,
-  faSearch,
   faSeedling,
   faTruck,
   faWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
 
 import { useState, useEffect } from "react";
 import SearchBar from "../ui/SearchBar";
+import Link from "next/link";
 
 const banniereDatas = [
   {
@@ -35,7 +34,7 @@ const banniereDatas = [
   },
   {
     src: banniere3,
-    alt: "Déménagement",
+    alt: "Demenagement",
     description:
       "Des services de déménagement fiables et rapides pour un transfert sans souci.",
     icon: faTruck,
@@ -110,15 +109,18 @@ const HeroSlider = () => {
           }`}
         >
           <h1 className="text-[20px] font-[600] sm:text-[30px] lg:text-[45px]">
-            {banniereDatas[currentIndex].alt}{" "}
+            {banniereDatas[currentIndex].alt}
             <FontAwesomeIcon icon={banniereDatas[currentIndex].icon} />
           </h1>
           <p className="font-[300] text-shadow-custom font-Quicksand text-justify sm:text-[20px] sm:font-[500] lg:text-[25px] lg:font-[400] sm:text-center">
             {banniereDatas[currentIndex].description}
           </p>
-          <button className="bg-midnight-blue w-fit text-[15px] hover:bg-hover-btn transition-all capitalize lg:font-[600] rounded-[.2rem] sm:rounded-[.3rem] lg:rounded-lg px-[10px] py-[5px] lg:text-[18px]  lg:px-[30px] lg:py-[10px]">
+          <Link
+            href={`/services/by-slug/${banniereDatas[currentIndex].alt}`}
+            className="bg-midnight-blue w-fit text-[15px] hover:bg-hover-btn transition-all capitalize lg:font-[400] rounded-[.2rem] sm:rounded-[.3rem] lg:rounded-lg px-[10px] py-[5px] lg:text-[18px]  lg:px-[30px] lg:py-[10px]"
+          >
             En savoir plus
-          </button>
+          </Link>
         </div>
         <SearchBar />
       </div>

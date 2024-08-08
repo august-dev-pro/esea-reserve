@@ -4,21 +4,18 @@ import React, { useState } from "react";
 import eseaServiceLogo from "@/imgs/eseareserve.png";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faCaretDown,
-  faChevronDown,
-  faClose,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
-  const [activeLink, setActiveLink] = useState<number>(0);
+  const [activeLink, setActiveLink] = useState<number | null>(0);
   const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
   const [screenDropdownOpen, setScreenDropdownOpen] = useState<number | null>(
     null
   );
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const pathName = usePathname();
 
   const navLinks = [
     { label: "Accueil", path: "/" },
@@ -80,7 +77,6 @@ const Header = () => {
                         activeLink === index ? "text-midnight-blue" : ""
                       }`}
                       onClick={() => {
-                        setActiveLink(index);
                         setScreenDropdownOpen(isOpen ? null : index);
                       }}
                     >
@@ -138,7 +134,7 @@ const Header = () => {
           )}
 
           <div className="items-center gap-[50px] hidden md:flex">
-            <nav className="nav ">
+            <nav className="nav">
               <div className="links font-[300] flex gap-[15px] md:text-[15px]">
                 {navLinks.map((link: any, index: number) => (
                   <div key={index} className="relative">
@@ -148,7 +144,11 @@ const Header = () => {
                         onMouseEnter={() => setDropdownOpen(index)}
                         onMouseLeave={() => setDropdownOpen(null)}
                       >
-                        <div className="link flex items-center font-[400] capitalize gap-[5px] hover:text-midnight-blue transition-all">
+                        <div
+                          className={`link flex items-center font-[400] capitalize gap-[5px] hover:text-midnight-blue transition-all ${
+                            pathName === link.path ? "active" : ""
+                          }`}
+                        >
                           {link.label} <FontAwesomeIcon icon={faCaretDown} />
                         </div>
                         {dropdownOpen === index && (
@@ -170,10 +170,9 @@ const Header = () => {
                     ) : (
                       <Link
                         className={`link flex font-[400] flex-col hover:text-midnight-blue transition-all ${
-                          activeLink === index ? "active" : ""
+                          pathName === link.path ? "active" : ""
                         }`}
                         href={link.path}
-                        onClick={() => setActiveLink(index)}
                       >
                         {link.label}
                       </Link>

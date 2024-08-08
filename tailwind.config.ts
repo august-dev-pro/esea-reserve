@@ -13,6 +13,10 @@ const config: Config = {
           "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
         "custom-form": "0 3px 9px rgba(0,0,0,0.5);",
       },
+      animation: {
+        spin: "spin 0.5s linear infinite", // Plus rapide
+        spinSlow: "spin 2s linear infinite", // Plus lente
+      },
       textShadow: {
         sm: "1px 1px 2px rgba(0, 0, 0, 0.1)",
         md: "2px 2px 4px rgba(0, 0, 0, 0.15)",

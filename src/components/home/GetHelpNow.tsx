@@ -1,4 +1,6 @@
 import { services } from "@/ui/testDatas";
+import { Service } from "@/ui/types";
+import Link from "next/link";
 import React from "react";
 
 const GetHelpNow = () => {
@@ -15,13 +17,14 @@ const GetHelpNow = () => {
           </div>
         </div>
         <div className="flex flex-wrap gap-4 md:gap-6">
-          {services.map((service: any, index: number) => (
-            <div
+          {services.map((service: Service, index: number) => (
+            <Link
+              href={`/services/by-slug/${service.title}`}
               key={index}
               className="help text-[15px] font-[300] px-[20px] py-[5px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[18px] lg:font-[400]"
             >
               {service.title}
-            </div>
+            </Link>
           ))}
         </div>
       </div>

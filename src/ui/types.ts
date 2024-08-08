@@ -1,19 +1,17 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
-// Define the type for the service options
 export type ServiceOption = {
   title: string;
   description: string;
   img: string;
 };
 
-// Define the type for the main service object
 export type Service = {
   id: number;
-  img: any; // Assuming img is a string path to the image
+  img: any;
   title: string;
   description: string;
-  icon: IconDefinition; // FontAwesome icon type
+  icon: IconDefinition;
   points: string[];
   options: ServiceOption[];
 };
@@ -28,3 +26,24 @@ export interface Comment {
   date: string;
   rate: number;
 }
+
+export type User = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: "user" | "prestataire";
+  profilImage: string;
+};
+
+export type PrestataireSpecifics = {
+  servicesOffered: Service[];
+  experienceYears: number;
+  hourlyRate: number;
+  bio: string;
+  location: string;
+  availability: string[];
+};
+
+export type Prestataire = User & PrestataireSpecifics;
