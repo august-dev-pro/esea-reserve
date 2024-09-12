@@ -1,5 +1,5 @@
 "use client";
-import { updateReservation } from "@/redux/reservationSlice";
+import { updateReservation } from "@/redux/slices/reservationSlice";
 import { RootState } from "@/redux/store";
 import { Service, ServiceOption } from "@/ui/types";
 import React, { useState } from "react";

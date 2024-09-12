@@ -5,6 +5,37 @@ export type ServiceOption = {
   description: string;
   img: string;
 };
+export interface IServiceOption {
+  _id: string;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface IUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: "user" | "tasker" | "admin" | "admin & tasker";
+  profileImage: string;
+  phone: string;
+  address?: string;
+  favorites?: number[];
+  registrationDate?: Date;
+}
+
+export interface IService {
+  _id: string;
+  title: string;
+  frontImage: string;
+  description: string;
+  icon: string;
+  points: string[];
+  options: string[];
+  comments: string[];
+}
 
 export type Service = {
   id: number;

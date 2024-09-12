@@ -1,19 +1,50 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { services } from "@/ui/testDatas";
-import { Service, ServiceOption } from "@/ui/types";
-import { useDispatch } from "react-redux";
-import { addId, addOption } from "@/redux/reservationSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addId, addOption } from "@/redux/slices/reservationSlice";
+import { AppDispatch, RootState } from "@/redux/store";
+import { IService, IServiceOption } from "@/ui/types";
+import { getImageUrl } from "@/ui/fonctions";
+import { fetchServices } from "@/redux/slices/serviceSlice";
+import { fetchServiceOptions } from "@/redux/slices/servicesOptionsSlice";
+import IconGenerate from "../utils/IconGenerate";
 
 const ServicesAll = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const services = useSelector((state: RootState) => state.service.services);
+  const servicesOptions = useSelector(
+    (state: RootState) => state.servicesOptions.serviceOptions
+  );
+  const isLoading = useSelector(
+    (state: RootState) => state.service.loading || state.servicesOptions.loading
+  );
+  const error = useSelector(
+    (state: RootState) => state.service.error || state.servicesOptions.error
+  );
 
   const handleOptionClick = (optionTitle: string, serviceId: number) => {
     dispatch(addOption(optionTitle));
     dispatch(addId(serviceId));
   };
+
+  useEffect(() => {
+    // Dispatch action to fetch services when component mounts
+    dispatch(fetchServices());
+    dispatch(fetchServiceOptions());
+  }, [dispatch]);
+
+  if (isLoading) return <p>Loading services...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!services || services.length === 0) {
+    return (
+      <div>
+        Loading services... or services notfund!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      </div>
+    ); // Affiche un message si `services` est vide
+  }
+
   return (
     <div className=" py-10 bg-gray-50 ">
       <div className="container mx-auto px-4 sm:px-8">
@@ -23,7 +54,7 @@ const ServicesAll = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service: Service, index: number) => (
+          {services.map((service: IService, index: number) => (
             <div
               key={index}
               className="service-card border border-gray-300 rounded-lg  overflow-hidden  bg-white transition-transform transform"
@@ -31,7 +62,9 @@ const ServicesAll = () => {
               <div
                 className="group relative h-[200px] cursor-pointer"
                 style={{
-                  background: `url('${service.img.src}') center`,
+                  background: `url('${getImageUrl(
+                    service.frontImage
+                  )}') center`,
                   backgroundAttachment: "fixed",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
@@ -55,20 +88,31 @@ const ServicesAll = () => {
                 </div>
                 <div className="options mb-5 mt-8">
                   <div className="grid grid-cols-1 gap-3">
-                    {service.options.map(
-                      (option: ServiceOption, index: number) => (
+                    {service.options
+                      .map((optionId: string) =>
+                        servicesOptions.find(
+                          (option) => option._id === optionId
+                        )
+                      )
+                      .filter(
+                        (option): option is IServiceOption =>
+                          option !== undefined
+                      )
+                      .map((option: IServiceOption) => (
                         <Link
-                          key={index}
-                          href={`/services/by-id/${service.id}`}
+                          key={option._id}
+                          href={`/services/by-id/${service._id}`}
                           onClick={() =>
-                            handleOptionClick(option.title, service.id)
+                            handleOptionClick(
+                              option.name,
+                              parseInt(service._id)
+                            )
                           }
                           className="block w-fit font-Quicksand text-blue-600 text-[15px] hover:underline hover:text-black text-midnight-blue transition-all duration-200"
                         >
-                          {option.title}
+                          {option.name}
                         </Link>
-                      )
-                    )}
+                      ))}
                   </div>
                 </div>
                 <div className="points">
@@ -81,10 +125,7 @@ const ServicesAll = () => {
                         key={index}
                         className="flex items-start text-gray-600"
                       >
-                        <FontAwesomeIcon
-                          icon={service.icon}
-                          className="text-blue-500 mt-1"
-                        />
+                        <IconGenerate iconName={service.icon} />
                         <span className="ml-2">{point}</span>
                       </li>
                     ))}

@@ -78,7 +78,7 @@ input:focus {
   .section {
     padding: 40px 0;
   }
-  .text-balance {
+  .icon-container .text-balance {
     text-wrap: balance;
   }
   .section-title {
@@ -434,6 +434,7 @@ input:focus {
 
   .tab_title.active_tab .icon-container {
     background-color: #009dff3d;
+    border-radius: 0% 100% 55% 45% / 41% 51% 49% 59%;
   }
 
   .text-shadow-custom {
@@ -443,11 +444,23 @@ input:focus {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 23px;
+    border-radius: 0.3rem;
     cursor: pointer;
+    border: 1px solid #000000b0;
+    padding: 5px;
+  }
+  .searchhed {
+    border-radius: 0.3rem;
+    border: 1px solid #000000b0;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .bars-icon .bar {
-    width: 100%;
+    width: 22px;
     height: 1px;
     padding: 1px 0;
     background-color: #000000b0;
@@ -458,6 +471,9 @@ input:focus {
     position: relative;
     width: 30px;
     height: 30px;
+    border-radius: 0.3rem;
+    border: 1px solid #000000b0;
+    padding: 5px;
   }
 
   .icon-close::before,

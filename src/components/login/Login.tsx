@@ -1,8 +1,19 @@
 "use client";
+import { login } from "@/redux/slices/authSlice";
+import { AppDispatch, RootState } from "@/redux/store";
 import Link from "next/link";
 import React, { ChangeEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
+  const connectMethodes = [
+    { type: "email", label: "connexion par Email" },
+    { type: "phone", label: "connexion par telephone" },
+  ];
+
+  const dispatch = useDispatch<AppDispatch>();
+  const authState = useSelector((state: RootState) => state.auth);
+
   const [formData, setFormData] = useState({
     phoneNumber: "",
     email: "",
@@ -12,11 +23,6 @@ const Login = () => {
   const [connectMethode, setConectMethode] = useState<"email" | "phone">(
     "email"
   );
-
-  const connectMethodes = [
-    { type: "email", label: "connexion par Email" },
-    { type: "phone", label: "connexion par telephone" },
-  ];
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -28,10 +34,35 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Logic for form submission, e.g., API call to register the user
-    console.log("Form submitted:", formData);
+
+    const credentials =
+      connectMethode === "email"
+        ? { email: formData.email, password: formData.password }
+        : { phoneNumber: formData.phoneNumber, password: formData.password };
+
+    try {
+      // Dispatch du thunk de connexion
+      const action = await dispatch(login(credentials));
+
+      if (login.fulfilled.match(action)) {
+        // Connexion réussie
+        setFormData({
+          phoneNumber: "",
+          email: "",
+          password: "",
+        });
+        const redirectPath = localStorage.getItem("redirectAfterLogin") || "/";
+        localStorage.removeItem("redirectAfterLogin"); // Nettoyer le stockage
+        window.location.href = redirectPath;
+      } else {
+        // Erreur de connexion
+        console.error("Erreur de connexion:", action.error.message);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la soumission du formulaire:", error);
+    }
   };
 
   return (
@@ -125,6 +156,8 @@ const Login = () => {
           </Link>
         </div>
       </div>
+      {authState.loading && <p>Chargement...</p>}
+      {authState.error && <p>{authState.error}</p>}
     </form>
   );
 };

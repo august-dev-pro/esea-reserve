@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Service, ServiceOption } from "@/ui/types";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { addOption } from "@/redux/reservationSlice";
+import { addOption } from "@/redux/slices/reservationSlice";
 
 const Serviceoption = ({
   option,

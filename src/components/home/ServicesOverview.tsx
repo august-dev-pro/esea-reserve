@@ -1,7 +1,8 @@
 import React from "react";
 import { services } from "@/ui/testDatas";
 import Service from "../ui/Service";
-const ServicesOverview = () => {
+import { IService } from "@/ui/types";
+const ServicesOverview = ({ services }: { services: IService[] }) => {
   return (
     <section id="services" className="section services-overview">
       <div className="container px-4 sm:px-0 mx-auto">

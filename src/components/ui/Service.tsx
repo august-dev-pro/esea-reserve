@@ -1,15 +1,18 @@
+import { getImageUrl } from "@/ui/fonctions";
+import { IService } from "@/ui/types";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import IconGenerate from "../utils/IconGenerate";
 
-const Service = ({ service }: any) => {
+const Service = ({ service }: { service: IService }) => {
   return (
     <article className="service group relative border-solid border-[1px] rounded-[.5rem] overflow-hidden h-[350px] shadow-md border-gray-300">
       <Link href={`/services/by-slug/${service.title}`}>
         <Image
-          src={service.img}
+          src={getImageUrl(service.frontImage)}
           alt="tof"
           width={500}
           height={600}
@@ -19,7 +22,7 @@ const Service = ({ service }: any) => {
       <div className="flex w-full flex-col transition-all bg-white absolute bottom-0 shadow-md p-4 md:bg-marron-opacity md:group-hover:bg-white md:text-white md:group-hover:text-gray-600">
         <Link href={`/services/by-slug/${service.title}`}>
           <h3 className="text-[16px]  font-[500] md:text-[30px] md:text-center group-hover:text-left">
-            {service.title} <FontAwesomeIcon icon={service.icon} />
+            {service.title} <IconGenerate iconName={service.icon} />
           </h3>
         </Link>
 

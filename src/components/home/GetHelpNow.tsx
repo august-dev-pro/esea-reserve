@@ -1,9 +1,8 @@
-import { services } from "@/ui/testDatas";
-import { Service } from "@/ui/types";
+import { IService } from "@/ui/types";
 import Link from "next/link";
 import React from "react";
 
-const GetHelpNow = () => {
+const GetHelpNow = ({ services }: { services: IService[] }) => {
   return (
     <section id="get-help-now" className="bg-blue-500 py-12">
       <div className="container mx-auto px-4 sm:px-0">
@@ -17,7 +16,7 @@ const GetHelpNow = () => {
           </div>
         </div>
         <div className="flex flex-wrap gap-4 md:gap-6">
-          {services.map((service: Service, index: number) => (
+          {services.map((service: IService, index: number) => (
             <Link
               href={`/services/by-slug/${service.title}`}
               key={index}

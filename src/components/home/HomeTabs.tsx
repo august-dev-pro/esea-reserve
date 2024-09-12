@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import { services } from "@/ui/testDatas";
-import { ServiceOption } from "@/ui/types";
+import { IService, IServiceOption, ServiceOption } from "@/ui/types";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { addOption } from "@/redux/reservationSlice";
+import { addOption } from "@/redux/slices/reservationSlice";
+import IconGenerate from "../utils/IconGenerate";
+import { API_URL } from "@/ui/api";
 
-const HomeTabs = () => {
+const HomeTabs = ({
+  services,
+  servicesOptions,
+}: {
+  services: IService[];
+  servicesOptions: IServiceOption[];
+}) => {
   const [activeTab, setActiveTab] = useState(0);
-
   const dispatch = useDispatch();
+
+  // Filtrer les options de service correspondant à l'ID du service actif
+  const filteredServiceOptions = services[activeTab]?.options.map(
+    (optionId: string) =>
+      servicesOptions.find((option) => option._id === optionId)
+  );
 
   const handleOptionClick = (optionTitle: string, serviceId: number) => {
     dispatch(addOption(optionTitle));
@@ -39,8 +50,9 @@ const HomeTabs = () => {
                       activeTab === index ? "active_tab" : ""
                     } flex flex-col items-center cursor-pointer h-full justify-between group transition duration-300 ease-in-out`}
                   >
-                    <div className="icon-container text-gray-500 group-hover:text-midnight-blue transition duration-300 ease-in-out flex gap-1 items-center">
-                      <FontAwesomeIcon icon={tab.icon} />
+                    <div className="icon-container text-gray-500 p-1 md:p-2 group-hover:text-midnight-blue transition duration-300 ease-in-out flex gap-1 items-center">
+                      {/* <FontAwesomeIcon icon={tab.icon} /> */}
+                      <IconGenerate iconName={tab.icon} size={22} />
                     </div>
 
                     <div className="title items-center relative flex flex-col group-hover:text-midnight-blue transition duration-300 ease-in-out font-Quicksand text-[14px] capitalize sm:text-[16px] mb-[10px]">
@@ -54,20 +66,26 @@ const HomeTabs = () => {
               </div>
             </div>
             <div className="success flex flex-wrap gap-[10px] py-[25px] transition-opacity duration-300 ease-in-out">
-              {services[activeTab].options.map(
-                (option: ServiceOption, index: number) => (
-                  <Link
-                    href={`/services/by-id/${services[activeTab].id}`}
-                    onClick={() =>
-                      handleOptionClick(option.title, services[activeTab].id)
-                    }
-                    key={index}
-                    className="help text-[14px] font-[300] px-[18px] py-[3px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
-                  >
-                    {option.title}
-                  </Link>
-                )
-              )}
+              {filteredServiceOptions?.map((option, index: number) => {
+                if (option) {
+                  return (
+                    <Link
+                      href={`/services/by-id/${services[activeTab]._id}`}
+                      onClick={
+                        () =>
+                          handleOptionClick(
+                            option.name,
+                            parseInt(services[activeTab]._id)
+                          ) // Utilisez _id pour la clé du service
+                      }
+                      key={option._id || index} // Utilisez _id comme clé si disponible
+                      className="help text-[14px] font-[300] px-[18px] py-[3px] rounded-[15px] transition-all border-solid border-[1px] cursor-pointer hover:bg-sky-100 border-midnight-blue lg:text-[16px] lg:font-[400]"
+                    >
+                      {option.name}
+                    </Link>
+                  );
+                }
+              })}
             </div>
           </div>
           <div className="tabs_content bg-blue-linght w-full pr-4 pb-4 sm:p-[30px] h-fit md:h-fit sm:rounded-[.5rem] transition-opacity duration-500 ease-in-out">
@@ -94,7 +112,7 @@ const HomeTabs = () => {
               </div>
               <div className="flex max-w-[1000px] justify-center items-center transition-opacity duration-500 ease-in-out opacity-100 transform-gpu">
                 <Image
-                  src={services[activeTab].img}
+                  src={`${API_URL}/uploads/${services[activeTab].frontImage}`}
                   width={500}
                   height={500}
                   alt={services[activeTab].title}

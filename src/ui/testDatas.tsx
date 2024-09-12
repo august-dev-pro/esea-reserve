@@ -101,7 +101,7 @@ export const services = [
     img: jardinage,
     title: "Jardinage",
     description:
-      "Améliorez votre jardin avec nos services de jardinage experts.",
+      "Améliorez votre jardin et espace avec nos services de jardinage experts.",
     icon: faLeaf,
     points: [
       "Entretien de pelouses et jardins.",
