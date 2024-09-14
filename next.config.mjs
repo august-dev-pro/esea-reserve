@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ["easy-reserve-backend-mzfv.onrender.com"],
     remotePatterns: [
       {
         protocol: "http",
