@@ -13,13 +13,13 @@ export interface IServiceOption {
 }
 
 export interface IUser {
-  _id: string;
+  _id?: string;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  role: "user" | "tasker" | "admin" | "admin & tasker";
-  profileImage: string;
+  role?: "user" | "tasker" | "admin" | "admin & tasker";
+  profileImage?: string;
   phone: string;
   address?: string;
   favorites?: number[];

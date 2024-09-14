@@ -219,9 +219,7 @@ input:focus {
   .form {
     display: flex;
     flex-direction: column;
-    border-radius: 0.3rem;
     margin: 0 auto;
-    border: 1px solid rgba(31, 42, 49, 0.288);
     overflow: hidden;
   }
 
@@ -263,7 +261,7 @@ input:focus {
     display: flex;
     align-items: center;
     padding: 4px;
-    border: 2px solid #1f2a3125;
+    border: 2px solid #242e3562;
     border-radius: 0.2rem;
     padding-left: 5px;
     outline: none;
@@ -278,8 +276,8 @@ input:focus {
 
   .form .form-content .actions {
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    gap: 20px;
   }
 
   /* reservation */
@@ -352,13 +350,14 @@ input:focus {
   .step-form .form_content .inputs .champ textarea {
     outline: none;
     transition: 0.3s ease;
-    border: 1.9px solid #79797970;
+    border: 1.9px solid #000000;
     border-radius: 0.2rem;
     padding: 3px;
     font-weight: 400;
     font-family: "Quicksand", sans-serif;
   }
   .errorMode {
+    border: 1px solid !important;
     border-color: #ff4040 !important;
   }
   .error {
@@ -474,6 +473,7 @@ input:focus {
     border-radius: 0.3rem;
     border: 1px solid #000000b0;
     padding: 5px;
+    cursor: pointer;
   }
 
   .icon-close::before,
@@ -506,6 +506,11 @@ input:focus {
   }
 
   @screen sm {
+    .form {
+      border-radius: 0.3rem;
+      border: 1px solid rgba(31, 42, 49, 0.288);
+    }
+
     .section {
       padding: 50px 0;
     }
@@ -578,9 +583,11 @@ input:focus {
   }
 
   @screen md {
+    .form .form-content {
+      padding: 25px;
+    }
     .form .form-content .form_inputs {
       display: grid;
-      padding: 20px;
     }
 
     .form .form-content .form_inputs .input input {

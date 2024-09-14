@@ -37,7 +37,8 @@ export const addUser = createAsyncThunk<IUser, IUser>(
       body: JSON.stringify(user),
     });
     if (!response.ok) {
-      throw new Error("Failed to add user");
+      const errorResponse = await response.json();
+      throw new Error(`${errorResponse.stack.error}`);
     }
     const result = await response.json();
     return result;
@@ -101,6 +102,10 @@ const usersSlice = createSlice({
       })
       .addCase(addUser.fulfilled, (state, action) => {
         state.users.push(action.payload);
+      })
+      .addCase(addUser.rejected, (state, action) => {
+        state.error = action.error.message || "Failed to fetch users";
+        state.loading = false;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         const index = state.users.findIndex(

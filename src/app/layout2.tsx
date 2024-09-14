@@ -5,6 +5,7 @@ import { store } from "@/redux/store";
 import { Provider } from "react-redux";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
 export default function RootLayout2({
   children,
 }: Readonly<{
@@ -20,21 +21,14 @@ export default function RootLayout2({
     initialize();
   }, []);
 
-  if (!initialized) {
-    return (
-      <Provider store={store}>
-        <div className="">
-          <Header />
-          <div>Loading...</div>
-          <Footer />
-        </div>
-      </Provider>
-    );
-  }
-
   return (
     <Provider store={store}>
-      <div>{children}</div>
+      <div>
+        <Header />
+        {/* Affiche "Loading..." uniquement si l'authentification n'est pas encore initialisée */}
+        {!initialized ? <div>Loading...</div> : <div>{children}</div>}
+        <Footer />
+      </div>
     </Provider>
   );
 }

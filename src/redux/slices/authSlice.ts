@@ -1,4 +1,9 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  createAsyncThunk,
+  isRejectedWithValue,
+} from "@reduxjs/toolkit";
 import { API_URL } from "@/ui/api";
 
 interface EmailCredentials {
@@ -15,7 +20,12 @@ type Credentials = EmailCredentials | PhoneCredentials;
 
 interface AuthState {
   token: string | null;
-  user: { userId: string; email: string; role: string } | null;
+  user: {
+    userId: string;
+    email: string;
+    role: string;
+    profilImage: string;
+  } | null;
   loading: boolean;
   error: string | null;
 }
@@ -39,15 +49,19 @@ export const login = createAsyncThunk<string, Credentials>(
       body: JSON.stringify(credentials),
     });
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(
-        `${response.status} ${response.statusText}: ${errorText}`
-      );
+      const errorResponse = await response.json();
+      console.log("fzefefrferferferferferf: ", errorResponse);
+
+      // Si l'erreur n'est pas au format JSON, on peut gérer ça ici
+      if (errorResponse.message) {
+        return isRejectedWithValue();
+      } else {
+        throw new Error(`${errorResponse.stack.message}`);
+      }
     }
 
     const result = await response.json();
     localStorage.setItem("token", result.token);
-
     if (!result.token) {
       throw new Error("Token is missing in the response");
     }
@@ -132,13 +146,27 @@ export const authSlice = createSlice({
 export const initializeAuth = () => (dispatch: any) => {
   if (typeof window !== "undefined") {
     const tokenFromStorage = localStorage.getItem("token");
+
     if (tokenFromStorage) {
-      dispatch(authSlice.actions.setToken(tokenFromStorage));
       try {
-        const user = JSON.parse(atob(tokenFromStorage.split(".")[1]));
-        dispatch(authSlice.actions.setUser(user));
+        // Décoder le payload du token (la partie entre les deux points)
+        const decodedToken = JSON.parse(atob(tokenFromStorage.split(".")[1]));
+
+        // Vérifier si le token a expiré
+        const currentTime = Math.floor(Date.now() / 1000); // Heure actuelle en secondes
+        if (decodedToken.exp && decodedToken.exp > currentTime) {
+          // Le token est encore valide
+          dispatch(authSlice.actions.setToken(tokenFromStorage));
+          dispatch(authSlice.actions.setUser(decodedToken));
+        } else {
+          // Le token a expiré, le supprimer
+          localStorage.removeItem("token");
+          console.warn("Token expiré. Déconnexion nécessaire.");
+          dispatch(authSlice.actions.logout()); // Action de déconnexion dans Redux
+        }
       } catch (error) {
         console.error("Erreur lors du décodage du token:", error);
+        localStorage.removeItem("token");
       }
     }
   }
