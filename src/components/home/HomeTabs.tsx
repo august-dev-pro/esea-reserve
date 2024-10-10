@@ -33,7 +33,7 @@ const HomeTabs = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [services.length]); // Ajouter services.length ici
 
   return (
     <div className="tabs-section pt-[50px] md:section">

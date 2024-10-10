@@ -47,7 +47,7 @@ const ServiceForm = ({
 
   useEffect(() => {
     dispatch(fetchServiceOptions());
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (
     e: React.ChangeEvent<
