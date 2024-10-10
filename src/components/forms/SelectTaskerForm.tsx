@@ -58,7 +58,7 @@ const SelectTaskerForm = ({
       <div className="taskers-list grid grid-cols-1 gap-7 md:w-[60%]">
         {users
           .filter((user) => user.role === "tasker")
-          .map((tasker: IUser) => {
+          .map((tasker: IUser, index: number) => {
             // Vérifier si taskerSpecifics est un tableau et chercher les spécificités correspondantes au tasker
             const taskerSpecific =
               Array.isArray(taskerSpecifics) &&
@@ -69,7 +69,7 @@ const SelectTaskerForm = ({
             if (taskerSpecific) {
               return (
                 <Tasker
-                  key={tasker._id}
+                  key={index}
                   tasker={[tasker, taskerSpecific]} // Passer user et ses spécificités
                   handleTaskerSelect={handleTaskerSelect}
                 />

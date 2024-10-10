@@ -24,7 +24,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
   useEffect(() => {
     dispatch(fetchServices());
     dispatch(fetchServiceOptions());
-  }, []);
+  }, [dispatch]);
 
   if (!service) {
     return <div className=""> aucun service pour ce slug: {slug}</div>;
