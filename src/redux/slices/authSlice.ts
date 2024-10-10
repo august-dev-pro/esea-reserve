@@ -36,7 +36,6 @@ const initialState: AuthState = {
   loading: false,
   error: null,
 };
-
 // Thunk pour gérer la connexion
 export const login = createAsyncThunk<string, Credentials>(
   "auth/login",
@@ -48,9 +47,9 @@ export const login = createAsyncThunk<string, Credentials>(
       },
       body: JSON.stringify(credentials),
     });
+
     if (!response.ok) {
       const errorResponse = await response.json();
-      console.log("fzefefrferferferferferf: ", errorResponse);
 
       // Si l'erreur n'est pas au format JSON, on peut gérer ça ici
       if (errorResponse.message) {
@@ -61,10 +60,14 @@ export const login = createAsyncThunk<string, Credentials>(
     }
 
     const result = await response.json();
-    localStorage.setItem("token", result.token);
     if (!result.token) {
       throw new Error("Token is missing in the response");
     }
+
+    localStorage.setItem("token", result.token);
+    const redirectPath = localStorage.getItem("redirectAfterLogin") || "/";
+    localStorage.removeItem("redirectAfterLogin"); // Nettoyer le stockage
+    window.location.href = redirectPath;
     return result.token;
   }
 );

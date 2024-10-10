@@ -1,5 +1,5 @@
 import { API_URL } from "@/ui/api";
-import { IService } from "@/ui/types";
+import { IService, setIService } from "@/ui/types";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 // Fetch all services
@@ -29,18 +29,17 @@ export const fetchServiceById = createAsyncThunk<IService, string>(
 );
 
 // Add a new service
-export const addService = createAsyncThunk<IService, IService>(
+export const addService = createAsyncThunk<IService, any>(
   "Services/addService",
   async (service) => {
     const response = await fetch(`${API_URL}/service/`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(service),
+      body: service,
     });
+
     if (!response.ok) {
-      throw new Error("Failed to add service");
+      const errorResponse = await response.json();
+      throw new Error(`${errorResponse.stack.error}`);
     }
     const result = await response.json();
     return result;
@@ -54,9 +53,6 @@ export const updateService = createAsyncThunk<
 >("Services/updateService", async ({ id, service }) => {
   const response = await fetch(`${API_URL}/service/${id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(service),
   });
   if (!response.ok) {

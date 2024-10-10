@@ -3,7 +3,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.date-picker {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
 
+.date-picker:focus {
+  border-color: #007bff;
+  outline: none;
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -23,7 +35,33 @@ input {
 input:focus {
   border-color: rgba(31, 42, 49, 0.8);
 }
-
+.input {
+  display: flex;
+  flex-direction: column;
+}
+.input label {
+  color: rgba(31, 42, 49, 0.718);
+  text-transform: capitalize;
+  font-family: "Quicksand", sans-serif;
+}
+.input input,
+.input textarea {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border: 2px solid #242e3562;
+  border-radius: 0.2rem;
+  padding-left: 5px;
+  outline: none;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  font-weight: 300;
+  color: #595a5c;
+}
+.input input:focus,
+.input textarea:focus {
+  border-color: #1f2a31cc;
+}
 * {
   font-family: "kanit", sans-serif;
 }

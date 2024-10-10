@@ -116,7 +116,7 @@ const HomeTabs = ({
                   width={500}
                   height={500}
                   alt={services[activeTab].title}
-                  className="h-full w-full object-cover md:rounded-[1rem] transition-transform duration-500 ease-in-out transform-gpu"
+                  className="max-h-[500px] w-full object-cover md:rounded-[1rem] transition-transform duration-500 ease-in-out transform-gpu"
                 />
               </div>
             </div>

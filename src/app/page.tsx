@@ -9,6 +9,7 @@ import HowIsWork from "@/components/home/HowIsWork";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import { fetchServices } from "@/redux/slices/serviceSlice";
 import { fetchServiceOptions } from "@/redux/slices/servicesOptionsSlice";
+import { SkeletonServiceList } from "@/components/ui/skeletons";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
@@ -40,11 +41,7 @@ export default function Home() {
   if (isLoading) return <p>Loading services...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!services || services.length === 0) {
-    return (
-      <div>
-        Loading services... or services notfund!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      </div>
-    ); // Affiche un message si `services` est vide
+    return <SkeletonServiceList />;
   }
 
   return (
@@ -52,13 +49,9 @@ export default function Home() {
       <HeroSlider />
       <HomeTabs services={services} servicesOptions={servicesOptions} />
       <ServicesOverview services={services} />
-      {/* Pass services to the component */}
       <HowIsWork />
       <GetHelpNow services={services} />
-      <div className="h-[200px]">
-        {/* Optionally display services or other data */}
-        {/* <div>services in token: {JSON.stringify(services)}</div> */}
-      </div>
+      <div className="h-[200px]"></div>
     </main>
   );
 }

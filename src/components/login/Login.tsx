@@ -54,9 +54,6 @@ const Login = () => {
           email: "",
           password: "",
         });
-        const redirectPath = localStorage.getItem("redirectAfterLogin") || "/";
-        localStorage.removeItem("redirectAfterLogin"); // Nettoyer le stockage
-        window.location.href = redirectPath;
       } else {
         switch (action.error.message) {
           case "User not found":

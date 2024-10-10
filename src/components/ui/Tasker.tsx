@@ -10,25 +10,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faMedium } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
+import { ITaskerSpecifics, IUser } from "@/ui/types";
 
 type TaskerProps = {
-  tasker: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    rate: number;
-    description: string;
-    slug: string;
-    profileImage: string;
-    workingImages: string[];
-    status: string;
-    domaine: string;
-  };
-  handleTaskerSelect: (taskerId: number) => void; // Correct type for the handler
+  tasker: [IUser, ITaskerSpecifics];
+  handleTaskerSelect: (taskerId: string) => void;
 };
 
 const Tasker: React.FC<TaskerProps> = ({ tasker, handleTaskerSelect }) => {
+  const [user, specifics] = tasker;
+
   return (
     <div className="tasker p-2 border-solid border-[1px] rounded-md font-Quicksand md:p-3 lg:p-5">
       <div className="tasker-info flex flex-col gap-[15px] md:gap-[30px]">
@@ -38,36 +29,34 @@ const Tasker: React.FC<TaskerProps> = ({ tasker, handleTaskerSelect }) => {
               src={taskerImg} // Use actual profileImage or fallback to default
               width={500}
               height={500}
-              alt={`tasker ${tasker.slug} image`}
+              alt={`tasker ${user.lastName} image`}
               className=""
             />
           </div>
           <div className="tasker-vews text-[14px] sm:text-[16px] flex flex-col gap-1">
             <div className="name-status flex justify-between">
               <div className="name">
-                {tasker.firstName} {tasker.lastName}
+                {user.firstName} {user.lastName}
               </div>
               <div className="status flex gap-1 items-center text-[13px]">
-                {tasker.status}
-                {tasker.status === "new" ? (
+                {specifics.status}
+                {specifics.status === "new" ? (
                   <FontAwesomeIcon
                     className="text-yellow-500"
                     icon={faSprayCanSparkles}
                   />
-                ) : tasker.status === "medium" ? (
+                ) : specifics.status === "medium" ? (
                   <FontAwesomeIcon className="text-pink-500" icon={faMedium} />
-                ) : (
-                  tasker.status === "certified" && (
-                    <FontAwesomeIcon
-                      className="text-green-500"
-                      icon={faCertificate}
-                    />
-                  )
-                )}
+                ) : specifics.status === "certified" ? (
+                  <FontAwesomeIcon
+                    className="text-green-500"
+                    icon={faCertificate}
+                  />
+                ) : null}
               </div>
             </div>
             <div className="all-rate">
-              <FontAwesomeIcon icon={faStar} /> {tasker.rate} (7 reviews)
+              <FontAwesomeIcon icon={faStar} /> {specifics.rate} (7 reviews)
             </div>
             <div className="task-termines font-Quicksand">
               (7) interventions notées
@@ -79,17 +68,24 @@ const Tasker: React.FC<TaskerProps> = ({ tasker, handleTaskerSelect }) => {
         </div>
         <div className="description flex flex-col gap-[15px] md:gap-[25px]">
           <div className="mot text-[15px] font-Quicksand p-2 rounded-md bg-blue-opcity md:p-3">
-            {tasker.description}...
+            {specifics.bio}...
           </div>
           <div className="actions flex gap-[50px] items-end">
             <button
-              onClick={() => handleTaskerSelect(tasker.id)}
+              onClick={() => {
+                if (user._id) {
+                  handleTaskerSelect(user._id);
+                } else {
+                  console.error("Tasker ID is undefined");
+                }
+              }}
               className="btn-primary font-Quicksand"
             >
               Select & Continue
             </button>
+
             <Link
-              href={`/taskers/${tasker.slug}`}
+              href={`/taskers/${user._id}`}
               className="underline hover:text-midnight-blue"
             >
               Voir profil +

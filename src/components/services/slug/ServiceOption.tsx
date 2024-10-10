@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import image from "@/imgs/banniere/plomberie.jpeg";
 import Image from "next/image";
-import { Service, ServiceOption } from "@/ui/types";
+import { IService, IServiceOption, Service, ServiceOption } from "@/ui/types";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { addOption } from "@/redux/slices/reservationSlice";
@@ -11,8 +11,8 @@ const Serviceoption = ({
   option,
   service,
 }: {
-  option: ServiceOption;
-  service: Service;
+  option: IServiceOption;
+  service: IService;
 }) => {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -28,16 +28,16 @@ const Serviceoption = ({
           src={image}
           width={500}
           height={500}
-          alt={`${option.title}`}
+          alt={`${option.name}`}
           className="h-full object-cover"
         />
       </div>
       <div className="des w-full md:max-w-[500px] justify-center items-center md:items-start text-center md:text-left flex flex-col gap-[10px]">
-        <div className="title text-[20px] capitalize ">{option.title}</div>
+        <div className="title text-[20px] capitalize ">{option.name}</div>
         <div className="description font-Quicksand ">{option.description}</div>
         <Link
-          onClick={() => handleOptionClick(option.title)}
-          href={`/services/by-id/${service.id}`}
+          onClick={() => handleOptionClick(option.name)}
+          href={`/services/by-id/${service._id}`}
           className="btn-primary w-fit font-Quicksand"
         >
           reserver

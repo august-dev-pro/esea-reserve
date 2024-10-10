@@ -5,14 +5,14 @@ export type ServiceOption = {
   description: string;
   img: string;
 };
-export interface IServiceOption {
+export type IServiceOption = {
   _id: string;
   name: string;
   description: string;
   image: string;
-}
+};
 
-export interface IUser {
+export type IUser = {
   _id?: string;
   firstName: string;
   lastName: string;
@@ -24,9 +24,9 @@ export interface IUser {
   address?: string;
   favorites?: number[];
   registrationDate?: Date;
-}
+};
 
-export interface IService {
+export type IService = {
   _id: string;
   title: string;
   frontImage: string;
@@ -35,7 +35,16 @@ export interface IService {
   points: string[];
   options: string[];
   comments: string[];
-}
+};
+export type setIService = {
+  title: string;
+  frontImage: File | null;
+  description: string;
+  icon: string;
+  points: string[];
+  options: string[];
+  comments: string[];
+};
 
 export type Service = {
   id: number;
@@ -45,6 +54,53 @@ export type Service = {
   icon: IconDefinition;
   points: string[];
   options: ServiceOption[];
+};
+
+export type IReservation = {
+  _id: string;
+  serviceId: string | null;
+  date: string;
+  adress: string;
+  options: string[];
+  taskDescription: string;
+  taskerId: string;
+  status: string;
+  jobType: string;
+  wever: string;
+};
+export type Reservation = {
+  serviceId?: string | null;
+  date: string;
+  adress: string;
+  options: string[];
+  taskDescription: string;
+  taskerId?: string;
+  status?: string;
+  jobType: string;
+  wever: string;
+};
+
+export type TaskerSpecifics = {
+  user: string;
+  domaine: string;
+  serviceOfferedOptions: string[];
+  experienceYears: number;
+  bio: string;
+  rate: number;
+  location: string;
+  availability: string[];
+};
+export type ITaskerSpecifics = {
+  _id: string;
+  user: string;
+  domaine: string;
+  serviceOfferedOptions: string[];
+  experienceYears: number;
+  bio: string;
+  rate: number;
+  location: string;
+  availability: string[];
+  status: "new" | "medium" | "certified";
 };
 
 export type Services = Service[];
@@ -67,14 +123,3 @@ export type User = {
   role: "user" | "prestataire";
   profilImage: string;
 };
-
-export type PrestataireSpecifics = {
-  servicesOffered: Service[];
-  experienceYears: number;
-  hourlyRate: number;
-  bio: string;
-  location: string;
-  availability: string[];
-};
-
-export type Prestataire = User & PrestataireSpecifics;

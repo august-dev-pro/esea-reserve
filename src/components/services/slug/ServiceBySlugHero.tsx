@@ -1,16 +1,21 @@
-import { Comment, Service, ServiceOption } from "@/ui/types";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { Comment, IService, IServiceOption } from "@/ui/types";
 import React from "react";
 import ServiceComent from "../ServiceComent";
 import { comments } from "@/ui/testDatas";
 import HowIsWork from "../HowIsWork";
-import Image from "next/image";
 import Serviceoption from "./ServiceOption";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { getImageUrl } from "@/ui/fonctions";
 
-const ServiceBySlugHero = ({ service }: { service: Service }) => {
+const ServiceBySlugHero = ({
+  service,
+  serviceOptions,
+}: {
+  service: IService;
+  serviceOptions: IServiceOption[];
+}) => {
   if (!service) {
     return;
   }
@@ -19,7 +24,7 @@ const ServiceBySlugHero = ({ service }: { service: Service }) => {
       <div
         className="h-[350px] md:h-[400px] lg:h-[450px] relative flex items-center justify-center"
         style={{
-          background: `url('${service.img.src}') center`,
+          background: `url('${getImageUrl(service.frontImage)}') center`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
@@ -66,7 +71,7 @@ const ServiceBySlugHero = ({ service }: { service: Service }) => {
           </div>
           <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1fr_310px] lg:gap-4">
             <div className="flex flex-col gap-[30px]">
-              {service.options.map((option: ServiceOption, index: number) => (
+              {serviceOptions.map((option: IServiceOption, index: number) => (
                 <Serviceoption key={index} option={option} service={service} />
               ))}
             </div>

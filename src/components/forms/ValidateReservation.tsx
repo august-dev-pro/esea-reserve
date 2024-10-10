@@ -1,7 +1,7 @@
 "use client";
-import { services, taskers } from "@/ui/testDatas";
+import { services } from "@/ui/testDatas";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import taskerImg from "@/imgs/tasker2.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,31 +10,65 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { Reservation } from "@/ui/types";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import { fetchUsers } from "@/redux/slices/userSlice";
+import { fetchTaskerSpecifics } from "@/redux/slices/TaskerSpecificsSlice";
+import { fetchServices } from "@/redux/slices/serviceSlice";
 
 const ValidateReservation = ({
+  tempReservation,
   formData,
   handleNextStep,
   handleEditStep,
   confirmeReservation,
 }: {
+  tempReservation: Reservation | null;
   formData: any;
   handleNextStep: (stepData: any) => void;
   handleEditStep: (step: number) => void;
-  confirmeReservation: (data: any) => void;
+  confirmeReservation: (data: any) => Promise<void>;
 }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  // Dispatcher les actions pour récupérer les données
+  /*  useEffect(() => {
+    dispatch(fetchUsers());
+    dispatch(fetchServices());
+    dispatch(fetchTaskerSpecifics());
+  }, [dispatch]); */
+
   const [isLoading, setIsLoading] = useState(false);
+  const users = useSelector((state: RootState) => state.user.users);
+  const taskerSpecifics = useSelector(
+    (state: RootState) => state.taskerSpecifics.specifics
+  );
+  const tasker = users
+    .filter((item) => item.role == "tasker")
+    .find(
+      (tasker) =>
+        tasker._id === (tempReservation?.taskerId || formData.taskerId)
+    );
+
+  const taskerSpecific = taskerSpecifics.find(
+    (specific) => specific.user === tasker?._id
+  );
+
+  const service = useSelector(
+    (state: RootState) => state.service.services
+  ).find(
+    (service) =>
+      service._id === (tempReservation?.serviceId || formData.serviceId)
+  );
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    confirmeReservation(formData);
+    await confirmeReservation(formData);
+    handleNextStep(formData);
     setIsLoading(false);
   };
-
-  const tasker = taskers.find((tasker) => tasker.id === formData.taskerId);
-  const service = services.find((service) => service.id === formData.service);
-
-  if (!tasker) {
+  if (!tasker || !taskerSpecific) {
     return <div>Aucun tasker sélectionné</div>;
   }
 
@@ -57,19 +91,21 @@ const ValidateReservation = ({
               </div>
               <div className="item word_level">
                 <div className="label">Niveau du travail:</div>{" "}
-                {formData.jobType}
+                {tempReservation?.jobType || formData.jobType}
               </div>
               <div className="item flex flex-col">
                 <div className="label">Options:</div>
                 <ul className="ml-5">
-                  {formData.option.map((option: any, index: number) => (
-                    <li
-                      key={index}
-                      className=" font-Quicksand flex items-center"
-                    >
-                      * {option}
-                    </li>
-                  ))}
+                  {(tempReservation?.options || formData.options).map(
+                    (option: any, index: number) => (
+                      <li
+                        key={index}
+                        className=" font-Quicksand flex items-center"
+                      >
+                        * {option}
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
               <div className="edit" onClick={() => handleEditStep(1)}>
@@ -83,7 +119,7 @@ const ValidateReservation = ({
                     src={taskerImg}
                     width={500}
                     height={500}
-                    alt={`tasker ${tasker.slug}`}
+                    alt={`tasker ${tasker.lastName}`}
                   />
                 </div>
                 <div className="tasker_info">
@@ -95,10 +131,10 @@ const ValidateReservation = ({
                       icon={faStar}
                       className="text-yellow-500"
                     />{" "}
-                    ( {tasker.rate} )
+                    ( {taskerSpecific?.rate} )
                   </div>
                   <div className="font-Quicksand">
-                    {tasker.status}{" "}
+                    {taskerSpecific?.status}{" "}
                     <FontAwesomeIcon
                       icon={faSprayCanSparkles}
                       className="text-orange-400"
@@ -112,11 +148,12 @@ const ValidateReservation = ({
             </div>
             <div className="others chield">
               <div className="address item">
-                <div className="label">Address:</div> {formData.address}
+                <div className="label">Address:</div>{" "}
+                {tempReservation?.adress || formData.adress}
               </div>
               <div className="date item">
                 <div className="label">Date d'intervention:</div>{" "}
-                {formData.date}
+                {tempReservation?.date || formData.date}
               </div>
               <label htmlFor="evening" className="flex gap-2 font-Quicksand">
                 Soir

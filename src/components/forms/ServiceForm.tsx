@@ -1,46 +1,53 @@
 "use client";
-import { updateReservation } from "@/redux/slices/reservationSlice";
-import { RootState } from "@/redux/store";
-import { Service, ServiceOption } from "@/ui/types";
-import React, { useState } from "react";
+import { AppDispatch, RootState } from "@/redux/store";
+import { IService, IServiceOption, Reservation } from "@/ui/types";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { fetchServiceOptions } from "@/redux/slices/servicesOptionsSlice";
+import "flatpickr/dist/flatpickr.min.css";
+import Flatpickr from "react-flatpickr";
 
 const ServiceForm = ({
   handleNextStep,
   service,
 }: {
-  handleNextStep: (data: {
-    date: string;
-    address: string;
-    option: string[];
-    problemDescription: string;
-    jobType: string;
-    wever: string;
-  }) => void;
-  service: Service;
+  handleNextStep: (data: Reservation) => void;
+  service: IService;
   data: any;
 }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(false);
-  const reservation = useSelector((state: RootState) => state.reservation);
-  const [formData, setFormData] = useState({
+  const servicesOptions = useSelector(
+    (state: RootState) => state.servicesOptions.serviceOptions
+  );
+  const [formData, setFormData] = useState<{
+    date: string;
+    adress: string;
+    taskDescription: string;
+    options: string[];
+    jobType: string;
+    wever: string;
+  }>({
     date: "",
-    address: "",
-    problemDescription: "",
-    option: reservation.option,
+    adress: "",
+    taskDescription: "",
+    options: [],
     jobType: "",
     wever: "",
   });
   const [formDataErrors, setFormDataErrors] = useState({
     date: "",
-    address: "",
-    problemDescription: "",
+    adress: "",
+    taskDescription: "",
     jobType: "",
-    option: "",
+    options: "",
     wever: "",
   });
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchServiceOptions());
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -54,10 +61,10 @@ const ServiceForm = ({
 
       setFormData((prevData) => {
         const updatedOptions = checked
-          ? [...prevData.option, value] // Ajouter l'option si elle est cochée
-          : prevData.option.filter((opt) => opt !== value); // Retirer l'option si elle est décochée
+          ? [...prevData.options, value] // Ajouter l'option si elle est cochée
+          : prevData.options.filter((opt) => opt !== value); // Retirer l'option si elle est décochée
 
-        return { ...prevData, option: updatedOptions };
+        return { ...prevData, options: updatedOptions };
       });
     } else {
       // Pour les autres types de champs, mettre à jour l'état normalement
@@ -69,7 +76,7 @@ const ServiceForm = ({
     let isValid = true;
     let errors: any = {};
 
-    if (!formData.address) {
+    if (!formData.adress) {
       isValid = false;
       errors.address = "L'adresse est requise.";
     }
@@ -79,9 +86,9 @@ const ServiceForm = ({
       errors.date = "La date est requise.";
     }
 
-    if (!formData.problemDescription) {
+    if (!formData.taskDescription) {
       isValid = false;
-      errors.problemDescription = "La description du besoin est requise.";
+      errors.taskDescription = "La description du besoin est requise.";
     }
 
     if (!formData.jobType) {
@@ -104,6 +111,7 @@ const ServiceForm = ({
       setIsLoading(true); // Simulate API request
       await new Promise((resolve) => setTimeout(resolve, 2000));
       handleNextStep(formData);
+      console.log("form data: ", formData);
     }
 
     setIsLoading(false);
@@ -122,17 +130,17 @@ const ServiceForm = ({
         <div className="form_content">
           <div className="inputs">
             <div className="champ">
-              <label htmlFor="address">Entrer votre adresse</label>
+              <label htmlFor="adress">Entrer votre adresse</label>
               <input
                 type="text"
-                name="address"
-                id="address"
-                value={formData.address}
+                name="adress"
+                id="adress"
+                value={formData.adress}
                 onChange={handleChange}
-                className={`${formDataErrors.address ? "errorMode" : ""}`}
+                className={`${formDataErrors.adress ? "errorMode" : ""}`}
               />
-              {formDataErrors.address && (
-                <div className="error">{formDataErrors.address}</div>
+              {formDataErrors.adress && (
+                <div className="error">{formDataErrors.adress}</div>
               )}
             </div>
             <div className="flex flex-col gap-1">
@@ -187,39 +195,44 @@ const ServiceForm = ({
                 Sélectionnez vos options ( optionnel )
               </label>
               <div className="flex flex-col items-start rounded-[.3rem] gap-4 border-solid border-gray-300 border-[1px] px-3 py-4">
-                {service.options.map((option: ServiceOption, index: number) => (
-                  <label
-                    key={index}
-                    className="flex flex-row-reverse gap-3 text-[14px] sm:text-[16px] capitalize font-Quicksand w-fit cursor-pointer"
-                  >
-                    {option.title}
-                    <input
-                      type="checkbox"
-                      name="option"
-                      value={option.title}
-                      checked={
-                        formData.option.includes(option.title) ||
-                        reservation.option.includes(option.title)
-                      }
-                      onChange={handleChange}
-                      className="w-[20px]"
-                    />
-                  </label>
-                ))}
-                <label className="flex flex-row-reverse gap-3 text-[14px] sm:text-[16px] capitalize font-Quicksand w-fit cursor-pointer">
+                {servicesOptions
+                  .filter((option: IServiceOption) =>
+                    service.options.includes(option._id)
+                  )
+                  .map((option: IServiceOption, index: number) => (
+                    <label
+                      key={index}
+                      className="flex flex-row-reverse gap-3 text-[14px] sm:text-[16px] capitalize font-Quicksand w-fit cursor-pointer"
+                    >
+                      {option.name}
+                      <input
+                        type="checkbox"
+                        name="options"
+                        value={option._id}
+                        checked={
+                          formData.options?.includes(option._id!) /*  ||
+                          reservation.options.includes(option._id) */
+                        }
+                        onChange={handleChange}
+                        className="w-[20px]"
+                      />
+                    </label>
+                  ))}
+
+                {/* <label className="flex flex-row-reverse gap-3 text-[14px] sm:text-[16px] capitalize font-Quicksand w-fit cursor-pointer">
                   autres
                   <input
                     type="checkbox"
-                    name="option"
+                    name="options"
                     value={"autres"}
-                    checked={formData.option.includes("autres")}
+                    checked={formData.options.includes("autres")}
                     onChange={handleChange}
                     className="w-[20px]"
                   />
-                </label>
+                </label> */}
               </div>
             </div>
-            <div className="champ">
+            {/* <div className="champ">
               <label htmlFor="date">Choisir la date d'intervention</label>
               <input
                 type="date"
@@ -233,22 +246,47 @@ const ServiceForm = ({
               {formDataErrors.date && (
                 <div className="error">{formDataErrors.date}</div>
               )}
+            </div> */}
+            <div className="champ">
+              <label htmlFor="date">Choisir la date d'intervention</label>
+              <Flatpickr
+                value={formData.date}
+                onChange={(selectedDates) => {
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    date: selectedDates[0]
+                      ? selectedDates[0].toISOString().split("T")[0]
+                      : "", // Format the date as needed
+                  }));
+                }}
+                options={{
+                  dateFormat: "d / m / Y",
+                  allowInput: true,
+                }}
+                placeholder="10 / 08 / 2024"
+                className={`date-picker ${
+                  formDataErrors.date ? "errorMode" : ""
+                }`}
+              />
+              {formDataErrors.date && (
+                <div className="error">{formDataErrors.date}</div>
+              )}
             </div>
             <div className="champ">
               <label htmlFor="problemDescription">Description du besoin</label>
               <textarea
-                name="problemDescription"
-                id="problemDescription"
+                name="taskDescription"
+                id="taskDescription"
                 cols={30}
                 rows={5}
-                value={formData.problemDescription}
+                value={formData.taskDescription}
                 onChange={handleChange}
                 className={`${
-                  formDataErrors.problemDescription ? "errorMode" : ""
+                  formDataErrors.taskDescription ? "errorMode" : ""
                 }`}
               ></textarea>
-              {formDataErrors.problemDescription && (
-                <div className="error">{formDataErrors.problemDescription}</div>
+              {formDataErrors.taskDescription && (
+                <div className="error">{formDataErrors.taskDescription}</div>
               )}
             </div>
             <div className="times relative flex gap-8">

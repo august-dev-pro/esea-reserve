@@ -36,8 +36,8 @@ export const addUser = createAsyncThunk<IUser, IUser>(
       },
       body: JSON.stringify(user),
     });
+    const errorResponse = await response.json();
     if (!response.ok) {
-      const errorResponse = await response.json();
       throw new Error(`${errorResponse.stack.error}`);
     }
     const result = await response.json();

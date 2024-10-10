@@ -1,41 +1,93 @@
 "use client";
-import { services } from "@/ui/testDatas";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
-import { notFound } from "next/navigation";
 import SelectTaskerForm from "@/components/forms/SelectTaskerForm";
 import ServiceForm from "@/components/forms/ServiceForm";
 import ValidateReservation from "@/components/forms/ValidateReservation";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import { getImageUrl } from "@/ui/fonctions";
+import IconGenerate from "@/components/utils/IconGenerate";
+import { fetchServices } from "@/redux/slices/serviceSlice";
+import {
+  addReservation,
+  getTempReservation,
+  saveTempReservation,
+} from "@/redux/slices/reservationSlice";
+import Link from "next/link";
+
 const ServicePage = ({ params }: { params: { id: string } }) => {
-  const id = parseInt(params.id, 10);
-  const service = services.find((service) => service.id === id);
-
-  if (!service) {
-    notFound();
-  }
-
+  // localStorage.removeItem("tempReservation");
+  const id = params.id;
+  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.auth.user);
+  const services = useSelector((state: RootState) => state.service.services);
+  const isServicesLoading = useSelector(
+    (state: RootState) => state.service.loading
+  );
+  const servicesError = useSelector((state: RootState) => state.service.error);
+  const service = services.find((service) => service._id === id);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [tempReservation, setTempReservation] = useState(null);
   const [currentStep, setCurrentStep] = useState(1);
   const reserveHeadRef = useRef<HTMLDivElement>(null);
   const [isFixed, setIsFixed] = useState(false);
   const [formData, setFormData] = useState({
-    service: service.id,
     date: "",
-    address: "",
-    option: [""],
-    problemDescription: "",
+    adress: "",
+    options: [],
+    taskDescription: "",
     taskerId: "",
     jobType: "",
     wever: "",
+    userId: user?.userId,
+    serviceId: service?._id,
+    service: service?.title,
   });
-
   const handleNextStep = (stepData: any) => {
-    setFormData((prevData) => ({ ...prevData, ...stepData }));
+    setFormData((prevData) => ({
+      ...prevData,
+      ...stepData,
+      userId: user?.userId,
+      serviceId: service?._id,
+      service: service?.title,
+    }));
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
-  const confirmeReservation = (data: any) => {
-    console.log("reservation: ", data);
+  const confirmeReservation = async (data: any) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      userId: user?.userId,
+      serviceId: service?._id,
+      service: service?.title,
+    }));
+
+    console.log("submeted data: ", data);
+
+    if (!user) {
+      saveTempReservation(data);
+      window.location.href = "/login";
+      localStorage.setItem(
+        "redirectAfterLogin",
+        `/services/by-id/${service?._id}`
+      );
+    } else {
+      localStorage.removeItem("redirectAfterLogin");
+      try {
+        const response = await dispatch(addReservation(data)).unwrap();
+        console.log("response: ", response);
+        setSuccessMessage(response.message); // Utiliser le message renvoyé par l'API
+      } catch (error: any) {
+        console.error("Erreur lors de la création de la réservation: ", error);
+        const errorMessage = error.message.includes("Network Error")
+          ? "Vérifiez votre connexion internet et réessayez."
+          : "Une erreur s'est produite, veuillez réessayer.";
+        setErrorMessage(errorMessage);
+      }
+    }
   };
+
   const handleEditStep = (step: number) => {
     setCurrentStep(step);
   };
@@ -49,7 +101,7 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
         <ServiceForm
           handleNextStep={handleNextStep}
           data={formData}
-          service={service}
+          service={service!}
         />
       ),
     },
@@ -65,6 +117,7 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
       description: "Chat avec le tasker et trouvez un terrain d'entente",
       component: (
         <ValidateReservation
+          tempReservation={tempReservation}
           formData={formData}
           handleNextStep={handleNextStep}
           handleEditStep={handleEditStep}
@@ -75,6 +128,14 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
   ];
 
   useEffect(() => {
+    dispatch(fetchServices());
+    const tempReservation = getTempReservation();
+    console.log("tempReservation: ", tempReservation);
+
+    if (tempReservation) {
+      setTempReservation(tempReservation);
+      setCurrentStep(3); // Only set current step inside useEffect
+    }
     const handleScroll = () => {
       if (reserveHeadRef.current) {
         const scrollY = window.scrollY;
@@ -86,27 +147,37 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
         }
       }
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [dispatch]);
+
+  if (isServicesLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (servicesError) {
+    return <div>Error loading services, please try again later.</div>;
+  }
+
+  if (!service) {
+    return <div>Aucun service trouvé</div>;
+  }
 
   return (
     <div className="">
       <div
         className={`service-reserve-present-bg h-[200px] sm:h-[280px] md:h-[350px] lg:h-[380px]`}
         style={{
-          background: `url('${service.img.src}') center`,
+          background: `url('${getImageUrl(service.frontImage)}') center`,
           backgroundAttachment: "fixed",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
       >
         <div className=" h-full w-full gap-1 bg-marron-opacity-claire text-white flex items-center justify-center font-Quicksand text-[35px] font-[700] md:text-[45px] md:font-[800]">
-          {service.title} <FontAwesomeIcon icon={service.icon} />
+          {service.title} <IconGenerate iconName={service.icon} />
         </div>
       </div>
       <div className=" py-4" id="service">
@@ -163,6 +234,60 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           </div>
+
+          {successMessage && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+              <div className="bg-white p-8 rounded-xl shadow-2xl text-center transform transition-transform duration-500 scale-95 max-w-lg">
+                <h1 className="text-4xl font-extrabold font-Quicksand mb-4 text-gray-800">
+                  Réservation réussie!
+                </h1>
+                <p className="text-lg mb-6 font-Quicksand text-green-600 font-medium">
+                  {successMessage}
+                </p>
+                <div className="flex justify-center gap-4 mt-6">
+                  <Link
+                    href="/reservations"
+                    className="text-white bg-gradient-to-r from-gray-500 to-gray-700 px-6 py-3 rounded-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    Retour à l'accueil
+                  </Link>{" "}
+                  <Link
+                    href="/account/reservations"
+                    className="text-white bg-gradient-to-r from-sky-500 to-sky-700 px-6 py-3 rounded-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    Voir mes réservations
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+          {errorMessage && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+              <div className="bg-white p-8 rounded-xl shadow-2xl text-center transform transition-transform duration-500 scale-95 max-w-lg">
+                <h1 className="text-4xl font-extrabold font-Quicksand mb-4 text-red-600">
+                  La réservation a échoué
+                </h1>
+                <p className="text-lg mb-6 text-gray-700 font-medium">
+                  {errorMessage}
+                </p>
+                <div className="flex justify-center gap-4 mt-6">
+                  <Link
+                    href="/"
+                    className="text-white bg-gradient-to-r from-red-500 to-red-700 px-6 py-3 rounded-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    Retour à l'accueil
+                  </Link>
+                  <Link
+                    href="/account/reservations"
+                    className="text-white bg-gradient-to-r from-sky-500 to-sky-700 px-6 py-3 rounded-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    Voir mes réservations
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div
             className={` ${
               isFixed ? " pt-[160px]" : "mt-5"
@@ -171,7 +296,7 @@ const ServicePage = ({ params }: { params: { id: string } }) => {
             {steps.map((step: any, index: number) => (
               <div
                 key={index}
-                className={`${currentStep != index + 1 ? "hidden" : ""}`}
+                className={`${currentStep !== index + 1 ? "hidden" : ""}`}
               >
                 {step.component}
               </div>
