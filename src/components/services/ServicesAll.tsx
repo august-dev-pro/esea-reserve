@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addId, addOption } from "@/redux/slices/reservationSlice";
@@ -24,7 +23,7 @@ const ServicesAll = () => {
     (state: RootState) => state.service.error || state.servicesOptions.error
   );
 
-  const handleOptionClick = (optionTitle: string, serviceId: number) => {
+  const handleOptionClick = (optionTitle: string, serviceId: string) => {
     dispatch(addOption(optionTitle));
     dispatch(addId(serviceId));
   };
@@ -103,10 +102,7 @@ const ServicesAll = () => {
                           key={option._id}
                           href={`/services/by-id/${service._id}`}
                           onClick={() =>
-                            handleOptionClick(
-                              option.name,
-                              parseInt(service._id)
-                            )
+                            handleOptionClick(option.name, service._id)
                           }
                           className="block w-fit font-Quicksand text-blue-600 text-[15px] hover:underline hover:text-black text-midnight-blue transition-all duration-200"
                         >
