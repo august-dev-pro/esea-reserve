@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const page = () => {
+const Page = () => {
   const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: RootState) => state.user.users);
   const loading = useSelector((state: RootState) => state.user.loading);
@@ -22,4 +22,4 @@ const page = () => {
   return <DashboardUsers users={users} />;
 };
 
-export default page;
+export default Page;

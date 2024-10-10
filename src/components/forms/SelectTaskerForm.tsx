@@ -58,7 +58,7 @@ const SelectTaskerForm = ({
       <div className="taskers-list grid grid-cols-1 gap-7 md:w-[60%]">
         {users
           .filter((user) => user.role === "tasker")
-          .map((tasker: IUser, index: number) => {
+          .map((tasker: IUser) => {
             // Vérifier si taskerSpecifics est un tableau et chercher les spécificités correspondantes au tasker
             const taskerSpecific =
               Array.isArray(taskerSpecifics) &&
@@ -69,13 +69,13 @@ const SelectTaskerForm = ({
             if (taskerSpecific) {
               return (
                 <Tasker
-                  key={index}
+                  key={tasker._id} // Utiliser _id comme clé unique
                   tasker={[tasker, taskerSpecific]} // Passer user et ses spécificités
                   handleTaskerSelect={handleTaskerSelect}
                 />
               );
             }
-            return <div>aucun specifics</div>; // Ne rien rendre si les spécificités sont manquantes
+            return <div key={tasker._id}>aucun specifics</div>; // Assurer que chaque élément a une clé, même sans specifics
           })}
       </div>
     </div>
