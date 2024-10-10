@@ -14,7 +14,7 @@ import jobs from "@/imgs/svgs/getting_jobs-037938907c55e3d9ae963b4a182b3150.svg"
 import aboutFouter from "@/imgs/providers/about_footer_image.jpg";
 import RegisterTaskerForm from "@/components/forms/RegisterTaskerForm";
 import { services } from "@/ui/testDatas";
-import { Prestataire, Service } from "@/ui/types";
+import { Service } from "@/ui/types";
 
 const Page = () => {
   const bondoukouQuarters = [
