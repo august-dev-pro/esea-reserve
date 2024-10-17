@@ -11,11 +11,6 @@ const RegisterTaskerSpecificsForm = () => {
   const servicesOptions = useSelector(
     (state: RootState) => state.servicesOptions.serviceOptions
   );
-  if (!user) {
-    localStorage.setItem("redirectAfterLogin", "/providers/completedSpecifics");
-    window.location.href = "/login";
-    return;
-  }
 
   const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +18,6 @@ const RegisterTaskerSpecificsForm = () => {
   const [registrationError, setRegistrationError] = useState("");
 
   const [formData, setFormData] = useState<{
-    user: string;
     domaine: string;
     experienceYears: number;
     bio: string;
@@ -31,7 +25,6 @@ const RegisterTaskerSpecificsForm = () => {
     availability: string[];
     serviceOfferedOptions: string[];
   }>({
-    user: user?.userId,
     domaine: "",
     experienceYears: 0,
     bio: "",
@@ -110,39 +103,42 @@ const RegisterTaskerSpecificsForm = () => {
     if (validateForm()) {
       setIsLoading(true); // Simulate API request
       try {
-        const action = await dispatch(addTaskerSpecifics(formData));
+        if (user) {
+          const action = await dispatch(
+            addTaskerSpecifics({ ...formData, user: user.userId })
+          );
 
-        if (addTaskerSpecifics.fulfilled.match(action)) {
-          // Connexion réussie
-          setFormData({
-            user: "",
-            domaine: "",
-            experienceYears: 1,
-            bio: "",
-            location: "",
-            availability: [],
-            serviceOfferedOptions: [],
-          });
+          if (addTaskerSpecifics.fulfilled.match(action)) {
+            // Connexion réussie
+            setFormData({
+              domaine: "",
+              experienceYears: 1,
+              bio: "",
+              location: "",
+              availability: [],
+              serviceOfferedOptions: [],
+            });
 
-          // Redirection
-          window.location.href = "/";
-        } else {
-          console.log("Action failed:", action.error.message);
-          switch (action.error.message) {
-            case "User already exists":
-              setRegistrationError(
-                "Utilisateur existant ! vérifier les infos ou connectez-vous."
-              );
-              break;
-            case "getaddrinfo ENOTFOUND cluster0-shard-00-00.owjdw.mongodb.net":
-              setRegistrationError("Vérifiez votre connexion internet.");
-              break;
-            case "Invalid credentials":
-              setRegistrationError("Email ou mot de passe incorrect.");
-              break;
-            default:
-              setRegistrationError("Une erreur inconnue est survenue.");
-              break;
+            // Redirection
+            window.location.href = "/";
+          } else {
+            console.log("Action failed:", action.error.message);
+            switch (action.error.message) {
+              case "User already exists":
+                setRegistrationError(
+                  "Utilisateur existant ! vérifier les infos ou connectez-vous."
+                );
+                break;
+              case "getaddrinfo ENOTFOUND cluster0-shard-00-00.owjdw.mongodb.net":
+                setRegistrationError("Vérifiez votre connexion internet.");
+                break;
+              case "Invalid credentials":
+                setRegistrationError("Email ou mot de passe incorrect.");
+                break;
+              default:
+                setRegistrationError("Une erreur inconnue est survenue.");
+                break;
+            }
           }
         }
       } catch (error) {
@@ -159,6 +155,11 @@ const RegisterTaskerSpecificsForm = () => {
     dispatch(fetchServiceOptions());
     dispatch(fetchServices());
   }, [dispatch]);
+  if (!user) {
+    localStorage.setItem("redirectAfterLogin", "/providers/completedSpecifics");
+    window.location.href = "/login";
+    return;
+  }
 
   return (
     <div className="bg section Z-[100] flex justify-center top-0 left-0 right-0 bottom-0 bg-white-opacity-plus">
