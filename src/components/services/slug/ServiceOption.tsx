@@ -6,6 +6,7 @@ import { IService, IServiceOption, Service, ServiceOption } from "@/ui/types";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { addOption } from "@/redux/slices/reservationSlice";
+import { getImageUrl } from "@/ui/fonctions";
 
 const Serviceoption = ({
   option,
@@ -25,7 +26,7 @@ const Serviceoption = ({
     <div className="option shadow-custom-header flex flex-col gap-4 md:flex-row w-full items-center md:max-w-[800px] rounded-[.3rem] lg:justify-between p-[10px] sm:p-[15px] md:p-[20px] lg:p-[30px] border border-gray-400 bg-white">
       <div className="image rounded-[50%] lg:rounded-[.5rem] overflow-hidden m-[0_auto] h-[130px] w-[130px] md:h-[180px] md:w-[160px] lg:w-[250px] lg:h-[full] lg:min-h-[150px]">
         <Image
-          src={image}
+          src={getImageUrl(option.image)}
           width={500}
           height={500}
           alt={`${option.name}`}

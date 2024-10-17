@@ -148,15 +148,8 @@ const ServiceForm = () => {
       onSubmit={handleSubmit}
       className=" max-w-[700px] mx-auto bg-white shadow-md rounded-md form"
     >
-      {successMessage && <div className="">{successMessage}</div>}
       <div className="form-title">
         <h2 className="text-2xl font-bold mb-4">Ajouter un nouveau service</h2>
-        {successMessage && (
-          <p className="text-green-600 mb-4">{successMessage}</p>
-        )}
-        {errors.apiError && (
-          <div className="text-red-600 mb-4">{errors.apiError}</div>
-        )}
       </div>
       <div className="form-content">
         <div className="flex flex-col gap-5">
@@ -276,6 +269,47 @@ const ServiceForm = () => {
           <p className="text-red-600 font-Quicksand mt-2">{errors.form}</p>
         )}
       </div>
+
+      {successMessage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          <div className="bg-white p-8 rounded-xl shadow-2xl text-center transform transition-transform duration-500 scale-95 max-w-lg">
+            <h1 className="text-4xl font-extrabold font-Quicksand mb-4 text-gray-800">
+              Oppération réussie !
+            </h1>
+            <p className="text-lg mb-6 font-Quicksand text-green-600 font-medium">
+              {successMessage}
+            </p>
+            <div className="flex justify-center gap-4 mt-6">
+              <button
+                onClick={() => setSuccessMessage("")}
+                className="text-white font-serif bg-gradient-to-r from-sky-500 to-sky-700 px-6 py-3 rounded-lg hover:shadow-xl transition-all duration-300"
+              >
+                Terminer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {errors.apiError && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          <div className="bg-white p-8 rounded-xl shadow-2xl text-center transform transition-transform duration-500 scale-95 max-w-lg">
+            <h1 className="text-4xl font-extrabold font-Quicksand mb-4 text-red-600">
+              Echec de l'Opperation !
+            </h1>
+            <p className="text-lg mb-6 text-gray-700 font-medium">
+              {errors.apiError}
+            </p>
+            <div className="flex justify-center gap-4 mt-6">
+              <button
+                onClick={() => setErrors({})}
+                className="text-white bg-gradient-to-r font-serif from-red-500 to-red-700 px-6 py-3 rounded-lg hover:shadow-xl transition-all duration-300"
+              >
+                Reprndre
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </form>
   );
 };
