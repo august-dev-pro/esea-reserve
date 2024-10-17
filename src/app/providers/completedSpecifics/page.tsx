@@ -2,7 +2,7 @@
 import RegisterTaskerSpecificsForm from "@/components/forms/RegisterTaskerSpecificsForm";
 import React from "react";
 
-const page = () => {
+const Page = () => {
   const handleStartRegister = () => {};
   return (
     <div>
@@ -11,4 +11,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
