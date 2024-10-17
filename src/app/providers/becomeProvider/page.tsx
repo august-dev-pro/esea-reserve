@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"; // Assuming you're using Redux for authentication
 import become_hero from "@/imgs/providers/hero_landing-fdeb7ef8f1a4361ec76f75d007d79546.jpg";
 import Link from "next/link";
 import SeparedBar from "@/components/ui/SeparedBar";
@@ -15,8 +15,40 @@ import aboutFouter from "@/imgs/providers/about_footer_image.jpg";
 import RegisterTaskerForm from "@/components/forms/RegisterTaskerForm";
 import { services } from "@/ui/testDatas";
 import { Service } from "@/ui/types";
+import { AppDispatch, RootState } from "@/redux/store";
+import { fetchTaskerSpecifics } from "@/redux/slices/TaskerSpecificsSlice";
 
 const Page = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const [registerTakerForm, setRegisterTakerForm] = useState(false);
+  const [registerLoading, setRegisterLoading] = useState(false);
+
+  // Get the user state from Redux
+  const user = useSelector((state: RootState) => state.auth.user); // Adjust according to your Redux store
+  const taskersSpecifics = useSelector(
+    (state: RootState) => state.taskerSpecifics.specifics
+  );
+  console.log("hdjjdhezd", taskersSpecifics);
+
+  const isAuthenticated = !!user;
+  // Si l'utilisateur est authentifié, on vérifie s'il est un tasker valide
+  const taskerValide = isAuthenticated
+    ? taskersSpecifics.find((specific) => specific.user === user.userId)
+    : null;
+
+  const handleStartRegister = () => {
+    if (!isAuthenticated) {
+      setRegisterTakerForm(true);
+    } else if (taskerValide) {
+      window.location.href = "/";
+    } else {
+      window.location.href = "/providers/completedSpecifics";
+    }
+  };
+
+  const setShowModalV = () => {
+    setRegisterTakerForm(!registerTakerForm);
+  };
   const bondoukouQuarters = [
     { value: "Bondoukou, Dioulabougou" },
     { value: "Bondoukou, TP" },
@@ -70,12 +102,9 @@ const Page = () => {
       description: "Développez votre entreprise selon vos propres conditions.",
     },
   ];
-  const [registerTakerForm, setRegisterTakerForm] = useState(false);
-
-  const handleStartRegister = () => {
-    setRegisterTakerForm(!registerTakerForm);
-  };
-
+  useEffect(() => {
+    dispatch(fetchTaskerSpecifics());
+  }, [dispatch]);
   return (
     <div className="relative">
       {registerTakerForm ? (
@@ -88,7 +117,10 @@ const Page = () => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <RegisterTaskerForm handleStartRegister={handleStartRegister} />
+          <RegisterTaskerForm
+            handleStartRegister={handleStartRegister}
+            setShowModalV={setShowModalV}
+          />
         </div>
       ) : (
         <>
@@ -153,7 +185,7 @@ const Page = () => {
                     </div>
                     <div
                       onClick={handleStartRegister}
-                      className="btn-primary w-full text-[18px]"
+                      className="btn-primary w-full text-[18px] text-center"
                     >
                       commencer maintenant
                     </div>
@@ -163,7 +195,7 @@ const Page = () => {
                         className=" font-Quicksand underline hover:text-midnight-blue"
                         href={"/login"}
                       >
-                        se conecter
+                        se connecter
                       </Link>{" "}
                     </div>
                   </form>
@@ -186,58 +218,24 @@ const Page = () => {
                     className="chield flex flex-col w-full  gap-[10px]"
                   >
                     <div className="chield_title flex w-full justify-start items-end gap-4">
-                      <Image
-                        src={item.icon}
-                        alt={`${""}`}
-                        width={150}
-                        height={150}
-                        className=" max-w-[35px] md:max-w-[50px]"
-                      />
-
-                      <div className="capitalize font-Quicksand text-[16px] md:text-[20px] font-[600] text-start">
-                        {item.id}. {item.title}
+                      <div className="img w-[50px] sm:w-[80px]">
+                        <Image
+                          src={item.icon}
+                          alt={item.title}
+                          width={10000}
+                          height={10000}
+                          className=" w-full"
+                        />
+                      </div>
+                      <div className="chield-title font-Quicksand font-[700] text-[20px] capitalize">
+                        {item.title}
                       </div>
                     </div>
-                    <div className="describe flex font-Quicksand text-[15px] text-start lg:text-[18px]">
+                    <div className="chield_description font-Quicksand text-[16px]">
                       {item.description}
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-          </div>
-          <div
-            className="section "
-            style={{
-              backgroundImage: `url('${aboutFouter.src}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <div className="section-what-easereserve_content container px-4 sm:px-0">
-              <div className="section-title">
-                <div className="title">c'est quoi esea-reserve ?</div>
-                <div className="sub_title"></div>
-              </div>
-              <div className="desscription font-Quicksand text-center text-[15px] md:text-[18px] font-[400] max-w-[700px] m-[0_auto] flex flex-col gap-4">
-                TaskRabbit connects busy people in need of help with trusted
-                local Taskers who can lend a hand with everything from home
-                repairs to errands. As a Tasker, you can get paid to do what you
-                love, when and where you want — all while saving the day for
-                someone in your city.
-                <div className="actions flex w-full text-[16px] justify-around">
-                  <button
-                    type="submit"
-                    onClick={handleStartRegister}
-                    className="btn-primary w-fit"
-                  >
-                    devenir tasker
-                  </button>
-                  <Link href={`/services`} className="btn-secondary w-fit">
-                    reserver service
-                  </Link>
-                </div>
               </div>
             </div>
           </div>

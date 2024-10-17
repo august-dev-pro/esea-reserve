@@ -58,6 +58,7 @@ export type Service = {
 
 export type IReservation = {
   _id: string;
+  userId: string;
   serviceId: string | null;
   date: string;
   adress: string;
@@ -67,6 +68,7 @@ export type IReservation = {
   status: string;
   jobType: string;
   wever: string;
+  registrationDate: Date;
 };
 export type Reservation = {
   serviceId?: string | null;
@@ -86,7 +88,6 @@ export type TaskerSpecifics = {
   serviceOfferedOptions: string[];
   experienceYears: number;
   bio: string;
-  rate: number;
   location: string;
   availability: string[];
 };

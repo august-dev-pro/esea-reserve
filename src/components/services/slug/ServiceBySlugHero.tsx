@@ -30,7 +30,7 @@ const ServiceBySlugHero = ({
         }}
       >
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-black-opacity"></div>
-        <div className="container px-4 sm:px-0 z-[100]">
+        <div className="container px-4 sm:px-0 z-[50]">
           <div className="max-w-[820px] m-[0_auto] text-center">
             <div className="text-white text-[35px] font-[500]">
               {service.title}

@@ -50,7 +50,7 @@ const ServicesDashboard = ({ services }: { services: IService[] }) => {
               </tr>
             </thead>
             <tbody>
-              {services.map((service) => (
+              {services.map((service: IService) => (
                 <tr key={service._id} className="border-t-2 bg-white">
                   <td className="px-4 py-2">{service.title}</td>
                   <td className="px-4 py-2 font-Quicksand">

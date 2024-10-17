@@ -36,11 +36,13 @@ export const getTempReservation = () => {
 export const fetchReservations = createAsyncThunk(
   "reservations/fetchAll",
   async () => {
-    const response = await fetch(`${API_URL}/reservations`);
+    const response = await fetch(`${API_URL}/reservation`);
     if (!response.ok) {
       throw new Error("Failed to fetch reservations");
     }
-    return (await response.json()) as IReservation[];
+    const result = await response.json();
+
+    return result.reservations as IReservation[];
   }
 );
 
@@ -48,7 +50,7 @@ export const fetchReservations = createAsyncThunk(
 export const fetchReservationById = createAsyncThunk(
   "reservations/fetchById",
   async (id: string) => {
-    const response = await fetch(`${API_URL}/reservations/${id}`);
+    const response = await fetch(`${API_URL}/reservation/${id}`);
     if (!response.ok) {
       throw new Error("Failed to fetch reservation");
     }
@@ -76,15 +78,15 @@ export const addReservation = createAsyncThunk(
 
 // Update a reservation
 export const updateReservationNotLocal = createAsyncThunk(
-  "reservations/update",
+  "reservation/update",
   async ({
     id,
     reservationData,
   }: {
     id: string;
-    reservationData: Partial<Reservation>;
+    reservationData: Reservation;
   }) => {
-    const response = await fetch(`${API_URL}/reservations/${id}`, {
+    const response = await fetch(`${API_URL}/reservation/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reservationData),
@@ -93,7 +95,7 @@ export const updateReservationNotLocal = createAsyncThunk(
       const errorResponse = await response.json();
       throw new Error(errorResponse.message || "Failed to update reservation");
     }
-    return (await response.json()) as IReservation;
+    return await response.json();
   }
 );
 
@@ -101,7 +103,7 @@ export const updateReservationNotLocal = createAsyncThunk(
 export const deleteReservation = createAsyncThunk(
   "reservations/delete",
   async (id: string) => {
-    const response = await fetch(`${API_URL}/reservations/${id}`, {
+    const response = await fetch(`${API_URL}/reservation/${id}`, {
       method: "DELETE",
     });
     if (!response.ok) {

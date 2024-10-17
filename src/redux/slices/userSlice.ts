@@ -25,7 +25,6 @@ export const fetchUserById = createAsyncThunk(
   }
 );
 
-// Add a new user
 export const addUser = createAsyncThunk<IUser, IUser>(
   "users/addUser",
   async (user: IUser) => {
@@ -36,12 +35,17 @@ export const addUser = createAsyncThunk<IUser, IUser>(
       },
       body: JSON.stringify(user),
     });
-    const errorResponse = await response.json();
+
+    // Lire le body de la réponse une seule fois
+    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error(`${errorResponse.stack.error}`);
+      // Si la réponse n'est pas correcte, lever une erreur avec le message d'erreur de la réponse
+      throw new Error(`${data.stack?.error || "Une erreur s'est produite"}`);
     }
-    const result = await response.json();
-    return result;
+
+    // Retourner la donnée si tout est bon
+    return data;
   }
 );
 

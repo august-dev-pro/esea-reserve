@@ -16,6 +16,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import SearchBar from "../ui/SearchBar";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import { fetchServices } from "@/redux/slices/serviceSlice";
 
 const banniereDatas = [
   {
@@ -48,6 +51,14 @@ const banniereDatas = [
 ];
 
 const HeroSlider = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const services = useSelector((state: RootState) => state.service.services);
+  const isServicesLoading = useSelector(
+    (state: RootState) => state.service.loading
+  );
+  const servicesFetchError = useSelector(
+    (state: RootState) => state.service.error
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -58,7 +69,10 @@ const HeroSlider = () => {
 
     return () => clearInterval(interval);
   }, [currentIndex]);
-
+  /*  useEffect(() => {
+    dispatch(fetchServices());
+  }, [dispatch]);
+ */
   const nextSlide = () => {
     setIsTransitioning(true);
     setTimeout(() => {
@@ -112,7 +126,7 @@ const HeroSlider = () => {
             {banniereDatas[currentIndex].alt}
             <FontAwesomeIcon icon={banniereDatas[currentIndex].icon} />
           </h1>
-          <p className="font-[300] text-shadow-custom font-Quicksand text-justify sm:text-[20px] sm:font-[500] lg:text-[25px] lg:font-[400] sm:text-center">
+          <p className="font-[300] text-shadow-custom font-Quicksand  sm:text-[20px] sm:font-[500] lg:text-[25px] lg:font-[400] text-center">
             {banniereDatas[currentIndex].description}
           </p>
           <Link
@@ -122,7 +136,7 @@ const HeroSlider = () => {
             En savoir plus
           </Link>
         </div>
-        <SearchBar />
+        <SearchBar services={services} />
       </div>
     </div>
   );

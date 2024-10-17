@@ -34,13 +34,14 @@ export default function RootLayout({
           className={`${
             pathname.includes("/admin/dashboard")
               ? ""
-              : "pt-[101px] lg:pt-[65px]"
+              : "pt-[101px] md:pt-[56px] lg:pt-[65px]"
           }`}
         >
           {children}
         </div>
       )}
-      {!pathname.includes("/admin/dashboard") && <Footer />}
+      {!pathname.includes("/admin/dashboard") &&
+        !pathname.includes("/account") && <Footer />}
     </Provider>
   );
 }

@@ -17,17 +17,12 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { API_URL } from "@/ui/api";
 import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
 import { faGears } from "@fortawesome/free-solid-svg-icons/faGears";
-import { handleLogout } from "@/ui/fonctions";
+import { getImageUrl, handleLogout } from "@/ui/fonctions";
 
 const Header = () => {
   /////////////////////////////////////////////////////////
-  const profileImagePath =
-    "usersImages/profileImage-1724686505188-648406947.jpeg";
-  const normalizedPath = profileImagePath.replace(/\\/g, "/");
-  const imageUrl = `${API_URL}/uploads/${normalizedPath}`;
   const dispatch = useDispatch<AppDispatch>();
   const [activeLink, setActiveLink] = useState<number | null>(0);
   const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
@@ -35,12 +30,14 @@ const Header = () => {
     null
   );
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false);
+  const [userDropdownOpenT, setUserDropdownOpenT] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const pathName = usePathname();
 
   const navLinks = [
     { label: "Accueil", path: "/" },
     { label: "Services", path: "/services" },
+    { label: "À propos", path: "/about" },
     {
       label: "inscription",
       path: "/inscription",
@@ -48,11 +45,9 @@ const Header = () => {
         { label: "s'inscrire", path: "/signup" },
         { label: "se connecter", path: "/login" },
         { label: "Devenir Prestataire", path: "/providers/becomeProvider" },
-        { label: "mon compte", path: "/account" },
+        { label: "mon compte", path: "/account/reservations" },
       ],
     },
-
-    { label: "À propos", path: "/about" },
   ];
   const user = useSelector((state: RootState) => state.auth.user);
   useEffect(() => {
@@ -65,6 +60,7 @@ const Header = () => {
       ) {
         setMenuOpen(false);
       }
+
       if (
         !document
           .querySelector(".userDropdown")
@@ -73,9 +69,25 @@ const Header = () => {
       ) {
         setUserDropdownOpen(false);
       }
-      if (document.querySelector(".user")?.contains(event.target as Node)) {
-        setUserDropdownOpen(true);
+      if (
+        !document
+          .querySelector(".userDropdownT")
+          ?.contains(event.target as Node) &&
+        !document.querySelector(".userT")?.contains(event.target as Node)
+      ) {
+        setUserDropdownOpenT(false);
       }
+
+      /* if (document.querySelector(".userT")?.contains(event.target as Node)) {
+        setUserDropdownOpenT(!userDropdownOpenT);
+      } else if (
+        !document
+          .querySelector(".userDropdownT")
+          ?.contains(event.target as Node) &&
+        !document.querySelector(".userT")?.contains(event.target as Node)
+      ) {
+        setUserDropdownOpenT(false);
+      } */
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -91,23 +103,23 @@ const Header = () => {
     {
       label: "mon compte",
       icon: faUser,
-      link: "/account",
+      link: "/account/profile",
     },
     {
       label: "mes reservations",
       icon: faBook,
-      link: "/user-reservation",
+      link: "/account/reservations",
     },
     {
       label: "parametre",
       icon: faGears,
-      link: "/setting",
+      link: "/account/profile",
     },
 
     {
       label: "devenir prestataire",
       icon: faPenToSquare,
-      link: "/providers/become-provider",
+      link: "/providers/becomeProvider",
     },
   ];
   const pathname = usePathname();
@@ -115,7 +127,7 @@ const Header = () => {
     <header
       className={`header bg-white  ${
         pathname.includes("/admin/dashboard") ? "" : "fixed w-full"
-      } z-[10000]  py-[7px] border-solid border-b-[1px] border-b-gray-300 shadow-custom-header lg:py-[10px]`}
+      } z-[99]  py-[7px] border-solid border-b-[1px] border-b-gray-300 shadow-custom-header lg:py-[10px]`}
     >
       <div className="container px-5 sm:px-0">
         <div className="header_content flex flex-col gap-4 md:flex-row md:justify-between items-center">
@@ -129,6 +141,7 @@ const Header = () => {
               priority={true}
             />
           </div>
+
           <div className="flex items-center w-full justify-between md:hidden">
             <div className="flex gap-4">
               {menuOpen ? (
@@ -236,19 +249,19 @@ const Header = () => {
               <div className="flex gap-5 items-center">
                 <div
                   className={`user w-10 h-10 flex items-center justify-center rounded-[50%] overflow-hidden cursor-pointer ${
-                    !user.profilImage ? "bg-midnight-blue" : ""
+                    !user.profilImage ? "bg-black" : ""
                   }`}
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                 >
-                  {user.profilImage != "" && (
+                  {/* {user.profilImage != "" && (
                     <Image
                       className="rounded-[50%]"
-                      src={imageUrl}
+                      src={user.profilImage}
                       alt="user image"
                       width={500}
                       height={500}
                     />
-                  )}
+                  )} */}
                 </div>
                 <div
                   className={`userDropdown transition-all absolute top-[64px] md:top-[45px] lg:top-[50px] w-full h-[vh] bg-white shadow-xl p-4 pt-2 ${
@@ -265,14 +278,14 @@ const Header = () => {
                     <div className="font-[300] flex items-end gap-2">
                       <div
                         className={`user w-9 h-9 flex items-center justify-center rounded-[50%] overflow-hidden ${
-                          !user.profilImage ? "bg-midnight-blue" : ""
+                          !user.profilImage ? "bg-black" : ""
                         }`}
                         onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                       >
-                        {user.profilImage != "" && (
+                        {user.profilImage != " " && (
                           <Image
                             className="rounded-[50%]"
-                            src={imageUrl}
+                            src={user.profilImage}
                             alt="user image"
                             width={500}
                             height={500}
@@ -303,6 +316,15 @@ const Header = () => {
                         </Link>
                       )
                     )}
+                    <div
+                      onClick={() => logoutUser()}
+                      className="flex cursor-pointer py-[5px] pl-2 items-center gap-2 hover:bg-gray-300 transition-all rounded-[.3rem]"
+                    >
+                      <div className="w-[25px] flex justify-center">
+                        <FontAwesomeIcon icon={faSignOut} />
+                      </div>
+                      <div className="font-Quicksand">deconnexion</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -311,7 +333,7 @@ const Header = () => {
 
           <div className="items-center gap-[50px] hidden md:flex">
             <nav className="nav">
-              <div className="links font-[300] flex gap-[15px] md:text-[15px]">
+              <div className="links items-center font-[300] flex gap-[15px] md:text-[15px]">
                 {navLinks.map((link: any, index: number) => (
                   <div key={index} className="relative">
                     {!user && link.dropdownLinks ? (
@@ -343,16 +365,23 @@ const Header = () => {
                           </div>
                         )}
                       </div>
-                    ) : (
+                    ) : link.label != "inscription" ? (
                       <Link
                         className={`link flex font-[400] flex-col hover:text-midnight-blue transition-all ${
                           pathName === link.path ? "active" : ""
                         }`}
                         href={link.path}
                       >
-                        {link.label}
+                        {<div className="">{link.label}</div>}
                       </Link>
-                    )}
+                    ) : user?.role != "tasker" ? (
+                      <Link
+                        className={`py-1 px-3 border border-blue text-blue font-Quicksand font-[800] hover:bg-blue hover:text-white rounded-[1rem] capitalize flex transition-all`}
+                        href={"/providers/becomeProvider"}
+                      >
+                        devenir prestataire
+                      </Link>
+                    ) : null}
                   </div>
                 ))}
               </div>
@@ -360,35 +389,34 @@ const Header = () => {
             {!user && (
               <Link
                 href={"/providers/becomeProvider"}
-                className="start font-Quicksand capitalize border-[2px] border-midnight-blue px-[8px] py-[5px] rounded-[.3rem] cursor-pointer text-midnight-blue hover:bg-blue-opcity transition-colors"
+                className="py-1 px-3 border border-blue text-blue font-Quicksand font-[800] hover:bg-blue hover:text-white rounded-[1rem] capitalize flex transition-all"
               >
                 devenir prerstataire
               </Link>
             )}
-
             {user && (
               <div className="flex gap-5 items-center relative">
                 <div
-                  className={`user w-10 h-10 flex items-center justify-center rounded-[50%] overflow-hidden cursor-pointer ${
-                    !user.profilImage ? "bg-midnight-blue" : ""
+                  className={`userT w-10 h-10 flex items-center justify-center rounded-[50%] overflow-hidden cursor-pointer ${
+                    !user.profilImage ? "bg-black" : ""
                   }`}
-                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                  onClick={() => setUserDropdownOpenT(!userDropdownOpenT)}
                 >
-                  {user.profilImage != "" && (
+                  {/*   {user.profilImage != "" && (
                     <Image
                       className="rounded-[50%]"
-                      src={imageUrl}
+                      src={getImageUrl(user.profilImage)}
                       alt="user image"
                       width={500}
                       height={500}
                     />
-                  )}
+                  )} */}
                 </div>
                 <div
-                  className={`userDropdown transition-all absolute top-[45px] lg:top-[50px] w-[300px] bg-white shadow-xl rounded-b-lg p-4 pt-2 ${
-                    userDropdownOpen
-                      ? "right-0 opacity-100 z-50" // z-index élevé quand le menu est ouvert
-                      : "hidden right-[-300px] opacity-0 z-[-1]" // z-index bas quand il est fermé
+                  className={`userDropdownT transition-all duration-[0.2s] absolute top-[45px] lg:top-[50px] w-[300px] bg-white shadow-xl rounded-b-lg p-4 pt-2 ${
+                    userDropdownOpenT
+                      ? "right-0 z-[50] opacity-100" //  z-50 z-index élevé quand le menu est ouvert
+                      : "hidden right-[-300px] opacity-0 z-[-1]" //  z-index bas quand il est fermé
                   }`}
                   style={{ transition: "top 0.3s ease, opacity 0.3s ease" }} // Transition appliquée à top et opacity
                 >
@@ -397,15 +425,22 @@ const Header = () => {
                     <FontAwesomeIcon
                       className="text-[20px] cursor-pointer"
                       icon={faClose}
-                      onClick={() => setUserDropdownOpen(!userDropdownOpen)} // Gestion du clic pour fermer
+                      onClick={() => setUserDropdownOpenT(!userDropdownOpenT)} // Gestion du clic pour fermer
                     />
                   </div>
                   <div>
                     {userMenuDropdownLinks.map(
                       (linkData: any, index: number) => (
                         <Link
+                          onMouseOver={(e) => {
+                            e.stopPropagation(); // Empêche la fermeture immédiate du dropdown
+                            // Exécute ensuite l'action
+                          }}
                           key={index}
                           href={linkData.link}
+                          onClick={() => {
+                            setUserDropdownOpenT(false);
+                          }}
                           className="flex py-[5px] pl-2 items-center gap-2 hover:bg-gray-300 transition-all rounded-[.3rem]"
                         >
                           <div className="w-[25px] flex justify-center">

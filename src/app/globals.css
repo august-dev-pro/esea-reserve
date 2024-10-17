@@ -11,7 +11,6 @@
   font-size: 1rem;
   transition: border-color 0.2s ease;
 }
-
 .date-picker:focus {
   border-color: #007bff;
   outline: none;
@@ -58,7 +57,20 @@ input:focus {
   font-weight: 300;
   color: #595a5c;
 }
-.input input:focus,
+.iInput {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border: none;
+  border-radius: 0.2rem;
+  padding-left: 5px;
+  outline: none;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  font-weight: 300;
+  color: #595a5c;
+}
+.iInput .input input:focus,
 .input textarea:focus {
   border-color: #1f2a31cc;
 }
@@ -71,6 +83,7 @@ input:focus {
 
 .slide-content {
   transition: opacity 0.5s ease-in-out;
+  z-index: 10;
 }
 
 .slide-enter {
@@ -79,10 +92,6 @@ input:focus {
 
 .slide-enter-active {
   opacity: 1;
-}
-
-.slide-content {
-  z-index: 1000;
 }
 
 .container {
@@ -144,6 +153,23 @@ input:focus {
     display: flex;
     flex-direction: column;
     text-align: center;
+  }
+
+  .sideBar .link.active::after {
+    content: "";
+    padding: 2px;
+    height: 20px;
+    width: 5px;
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+  }
+
+  .sideBarProfile .link.active::after {
+    content: "";
+    height: 40px;
+    width: 5px;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
   }
 
   /* card-wcu */
