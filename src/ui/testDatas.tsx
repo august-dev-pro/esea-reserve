@@ -333,6 +333,12 @@ export const services = [
           "Ajoutez des prises supplémentaires dans votre maison pour plus de commodité.",
         img: "",
       },
+      {
+        title: "Installation de Caméras de Surveillance",
+        description:
+          "Installation des appareils de surveillance et caméras pour assurer la sécurité de votre maison ou de votre entreprise.",
+        img: "",
+      },
     ],
   },
   {
