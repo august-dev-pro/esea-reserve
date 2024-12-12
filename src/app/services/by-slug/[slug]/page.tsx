@@ -1,5 +1,6 @@
 "use client";
 import ServiceBySlugHero from "@/components/services/slug/ServiceBySlugHero";
+import PageSkeleton from "@/components/ui/PageSkeleton";
 import { fetchServices } from "@/redux/slices/serviceSlice";
 import { fetchServiceOptions } from "@/redux/slices/servicesOptionsSlice";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -11,6 +12,9 @@ const Page = ({ params }: { params: { slug: string } }) => {
   const slug = params.slug;
   const dispatch = useDispatch<AppDispatch>();
   const services = useSelector((state: RootState) => state.service.services);
+  const servicesLoading = useSelector(
+    (state: RootState) => state.service.loading
+  );
   const allServiceOptions = useSelector(
     (state: RootState) => state.servicesOptions.serviceOptions
   );
@@ -26,6 +30,9 @@ const Page = ({ params }: { params: { slug: string } }) => {
     dispatch(fetchServiceOptions());
   }, [dispatch]);
 
+  if (servicesLoading) {
+    return <PageSkeleton />;
+  }
   if (!service) {
     return <div className=""> aucun service pour ce slug: {slug}</div>;
   }

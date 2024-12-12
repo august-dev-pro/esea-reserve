@@ -7,6 +7,10 @@ import {
   faTools,
   faBell,
   faBroom,
+  faLeaf,
+  faTruck,
+  faWrench,
+  faBolt,
 } from "@fortawesome/free-solid-svg-icons"; // Importe ici les icônes nécessaires
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
@@ -26,6 +30,10 @@ const getIconByName = (iconName: string): IconDefinition | null => {
     faTools: faTools,
     faBell: faBell,
     faBroom: faBroom,
+    faLeaf: faLeaf,
+    faTruck: faTruck,
+    faWrench: faWrench,
+    faBolt: faBolt,
     // Ajoute d'autres icônes ici selon tes besoins
   };
 

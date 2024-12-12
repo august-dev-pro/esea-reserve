@@ -10,6 +10,7 @@ import ServicesOverview from "@/components/home/ServicesOverview";
 import { fetchServices } from "@/redux/slices/serviceSlice";
 import { fetchServiceOptions } from "@/redux/slices/servicesOptionsSlice";
 import { SkeletonServiceList } from "@/components/ui/skeletons";
+import PageSkeleton from "@/components/ui/PageSkeleton";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
@@ -38,10 +39,10 @@ export default function Home() {
     dispatch(fetchServiceOptions());
   }, [dispatch]);
 
-  if (isLoading) return <p>Loading services...</p>;
+  if (isLoading) return <PageSkeleton />;
   if (error) return <p>Error: {error}</p>;
   if (!services || services.length === 0) {
-    return <SkeletonServiceList />;
+    return <PageSkeleton />;
   }
 
   return (

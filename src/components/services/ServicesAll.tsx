@@ -9,6 +9,7 @@ import { getImageUrl } from "@/ui/fonctions";
 import { fetchServices } from "@/redux/slices/serviceSlice";
 import { fetchServiceOptions } from "@/redux/slices/servicesOptionsSlice";
 import IconGenerate from "../utils/IconGenerate";
+import PageSkeleton from "../ui/PageSkeleton";
 
 const ServicesAll = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,7 +35,7 @@ const ServicesAll = () => {
     dispatch(fetchServiceOptions());
   }, [dispatch]);
 
-  if (isLoading) return <p>Loading services...</p>;
+  if (isLoading) return <PageSkeleton />;
   if (error) return <p>Error: {error}</p>;
   if (!services || services.length === 0) {
     return (

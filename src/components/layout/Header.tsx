@@ -131,7 +131,10 @@ const Header = () => {
     >
       <div className="container px-5 sm:px-0">
         <div className="header_content flex flex-col gap-4 md:flex-row md:justify-between items-center">
-          <div className="logo_eseaservice w-[100px] h-[41px] sm: lg:w-[110px] lg:h-[45px] border-b">
+          <Link
+            href={"/"}
+            className="logo_eseaservice w-[100px] h-[41px] sm: lg:w-[110px] lg:h-[45px] border-b"
+          >
             <Image
               className=" object-cover max-h-[41px] lg:max-h-[45px]"
               src={eseaServiceLogo}
@@ -140,7 +143,7 @@ const Header = () => {
               height={500}
               priority={true}
             />
-          </div>
+          </Link>
 
           <div className="flex items-center w-full justify-between md:hidden">
             <div className="flex gap-4">
