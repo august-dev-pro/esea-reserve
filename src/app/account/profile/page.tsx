@@ -44,11 +44,13 @@ export default function UserDashboard() {
     if (isUserLoading) {
       return <div>Chargement...</div>; // Affichage pendant le chargement
     }
+
     if (userError) {
       return <div>Erreur : {userError}</div>; // Affichage en cas d'erreur
     }
+
     if (!user) {
-      return <div>Aucun utilisateur trouvé.</div>; // Gestion d'un utilisateur non trouvé
+      return <div>aucun utilisateur trouver.........</div>;
     }
     switch (activeSection) {
       case "profile":

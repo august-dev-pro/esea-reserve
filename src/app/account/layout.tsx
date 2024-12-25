@@ -15,6 +15,9 @@ import Image from "next/image";
 import userDefault from "@/imgs/tasker2.jpg";
 import { logout } from "@/redux/slices/authSlice";
 import { fakeNotifications } from "@/ui/testDatas";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { handleLogout } from "@/ui/fonctions";
 export default function UserDashboardLayout({
   children,
 }: {
@@ -34,6 +37,13 @@ export default function UserDashboardLayout({
     (notification) => !notification.isRead
   ).length;
   const pathname = usePathname();
+  const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
+  if (!user) {
+    localStorage.setItem("redirectAfterLogin", "/account/reservations");
+    window.location.href = "/login";
+    return;
+  }
   return (
     <div
       className="dashboard-container flex min-h-[calc(100vh-101px)] md:min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-65px)]"
@@ -76,7 +86,7 @@ export default function UserDashboardLayout({
           ))}
           <button
             className={`button w-full flex justify-between items-center hover:bg-white hover:text-violet-800  p-2 rounded transition duration-100 ease-in-out}`}
-            onClick={() => logout()}
+            onClick={() => handleLogout(dispatch)}
           >
             <div className="">
               <FontAwesomeIcon icon={faSignOutAlt} className="mr-3" />

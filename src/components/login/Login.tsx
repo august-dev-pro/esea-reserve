@@ -4,6 +4,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import Link from "next/link";
 import React, { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const Login = () => {
   const connectMethodes = [
@@ -168,9 +169,9 @@ const Login = () => {
           <div className="actions">
             <button
               type="submit"
-              className="btn-primary font-Quicksand text-[16px]"
+              className="btn-primary font-Quicksand flex gap-4  text-[16px]"
             >
-              se connecter
+              se connecter {authState.loading && <LoadingSpinner />}
             </button>
 
             <Link
@@ -181,7 +182,6 @@ const Login = () => {
             </Link>
           </div>
         </div>
-        {authState.loading && <p>Chargement...</p>}
       </form>
     </div>
   );
