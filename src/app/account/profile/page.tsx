@@ -25,6 +25,8 @@ export default function UserDashboard() {
   const user = useSelector((state: RootState) =>
     state.user.users.find((userData: IUser) => userData._id == userId)
   );
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   // Lien du sidebar avec les étiquettes et icônes
   const unreadNotificationsCount = fakeNotifications.filter(
     (notification) => !notification.isRead
@@ -69,19 +71,40 @@ export default function UserDashboard() {
         );
     }
   };
-
   return (
-    <div className="flex flex-col">
+    <div className="relative">
+      {/* Bouton pour afficher le menu en mobile */}
+      <button
+        className="md:hidden !z-50 flex items-center mb-4 px-4 py-2 bg-violet-900 text-white"
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+        <FontAwesomeIcon icon={faCog} className="mr-2" />
+        Settings Menu
+      </button>
+
+      {/* Overlay semi-transparent */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={() => setIsSidebarOpen(false)} // Ferme le menu si on clique en dehors
+        ></div>
+      )}
       {/* Sidebar */}
-      <div className="sideBarProfile w-fit border border-gray-300 bg-white text-gray-600">
-        <ul className="flex h-fit">
+      <div
+        className={`sideBarProfile z-50 absolute md:relative w-full border border-gray-300 bg-white text-gray-600
+        ${isSidebarOpen ? "block" : "hidden"} md:block md:w-fit`}
+      >
+        <ul className="flex h-fit flex-col md:flex-row">
           {sideBarsLinks.map((link, index) => (
             <li key={index} className="h-fit">
               <button
-                onClick={() => setActiveSection(link.section)} // Changement de section active
-                className={`link h-full group flex flex-row-reverse items-center hover:bg-violet-200 hover:text-violet-900 transition duration-100 ease-in-out ${
+                onClick={() => {
+                  setActiveSection(link.section);
+                  setIsSidebarOpen(false); // Ferme le menu en mobile après sélection
+                }}
+                className={`link group flex flex-row-reverse items-center md:hover:bg-violet-200 hover:text-violet-900 transition duration-100 ease-in-out ${
                   activeSection === link.section
-                    ? "active bg-violet-100 text-violet-900 after:bg-violet-900"
+                    ? "active md:bg-violet-100 text-violet-900 after:bg-violet-900"
                     : ""
                 }`}
               >
@@ -90,7 +113,7 @@ export default function UserDashboard() {
                   {link.label}
                   {link.section === "notifications" &&
                     unreadNotificationsCount > 0 && (
-                      <span className="ml-2 border border-red-600  text-red-600 w-5 h-5 font-Quicksand font-[700] flex items-center justify-center text-xs rounded-full px-2 py-1">
+                      <span className="ml-2 border border-red-600 text-red-600 w-5 h-5 font-Quicksand font-[700] flex items-center justify-center text-xs rounded-full px-2 py-1">
                         {unreadNotificationsCount}
                       </span>
                     )}
@@ -102,7 +125,7 @@ export default function UserDashboard() {
       </div>
 
       {/* Contenu principal */}
-      <div className="content w-4/5 p-6 bg-gray-100 flex-1 overflow-auto">
+      <div className="content w-full md:w-4/5 md:p-6 bg-gray-100 flex-1 overflow-auto">
         {renderContent()}
       </div>
     </div>

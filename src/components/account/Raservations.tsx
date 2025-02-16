@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { IReservation } from "@/ui/types"; // Importez votre type de réservation
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 
 // Composant pour afficher les réservations de l'utilisateur
 const Reservations = ({ reservations }: { reservations: IReservation[] }) => {
@@ -20,49 +22,13 @@ const Reservations = ({ reservations }: { reservations: IReservation[] }) => {
 
   return (
     <div className="reservations-container">
-      <h2 className="text-xl font-semibold mb-4">Mes Réservations </h2>
+      <h2 className="text-xl font-semibold mb-4">Mes Réservations</h2>
 
-      {/* Boutons de filtre */}
-      <div className="flex space-x-4 mb-6">
-        <button
-          className={`px-4 py-2 rounded ${
-            activeFilter === "all" ? "bg-violet-900 text-white" : "bg-gray-200"
-          }`}
-          onClick={() => setActiveFilter("all")}
-        >
-          Toutes
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            activeFilter === "confirmed"
-              ? "bg-violet-900 text-white"
-              : "bg-gray-200"
-          }`}
-          onClick={() => setActiveFilter("confirmed")}
-        >
-          Confirmées
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            activeFilter === "pending"
-              ? "bg-violet-900 text-white"
-              : "bg-gray-200"
-          }`}
-          onClick={() => setActiveFilter("pending")}
-        >
-          En attente
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            activeFilter === "canceled"
-              ? "bg-violet-900 text-white"
-              : "bg-gray-200"
-          }`}
-          onClick={() => setActiveFilter("canceled")}
-        >
-          Refusées
-        </button>
-      </div>
+      {/* Appeler ReservationList et passer activeFilter et setActiveFilter */}
+      <ReservationList
+        activeFilter={activeFilter}
+        setActiveFilter={setActiveFilter}
+      />
 
       {/* Liste des réservations */}
       <div className="grid grid-cols-1 gap-6">
@@ -72,7 +38,7 @@ const Reservations = ({ reservations }: { reservations: IReservation[] }) => {
             className="reservation-item bg-white shadow rounded-lg p-4 border border-gray-200"
           >
             <div className="flex justify-between">
-              <div className="">
+              <div>
                 <h3 className="text-lg font-bold font-Quicksand">
                   Service: {reservation.serviceId || "Non spécifié"}
                 </h3>
@@ -96,51 +62,76 @@ const Reservations = ({ reservations }: { reservations: IReservation[] }) => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
 
-      {/* Modal pour afficher les détails d'une réservation */}
-      {selectedReservation && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-lg w-1/2 p-6">
-            <h3 className="text-xl font-bold mb-4">
-              Détails de la réservation
-            </h3>
-            <p>
-              <strong>Service:</strong>{" "}
-              {selectedReservation.serviceId || "Non spécifié"}
-            </p>
-            <p>
-              <strong>Date:</strong>{" "}
-              {new Date(selectedReservation.date).toLocaleDateString()}
-            </p>
-            <p>
-              <strong>Adresse:</strong> {selectedReservation.adress}
-            </p>
-            <p>
-              <strong>Options:</strong> {selectedReservation.options.join(", ")}
-            </p>
-            <p>
-              <strong>Tasker:</strong> {selectedReservation.taskerId}
-            </p>
-            <p>
-              <strong>Statut:</strong>{" "}
-              {getStatusLabel(selectedReservation.status)}
-            </p>
-            <p>
-              <strong>Description:</strong>{" "}
-              {selectedReservation.taskDescription}
-            </p>
-            <p>
-              <strong>Wever:</strong> {selectedReservation.wever}
-            </p>
-            <button
-              onClick={() => setSelectedReservation(null)}
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Fermer
-            </button>
+// Composant ReservationList
+const ReservationList = ({
+  activeFilter,
+  setActiveFilter,
+}: {
+  activeFilter: string;
+  setActiveFilter: (filter: string) => void;
+}) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const filters = [
+    { value: "all", label: "Toutes" },
+    { value: "confirmed", label: "Confirmées" },
+    { value: "pending", label: "En attente" },
+    { value: "canceled", label: "Refusées" },
+  ];
+
+  return (
+    <div>
+      {/* Mobile: Dropdown */}
+      <div className="md:hidden relative mb-2">
+        <button
+          className="w-full flex justify-between items-center px-4 py-2 bg-gray-200 rounded"
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        >
+          {filters.find((f) => f.value === activeFilter)?.label}
+          <FontAwesomeIcon icon={faChevronDown} className="text-gray-600" />
+        </button>
+        {isDropdownOpen && (
+          <div className="absolute top-full left-0 w-full bg-white border border-gray-300 shadow-md rounded mt-1 z-10">
+            {filters.map((filter) => (
+              <button
+                key={filter.value}
+                className={`w-full text-left px-4 py-2 ${
+                  activeFilter === filter.value
+                    ? "bg-violet-900 text-white"
+                    : "hover:bg-gray-100"
+                }`}
+                onClick={() => {
+                  setActiveFilter(filter.value);
+                  setIsDropdownOpen(false);
+                }}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
+      {/* Desktop: Boutons classiques */}
+      <div className="hidden md:flex space-x-4 mb-6">
+        {filters.map((filter) => (
+          <button
+            key={filter.value}
+            className={`px-4 py-2 rounded ${
+              activeFilter === filter.value
+                ? "bg-violet-900 text-white"
+                : "bg-gray-200"
+            }`}
+            onClick={() => setActiveFilter(filter.value)}
+          >
+            {filter.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
@@ -160,6 +151,7 @@ const getStatusClass = (status: string) => {
 };
 
 // Fonction utilitaire pour obtenir un label lisible pour le statut
+
 const getStatusLabel = (status: string) => {
   switch (status) {
     case "confirmed":

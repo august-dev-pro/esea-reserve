@@ -35,7 +35,7 @@ const Notifications = ({ notifications }: { notifications: any }) => {
   };
 
   return (
-    <div className="p-4 max-w-2xl ">
+    <div className="md:p-4 max-w-2xl ">
       <h2 className="text-xl font-semibold mb-4">Notifications</h2>
       <div className="space-y-3">
         {notifications.map((notification: any) => (

@@ -42,7 +42,7 @@ const AdvancedSettings = ({ user }: { user: IUser }) => {
             gestion des comptes
             <FontAwesomeIcon className="text-red-600" icon={faTrashAlt} />
           </div>
-          <div className="flex gap-8">
+          <div className="flex flex-col sm:flex-row gap-8">
             <button className="font-Quicksand py-3 px-5 bg-red-600 text-white hover:bg-red-700 transition-all">
               supprimer mon compte
             </button>

@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["easy-reserve-backend-mzfv.onrender.com"],
     remotePatterns: [
       {
         protocol: "http",
         hostname: "localhost",
-        port: "4000",
+        port: "8800",
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "easy-reserve-backend-mzfv.onrender.com",
         pathname: "/uploads/**",
       },
     ],

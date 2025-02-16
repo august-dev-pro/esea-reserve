@@ -46,11 +46,11 @@ export default function UserDashboardLayout({
   }
   return (
     <div
-      className="dashboard-container flex min-h-[calc(100vh-101px)] md:min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-65px)]"
+      className="dashboard-container flex flex-col md:flex-row min-h-[calc(100vh-101px)] md:min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-65px)]"
       style={{ height: "calc(100vh - 66px)" }}
     >
       {/* Sidebar */}
-      <div className="sideBar w-1/5 bg-violet-950 text-white p-4">
+      <div className="sideBar w-full md:w-1/5 bg-violet-950 text-white p-4">
         <div className=" mb-6 border-b py-4 flex gap-4">
           <div className=" w-[50px] h-[50px] rounded-[50%] overflow-hidden">
             <Image src={userDefault} alt="name" width={500} height={500} />
@@ -96,7 +96,7 @@ export default function UserDashboardLayout({
         </ul>
       </div>
       {/* Main content */}
-      <div className="content w-4/5 p-6 bg-gray-100 flex-1 overflow-auto">
+      <div className="content w-full md:w-4/5 p-6 bg-gray-100 flex-1 md:overflow-auto">
         {children}
       </div>
     </div>

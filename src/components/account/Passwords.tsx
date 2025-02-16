@@ -25,8 +25,11 @@ const Passwords = ({ user }: { user: IUser }) => {
 
   return (
     <div className="password-settings">
-      <h2>Modifier le mot de passe</h2>
-      <div onSubmit={handlePasswordChange} className="grid grid-cols-2 gap-6">
+      <h2 className=" text-2xl font-semibold mb-6">Modifier le mot de passe</h2>
+      <div
+        onSubmit={handlePasswordChange}
+        className="grid sm:grid-cols-2 gap-6"
+      >
         <div className="input">
           <label className="block text-sm font-semibold mb-2">
             Nouveau mot de passe

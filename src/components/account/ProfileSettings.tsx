@@ -48,16 +48,16 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
   };
 
   return (
-    <div className="profile-settings p-4">
+    <div className="profile-settings sm:p-4">
       {/* Section 1 : Image de profil */}
-      <div className="profile-image-section flex items-center mb-6 gap-[80px]">
+      <div className="profile-image-section flex flex-col md:flex-row items-center mb-6 gap-10 md:gap-[80px]">
         <div className="w-[200px] h-[200px] rounded-[50%] relative">
           <Image
             alt="gggj"
             src={userDefault}
             width={500}
             height={500}
-            className="rounded-[50%]"
+            className="rounded-[50%] object-cover "
           />
           <div className="absolute border-2 w-[40px] h-[40px] bg-violet-900 text-white border-white p-2 right-0 top-2/3 cursor-pointer flex items-center justify-center rounded-[50%]">
             <FontAwesomeIcon icon={faCameraAlt} />
@@ -74,7 +74,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({
       </div>
 
       {/* Section 2 : Informations utilisateur */}
-      <div className="user-info-section grid grid-cols-2 gap-6">
+      <div className="user-info-section grid sm:grid-cols-2 gap-6">
         <div className="input ">
           <label className="block text-sm font-semibold mb-2">First Name</label>
           <input
